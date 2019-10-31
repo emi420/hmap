@@ -27,4 +27,4 @@ ENV
 utils/ENV
 
 # config
-config/config.js
+src/config/config.js
