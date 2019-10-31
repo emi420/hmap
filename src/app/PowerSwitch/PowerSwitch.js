@@ -1,34 +1,16 @@
 import React from 'react';
-
-const styles = {
-    'background': 'rgba(255,255,255,.75)',
-    'position': 'fixed',
-    'width': '22px',
-    'height': '22px', 
-    'right': '22px',
-    'padding': '4px',
-    'top': '25px',
-    'borderRadius': '100%',
-    'cursor': 'pointer',
-    'zIndex': '99999',
-    'boxShadow': '1px 1px 1px rgba(0,0,0,.5)' 
-}
-
-const stylesSpan = {
-    opacity: '.75',
-}
+import styles from './PowerSwitch.styles';
 
 const PowerSwitch = (props) => {
-    const stylesCopy = {...styles};
-    const stylesSpanCopy = {...stylesSpan};
+    const stylesCircle = {...styles.circle};
     
     if (props.value === true) {
-        stylesCopy.background = 'white';
-        stylesSpanCopy.opacity = '1';
+        stylesCircle.background = 'white';
+        stylesCircle.opacity = '1';
     }
     return (
-        <div onClick={() => { props.onSwitchChange() }} style={stylesCopy}>
-            <span aria-label="fire" style={stylesSpanCopy} role="img">🔥</span>
+        <div onClick={() => { props.onSwitchChange() }} style={stylesCircle}>
+            <span aria-label="fire" style={styles.emoji} role="img"></span>
         </div>
     );
 };

@@ -25,3 +25,6 @@ yarn-error.log*
 # python
 ENV
 utils/ENV
+
+# config
+config/config.js
