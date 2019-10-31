@@ -10,18 +10,23 @@ import {
     linePaintStyle113,
     circleLayoutStylePois,
     circlePaintStylePois,
-    symbolPaintLayoutStylePois
+    symbolPaintLayoutStylePois,
+    lineTracksStyles,
+    linePircasStyles,
+    layoutPircasStyles,
+    symbolPaintPircasStyles
 } from './MapStyles';
-import SampleLayer from  '../../static/sample.geojson';
+
 import BigFiresLayer from  '../../static/bigfires.geojson';
 import Layer113 from  '../../static/113.geojson';
 import AgreementsLayer from  '../../static/agreements.geojson';
 import PoisLayer from  '../../static/pois.geojson';
+import TracksLayer from '../../static/tracks.geojson';
+import PircasLayer from '../../static/pircas.geojson';
 
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiZW1pNDIwIiwiYSI6ImNqZW9leG5pZTAxYWwyeG83bHU0eHM0ZXcifQ.YWmk4Rp8FBGCLmpx_huJYw';
 const MAPBOX_DEFAULT_STYLE = 'mapbox://styles/emi420/ck2divmvv1gip1cpjxumqy761';
-//const MAPBOX_DEFAULT_STYLE = 'mapbox://styles/mapbox/light-v10';
 
 
 const MainMap = ReactMapboxGl({
@@ -48,13 +53,25 @@ const Map = (props) => (
             symbolPaint={linePaintStyle113}
         />
         <GeoJSONLayer
+            data={TracksLayer}
+            linePaint={lineTracksStyles}
+        />
+        <GeoJSONLayer
+            data={PircasLayer}
+            linePaint={linePircasStyles}
+        />
+        <GeoJSONLayer
+            data={PircasLayer}
+            symbolLayout={layoutPircasStyles}
+            symbolPaint={symbolPaintPircasStyles}            
+        />
+
+        { props.showFire ?
+        <GeoJSONLayer
             data={BigFiresLayer}
             fillPaint={fillStyleFire}
-        />
-        {/*<GeoJSONLayer
-            data={PowerLinesLayer}
-            linePaint={lineStylePowerLinesLayer}
-        />*/}
+        /> : ''}
+        
         <GeoJSONLayer
             data={AgreementsLayer}
             linePaint={lineStyleAgreements}
@@ -64,11 +81,6 @@ const Map = (props) => (
             symbolLayout={layoutStyleAgreements}
             symbolPaint={symbolPaintStyleAgreements}
         />
-        {/*<GeoJSONLayer
-            data={SampleLayer}
-            circlePaint={circlePaintStylePois}
-            // circleLayout={circleLayoutStylePois}
-        />*/}
         <GeoJSONLayer
             data={PoisLayer}
             circlePaint={circlePaintStylePois}

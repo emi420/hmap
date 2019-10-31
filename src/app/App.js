@@ -1,11 +1,11 @@
 import React from 'react';
-import Map from './Map/Map';
+import Cockpit from './Cockpit/Cockpit';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Map />
+      <Cockpit />
     </div>
   );
 }

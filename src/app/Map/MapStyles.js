@@ -72,3 +72,28 @@ export const circleLayoutStylePois = {
     "text-anchor": "top",
 };
 
+// Tracks
+
+export const lineTracksStyles = {
+    'line-color': 'rgba(255,255,255,.65)',
+    'line-width': .5,
+    'line-dasharray': [2, 2]
+};
+
+// 'Pircas'
+
+export const linePircasStyles = {
+    'line-color': 'rgba(255,255,255,.5)',
+    'line-width': .5,
+    'line-dasharray': [6, 6]
+};
+export const layoutPircasStyles = {
+    "text-field": "Pirca",
+    "symbol-placement": "line",
+    "text-size": 7,
+};
+export const symbolPaintPircasStyles = {
+    "text-color": "white",
+    "text-halo-color": "#333333",
+    "text-halo-width": 2,
+};
