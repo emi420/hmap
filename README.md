@@ -4,11 +4,11 @@ Easy-to-use humanitarian map for work before, during and after events.
 
 ### Install
 
-'''
+```
 $ git clone https://github.com/emi420/hmap.git
 $ cd hmap
 $ npm install
-'''
+```
 
 ### Configure
 
@@ -20,26 +20,26 @@ $ npm install
 
 ### Run
 
-'''
+```
 $ npm run start
-'''
+```
 
 Then load http://localhost:3000 in your browser.
 
 ### Build
 
-'''
+```
 $ npm run build
-'''
+```
 
 ### Deploy
 
 1. Rename `deploy-sample.sh` to `deploy.sh` and edit `<user>`, `<ip>` and `<project-folder>` with your server username, host and project folder.
 2. Run deploy script
 
-'''
+```
 $ sh ./deploy.sh
-'''
+```
 
 ### Live demo
 
