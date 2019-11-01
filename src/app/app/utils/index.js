@@ -1,5 +1,7 @@
 import GeoJSON from 'geojson';
 
+// Conversion code from: https://github.com/gavinr/csv-to-geojson
+
 function getColName(data, possibleColumnNames) {
     if (!data || !data.length) return null;
     for (var i = 0; i < data[0].length; i++) {
