@@ -28,3 +28,8 @@ utils/ENV
 
 # config
 src/config/config.js
+
+# deploy
+deploy.sh
+
+

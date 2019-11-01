@@ -5,12 +5,12 @@ import {
     MAPBOX_ACCESS_TOKEN,
     MAPBOX_DEFAULT_STYLE,
     MAP_DEFAULT_CENTER
-} from '../../config/config';
+} from '../../../config/config';
 
 const MainMap = ReactMapboxGl({
   accessToken: MAPBOX_ACCESS_TOKEN
 });
-  
+
 const Map = (props) => (
     <MainMap
         // eslint-disable-next-line react/style-prop-object
@@ -21,12 +21,14 @@ const Map = (props) => (
             width: '100vw'
         }}
         antialias={true}
+        zoom={[10]}
+        
       > 
         <MapLayers 
             layers={props.layers}
             hiddenLayers={props.hiddenLayers}
         />
-
+        
     </MainMap>
 )
 

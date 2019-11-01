@@ -1,5 +1,5 @@
 import React from 'react';
-import Cockpit from './Cockpit/Cockpit';
+import Cockpit from '../Cockpit/Cockpit';
 import './App.css';
 
 function App() {
