@@ -14,7 +14,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    emoji: {
+    icon: {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: '50% 50%',
         width: '20px',

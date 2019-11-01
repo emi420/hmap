@@ -105,6 +105,6 @@ const layers = [
     },
 ];
 
-export const DEFAULT_HIDDEN_LAYERS = ['big-fires']
+export const DEFAULT_HIDDEN_LAYERS = ['big-fires', 'firms-modis', 'firms-viirs']
 
 export default layers;

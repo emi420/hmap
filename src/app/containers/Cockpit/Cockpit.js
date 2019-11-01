@@ -10,7 +10,8 @@ class Cockpit extends PureComponent {
 
     state = {
         showFireHistory: false,
-        showFIRMS: true,
+        showFIRMS: false,
+        firmsDataWasLoaded: false,
         hiddenLayers: DEFAULT_HIDDEN_LAYERS
     }
 
@@ -18,11 +19,6 @@ class Cockpit extends PureComponent {
         super();
         this.clockClickHandler = this.clockClickHandler.bind(this);
         this.fireClickHandler = this.fireClickHandler.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.FIRMSLatestModis24Action();
-        this.props.FIRMSLatestViirs24Action();
     }
 
     render() {
@@ -49,11 +45,12 @@ class Cockpit extends PureComponent {
         ] : []; 
 
         const allLayers = [...layers, ...FIRMSModisLayer, ...FIRMSViirsLayer];
+        const firmsIsLoading = this.state.firmsDataWasLoaded && (this.props.FIRMSLatestViirs24.features.length < 1 || this.props.FIRMSLatestModis24.features.length < 1);
 
         return (
             <div>
                 <PowerSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onSwitchChange={this.clockClickHandler} />
-                <PowerSwitch right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
+                <PowerSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
                 <Map layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
             </div>
         );
@@ -62,7 +59,6 @@ class Cockpit extends PureComponent {
     clockClickHandler() {
         if (this.state.showFireHistory) {
             const hiddenLayers = [...this.state.hiddenLayers, 'big-fires'];
-
             this.setState({
                 hiddenLayers: hiddenLayers,
                 showFireHistory: false,
@@ -81,12 +77,18 @@ class Cockpit extends PureComponent {
     fireClickHandler() {
         if (this.state.showFIRMS) {
             const hiddenLayers = [...this.state.hiddenLayers, 'firms-modis', 'firms-viirs'];
-
             this.setState({
                 hiddenLayers: hiddenLayers,
                 showFIRMS: false,
             });
         } else {
+            if (!this.state.firmsDataWasLoaded) {
+                this.props.FIRMSLatestModis24Action();
+                this.props.FIRMSLatestViirs24Action();    
+                this.setState({
+                    firmsDataWasLoaded: true
+                });
+            }
             const hiddenLayers = [...this.state.hiddenLayers];
             hiddenLayers.splice(hiddenLayers.indexOf('firms-modis'), 1);
             hiddenLayers.splice(hiddenLayers.indexOf('firms-viirs'), 1);
