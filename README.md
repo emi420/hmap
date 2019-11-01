@@ -2,6 +2,10 @@
 
 Easy-to-use humanitarian map for work before, during and after events.
 
+### Live demo
+
+https://bomberoslagranja.org/mapa/
+
 ### Install
 
 ```
@@ -41,6 +45,3 @@ $ npm run build
 $ sh ./deploy.sh
 ```
 
-### Live demo
-
-https://bomberoslagranja.org/mapa/
