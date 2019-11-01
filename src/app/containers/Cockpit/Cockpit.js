@@ -9,13 +9,15 @@ import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../.
 class Cockpit extends PureComponent {
 
     state = {
-        showAll: false,
+        showFireHistory: false,
+        showFIRMS: true,
         hiddenLayers: DEFAULT_HIDDEN_LAYERS
     }
 
     constructor() {
         super();
-        this.powerSwitchClickHandler = this.powerSwitchClickHandler.bind(this);
+        this.clockClickHandler = this.clockClickHandler.bind(this);
+        this.fireClickHandler = this.fireClickHandler.bind(this);
     }
 
     componentWillMount() {
@@ -29,7 +31,7 @@ class Cockpit extends PureComponent {
                 id: 'firms-modis',
                 data: this.props.FIRMSLatestModis24,
                 circlePaint: {
-                    "circle-radius": 5,
+                    "circle-radius": 4,
                     "circle-color": "red",
                 }
             },
@@ -40,7 +42,7 @@ class Cockpit extends PureComponent {
                 id: 'firms-viirs',
                 data: this.props.FIRMSLatestViirs24,
                 circlePaint: {
-                    "circle-radius": 5,
+                    "circle-radius": 4,
                     "circle-color": "yellow",
                 }
             },
@@ -50,26 +52,51 @@ class Cockpit extends PureComponent {
 
         return (
             <div>
-                <PowerSwitch value={this.state.showAll} onSwitchChange={this.powerSwitchClickHandler} />
+                <PowerSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onSwitchChange={this.clockClickHandler} />
+                <PowerSwitch right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
                 <Map layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
             </div>
         );
     }
 
-    powerSwitchClickHandler() {
-        if (this.state.showAll) {
+    clockClickHandler() {
+        if (this.state.showFireHistory) {
+            const hiddenLayers = [...this.state.hiddenLayers, 'big-fires'];
+
             this.setState({
-                hiddenLayers: DEFAULT_HIDDEN_LAYERS,
-                showAll: false,
+                hiddenLayers: hiddenLayers,
+                showFireHistory: false,
             });
         } else {
+            const hiddenLayers = [...this.state.hiddenLayers];
+            hiddenLayers.splice(hiddenLayers.indexOf('big-fires'), 1);
             this.setState({
-                hiddenLayers: [],
-                showAll: true,
+                hiddenLayers: hiddenLayers,
+                showFireHistory: true,
             });
         }
+
     }
 
+    fireClickHandler() {
+        if (this.state.showFIRMS) {
+            const hiddenLayers = [...this.state.hiddenLayers, 'firms-modis', 'firms-viirs'];
+
+            this.setState({
+                hiddenLayers: hiddenLayers,
+                showFIRMS: false,
+            });
+        } else {
+            const hiddenLayers = [...this.state.hiddenLayers];
+            hiddenLayers.splice(hiddenLayers.indexOf('firms-modis'), 1);
+            hiddenLayers.splice(hiddenLayers.indexOf('firms-viirs'), 1);
+            this.setState({
+                hiddenLayers: hiddenLayers,
+                showFIRMS: true,
+            });
+        }
+
+    }
 }
 const mapStateToProps = state => ({
     FIRMSLatestModis24: getFIRMSLatestModis24GeoJSON(state),

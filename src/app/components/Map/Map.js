@@ -21,8 +21,6 @@ const Map = (props) => (
             width: '100vw'
         }}
         antialias={true}
-        zoom={[10]}
-        
       > 
         <MapLayers 
             layers={props.layers}

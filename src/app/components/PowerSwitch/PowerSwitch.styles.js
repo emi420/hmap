@@ -4,7 +4,6 @@ const styles = {
         position: 'fixed',
         width: '28px',
         height: '28px', 
-        right: '22px',
         top: '25px',
         borderRadius: '100%',
         cursor: 'pointer',
@@ -16,7 +15,6 @@ const styles = {
         alignItems: 'center',
     },
     emoji: {
-        backgroundImage: 'url(fire-emoji.png)',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: '50% 50%',
         width: '20px',
