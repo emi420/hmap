@@ -21,7 +21,7 @@ class CoordinateInput extends PureComponent {
     render() {
         return (
             <form onSubmit={this.submitHandler}>
-                <input onChange={this.textChangeHandler} value={this.state.textValue || this.props.value} type="text" className="CoordinateInput" />
+                <input placeholder="-64.10021 -31.0649" onChange={this.textChangeHandler} value={this.state.textValue || this.props.value} type="text" className="CoordinateInput" />
             </form>
         )
     }

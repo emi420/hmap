@@ -1,12 +1,14 @@
 
 .CoordinateInput {
-    border: 1px solid #ddd;
+    border: none;
+    -webkit-appearance: none;
     background: white;
     padding: 4px;
     border-radius: 10px;
     color: #333;
     position: absolute;
     right: 150px;
-    top: 28px;
+    top: 26px;
+    font-size: 16px;
     width: 150px;
 }
