@@ -16,3 +16,39 @@ const API = {
 };
 
 export default API;
+
+/*
+
+// Buildings inside Colón, Córdoba
+
+[out:json];
+
+area[name="Córdoba"]->.b;
+rel(area.b)[name="Departamento Colón"];
+map_to_area -> .a;
+
+
+way["building"](area.a);
+out geom;
+
+relation["building"](area.a);out;
+way(r)[!"building:part"];
+out geom;
+*/
+
+// --------
+
+/*
+
+// Fire nodes
+
+[out:json];
+
+area[name="Córdoba"]->.b;
+
+node["emergency"~"^fire"](area.b);
+out;
+
+node[~"^fire_.*$"~"."](area.b);
+out;
+*/

@@ -23,6 +23,7 @@ const Map = (props) => (
         antialias={true}
       > 
         <MapLayers 
+            onDTMFDecode={props.onDTMFDecode}
             layers={props.layers}
             hiddenLayers={props.hiddenLayers}
         />

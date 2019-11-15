@@ -1,7 +1,7 @@
 const layers = [
     {
         id: 'area-line',
-        data: './data/113.geojson',
+        data: './data/areas.geojson',
         linePaint: {
             'line-color': 'red',
             'line-width': 2,
@@ -10,7 +10,7 @@ const layers = [
     },
     {
         id: 'area-label',
-        data: './data/113.geojson',
+        data: './data/areas.geojson',
         symbolLayout: {
             "text-field": "Jurisdicción 113",
             "symbol-placement": "line",

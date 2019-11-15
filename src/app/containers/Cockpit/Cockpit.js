@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import Map from '../../components/Map/Map';
-import PowerSwitch from '../../components/PowerSwitch/PowerSwitch';
+import IconButtonSwitch from '../../components/IconButtonSwitch/IconButtonSwitch';
 import layers, { DEFAULT_HIDDEN_LAYERS } from '../../../config/layers';
+import { Layer, Feature } from 'react-mapbox-gl';
 import { connect } from "react-redux";
 import { FIRMSLatestModis24Action, FIRMSLatestViirs24Action } from '../../app/actions';
 import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../../app/selectors';
+import DTMFListener from '../../components/DTMFListener/DTMFListener';
+import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
 
 class Cockpit extends PureComponent {
 
@@ -12,17 +15,21 @@ class Cockpit extends PureComponent {
         showFireHistory: false,
         showFIRMS: false,
         firmsDataWasLoaded: false,
-        hiddenLayers: DEFAULT_HIDDEN_LAYERS
+        isListening: false,
+        hiddenLayers: DEFAULT_HIDDEN_LAYERS,
+        layers: [],
+        coordinateInputValue: "",
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.clockClickHandler = this.clockClickHandler.bind(this);
         this.fireClickHandler = this.fireClickHandler.bind(this);
-    }
+        this.earClickHandler = this.earClickHandler.bind(this);
+        this.coordinateSubmitHandler = this.coordinateSubmitHandler.bind(this);
+        this.DTMFDecodeHandler = this.DTMFDecodeHandler.bind(this);
 
-    render() {
-        const FIRMSModisLayer = this.props.FIRMSLatestModis24 ? [
+        this.FIRMSModisLayer = this.props.FIRMSLatestModis24 ? [
             {
                 id: 'firms-modis',
                 data: this.props.FIRMSLatestModis24,
@@ -33,7 +40,7 @@ class Cockpit extends PureComponent {
             },
         ] : []; 
 
-        const FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? [
+        this.FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? [
             {
                 id: 'firms-viirs',
                 data: this.props.FIRMSLatestViirs24,
@@ -42,18 +49,61 @@ class Cockpit extends PureComponent {
                     "circle-color": "yellow",
                 }
             },
-        ] : []; 
+        ] : [];
 
-        const allLayers = [...layers, ...FIRMSModisLayer, ...FIRMSViirsLayer];
+    }
+
+    render() {
         const firmsIsLoading = this.state.firmsDataWasLoaded && (this.props.FIRMSLatestViirs24.features.length < 1 || this.props.FIRMSLatestModis24.features.length < 1);
+        const allLayers = [...layers, ...this.state.layers, ...this.FIRMSModisLayer, ...this.FIRMSViirsLayer];
 
         return (
             <div>
-                <PowerSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onSwitchChange={this.clockClickHandler} />
-                <PowerSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
-                <Map layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
+                <Map onDTMFDecode={this.DTMFDecodeHandler} layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
+                <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
+                <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
+                <IconButtonSwitch loading={firmsIsLoading} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
+                <CoordinateInput value={this.state.coordinateInputValue} onSubmit={this.coordinateSubmitHandler} />
+                <DTMFListener onDecode={this.DTMFDecodeHandler} />    
             </div>
         );
+    }
+
+    DTMFDecodeHandler(value) {
+        this.setState({
+            coordinateInputValue: this.state.coordinateInputValue + value
+        });
+    }
+
+    coordinateSubmitHandler(value) {
+        const myLayer = {
+            id: value,
+            layer:
+                <Layer type="circle" key={value} paint={{
+                    "circle-radius": 10,
+                    "circle-color": "green",
+                }}>
+                    <Feature coordinates={value.split(' ')} />
+                </Layer>
+        }
+
+        const updatedLayers = [...this.state.layers, myLayer];
+        this.setState({
+            layers: updatedLayers
+        });
+    }
+
+    earClickHandler() {
+        if (this.state.isListening) {
+            this.setState({
+                isListening: false,
+            });
+        } else {
+            this.setState({
+                isListening: true,
+            });
+        }
+
     }
 
     clockClickHandler() {
