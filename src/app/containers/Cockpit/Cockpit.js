@@ -76,12 +76,26 @@ class Cockpit extends PureComponent {
 
     DTMFDecodeHandler(value) {
         const coords = value.split(' ');
-        this.coordinateSubmitHandler(value);
+
+        const myLayer = {
+            id: value,
+            layer:
+                <Layer type="circle" key={Math.random().toString()} paint={{
+                    "circle-radius": 10,
+                    "circle-color": "green",
+                }}>
+                    <Feature coordinates={coords} />
+                </Layer>
+        }
+
+        const updatedLayers = [...this.state.layers, myLayer];
+
         this.setState({
             coordinateInputValue: value,
             isListening: false,
             center: coords,
             zoom: 15,
+            layers: updatedLayers,
         });
     }
 
@@ -100,7 +114,9 @@ class Cockpit extends PureComponent {
 
         const updatedLayers = [...this.state.layers, myLayer];
         this.setState({
-            layers: updatedLayers
+            layers: updatedLayers,
+            center: coords,
+            zoom: 15,
         });
     }
 
