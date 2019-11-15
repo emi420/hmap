@@ -4,6 +4,9 @@ import IconButtonSwitch from '../../components/IconButtonSwitch/IconButtonSwitch
 import layers, { DEFAULT_HIDDEN_LAYERS } from '../../../config/layers';
 import { Layer, Feature } from 'react-mapbox-gl';
 import { connect } from "react-redux";
+import {
+    MAP_DEFAULT_CENTER
+} from '../../../config/config';
 import { FIRMSLatestModis24Action, FIRMSLatestViirs24Action } from '../../app/actions';
 import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../../app/selectors';
 import DTMFListener from '../../components/DTMFListener/DTMFListener';
@@ -15,6 +18,8 @@ class Cockpit extends PureComponent {
         showFireHistory: false,
         showFIRMS: false,
         firmsDataWasLoaded: false,
+        zoom: 11,
+        center: MAP_DEFAULT_CENTER,
         isListening: false,
         hiddenLayers: DEFAULT_HIDDEN_LAYERS,
         layers: [],
@@ -59,7 +64,7 @@ class Cockpit extends PureComponent {
 
         return (
             <div>
-                <Map onDTMFDecode={this.DTMFDecodeHandler} layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
+                <Map center={this.state.center} zoom={[this.state.zoom]} onDTMFDecode={this.DTMFDecodeHandler} layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
                 <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
@@ -70,14 +75,18 @@ class Cockpit extends PureComponent {
     }
 
     DTMFDecodeHandler(value) {
+        const coords = value.split(' ');
         this.coordinateSubmitHandler(value);
         this.setState({
             coordinateInputValue: value,
             isListening: false,
+            center: coords,
+            zoom: 15,
         });
     }
 
     coordinateSubmitHandler(value) {
+        const coords = value.split(' ');
         const myLayer = {
             id: value,
             layer:
@@ -85,7 +94,7 @@ class Cockpit extends PureComponent {
                     "circle-radius": 10,
                     "circle-color": "green",
                 }}>
-                    <Feature coordinates={value.split(' ')} />
+                    <Feature coordinates={coords} />
                 </Layer>
         }
 

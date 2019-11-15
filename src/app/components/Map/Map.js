@@ -4,7 +4,6 @@ import MapLayers from './MapLayers/MapLayers';
 import {
     MAPBOX_ACCESS_TOKEN,
     MAPBOX_DEFAULT_STYLE,
-    MAP_DEFAULT_CENTER
 } from '../../../config/config';
 
 const MainMap = ReactMapboxGl({
@@ -15,7 +14,8 @@ const Map = (props) => (
     <MainMap
         // eslint-disable-next-line react/style-prop-object
         style={MAPBOX_DEFAULT_STYLE}
-        center={MAP_DEFAULT_CENTER}
+        center={props.center}
+        zoom={props.zoom}
         containerStyle={{
             height: '100vh',
             width: '100vw'
