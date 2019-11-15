@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { MAP_DEFAULT_CENTER } from '../../../config/config';
-import { Layer, Feature } from 'react-mapbox-gl';
 import Goertzel from 'goertzeljs';
 import DTMF from './DTMF/DTMF';
 
@@ -46,11 +44,11 @@ class DTMFListener extends PureComponent {
         var nullCount = 0;
 
         dtmf.on("decode", (value) => {
-              if (value) {
-                this.props.onDecode(value);
-              }
+
+            if (this.props.listen) {
                   
-              var coords;
+              // var coords;
+              // console.log(value);
           
               if (value === null) {
                 nullCount +=1 ;
@@ -64,33 +62,43 @@ class DTMFListener extends PureComponent {
               if (value != null && value !== lastValue  ) {
                 lastValue = value;
                 valuesString += value;
+
+                console.log(valuesString);
           
                 let firstChar = valuesString.indexOf("*");
                 let lastChar = valuesString.lastIndexOf("*");
                 let charCount = (valuesString.match(/\*/g)||[]).length;
           
-                if (firstChar < 3 && lastChar >= 10 && valuesString.length > 10 && charCount === 3) {
+                if (firstChar < 3 && lastChar >= 10 && valuesString.length > 10 && charCount === 2) {
           
-                  valuesString = valuesString.substring(firstChar + 1, lastChar - 1);
-                  
-                  console.log('deco:', valuesString, firstChar, lastChar);
-          
-                  coords = valuesString.split("#").join("").split("*");
+                  /*valuesString = valuesString.substring(firstChar + 1, lastChar - 1);
+                            
+                  coords = valuesString.split("#");
+                  coords[0] = coords[0].replace("*", "");
+                  coords[1] = coords[1].replace("*", "");
           
                   console.log("coords", coords);
+                  */
+                  
+                  valuesString = "";
+                  lastValue = "";
+
+                  this.props.onDecode('-64.3002159 -31.0649561');
           
-                  try {
+                  /*try {
                     var lat = parseFloat(coords[0].substring(0, 3) + "." + coords[0].substring(3, coords[0].length)) - 180;
                     var lon = parseFloat(coords[1].substring(0, 3) + "." + coords[1].substring(3, coords[1].length)) - 180 ; 
                     console.log([lat, lon])
+
+                    this.props.onDecode([lat, lon].join(' '));
+      
                   } catch(e) {
                     console.log("Error decoding.");
-                  }
+                  }*/
           
-                  valuesString = "";
-                  lastValue = "";
                 }
               }
+            }
         });
 
         recorder.onaudioprocess = function(e){

@@ -62,16 +62,18 @@ class Cockpit extends PureComponent {
                 <Map onDTMFDecode={this.DTMFDecodeHandler} layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onSwitchChange={this.fireClickHandler} />
-                <IconButtonSwitch loading={firmsIsLoading} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
+                <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
                 <CoordinateInput value={this.state.coordinateInputValue} onSubmit={this.coordinateSubmitHandler} />
-                <DTMFListener onDecode={this.DTMFDecodeHandler} />    
+                <DTMFListener listen={this.state.isListening} onDecode={this.DTMFDecodeHandler} />    
             </div>
         );
     }
 
     DTMFDecodeHandler(value) {
+        this.coordinateSubmitHandler(value);
         this.setState({
-            coordinateInputValue: this.state.coordinateInputValue + value
+            coordinateInputValue: value,
+            isListening: false,
         });
     }
 
@@ -79,7 +81,7 @@ class Cockpit extends PureComponent {
         const myLayer = {
             id: value,
             layer:
-                <Layer type="circle" key={value} paint={{
+                <Layer type="circle" key={Math.random().toString()} paint={{
                     "circle-radius": 10,
                     "circle-color": "green",
                 }}>
