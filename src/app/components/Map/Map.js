@@ -25,7 +25,7 @@ const Map = (props) => (
         <MapLayers 
             onDTMFDecode={props.onDTMFDecode}
             layers={props.layers}
-            hiddenLayers={props.hiddenLayers}
+            hiddenLayers={[props.hiddenLayers]}
         />
         
     </MainMap>
