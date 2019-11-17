@@ -1,16 +1,23 @@
 import React, { PureComponent } from 'react';
-import Map from '../../components/Map/Map';
 import IconButtonSwitch from '../../components/IconButtonSwitch/IconButtonSwitch';
 import layers, { DEFAULT_HIDDEN_LAYERS } from '../../../config/layers';
 import { Layer, Feature } from 'react-mapbox-gl';
 import { connect } from "react-redux";
+import ReactMapboxGl from 'react-mapbox-gl';
+import MapLayers from '../../components/Map/MapLayers/MapLayers';
 import {
-    MAP_DEFAULT_CENTER
+    MAP_DEFAULT_CENTER,
+    MAPBOX_ACCESS_TOKEN,
+    MAPBOX_DEFAULT_STYLE,
 } from '../../../config/config';
 import { FIRMSLatestModis24Action, FIRMSLatestViirs24Action } from '../../app/actions';
 import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../../app/selectors';
 import DTMFListener from '../../components/DTMFListener/DTMFListener';
 import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
+
+const MainMap = ReactMapboxGl({
+    accessToken: MAPBOX_ACCESS_TOKEN
+});
 
 class Cockpit extends PureComponent {
 
@@ -18,7 +25,6 @@ class Cockpit extends PureComponent {
         showFireHistory: false,
         showFIRMS: false,
         firmsDataWasLoaded: false,
-        zoom: 11,
         center: MAP_DEFAULT_CENTER,
         isListening: false,
         hiddenLayers: DEFAULT_HIDDEN_LAYERS,
@@ -33,8 +39,12 @@ class Cockpit extends PureComponent {
         this.earClickHandler = this.earClickHandler.bind(this);
         this.coordinateSubmitHandler = this.coordinateSubmitHandler.bind(this);
         this.DTMFDecodeHandler = this.DTMFDecodeHandler.bind(this);
+    }
 
-        this.FIRMSModisLayer = this.props.FIRMSLatestModis24 ? [
+    render() {
+        const firmsIsLoading = this.state.firmsDataWasLoaded && (this.props.FIRMSLatestViirs24.features.length < 1 || this.props.FIRMSLatestModis24.features.length < 1);
+
+        const FIRMSModisLayer = this.props.FIRMSLatestModis24 ? [
             {
                 id: 'firms-modis',
                 data: this.props.FIRMSLatestModis24,
@@ -45,7 +55,7 @@ class Cockpit extends PureComponent {
             },
         ] : []; 
 
-        this.FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? [
+        const FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? [
             {
                 id: 'firms-viirs',
                 data: this.props.FIRMSLatestViirs24,
@@ -56,15 +66,27 @@ class Cockpit extends PureComponent {
             },
         ] : [];
 
-    }
-
-    render() {
-        const firmsIsLoading = this.state.firmsDataWasLoaded && (this.props.FIRMSLatestViirs24.features.length < 1 || this.props.FIRMSLatestModis24.features.length < 1);
-        const allLayers = [...layers, ...this.state.layers, ...this.FIRMSModisLayer, ...this.FIRMSViirsLayer];
+        const allLayers = [...layers, ...this.state.layers, ...FIRMSModisLayer, ...FIRMSViirsLayer];
 
         return (
             <div>
-                <Map center={this.state.center} zoom={[this.state.zoom]} onDTMFDecode={this.DTMFDecodeHandler} layers={allLayers} hiddenLayers={this.state.hiddenLayers} />
+                <MainMap
+                    // eslint-disable-next-line react/style-prop-object
+                    onStyleLoad={ el => this.map = el } 
+                    style={MAPBOX_DEFAULT_STYLE}
+                    center={this.state.center}
+                    containerStyle={{
+                        height: '100vh',
+                        width: '100vw'
+                    }}
+                    antialias={true}
+                > 
+                    <MapLayers 
+                        onDTMFDecode={this.DTMFDecodeHandler}
+                        layers={allLayers}
+                        hiddenLayers={this.state.hiddenLayers}
+                    />                    
+                </MainMap>
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onClick={this.fireClickHandler} />
                 <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
@@ -77,47 +99,60 @@ class Cockpit extends PureComponent {
     DTMFDecodeHandler(value) {
         const coords = value.split(' ');
 
-        const myLayer = {
-            id: value,
-            layer:
-                <Layer type="circle" key={Math.random().toString()} paint={{
-                    "circle-radius": 10,
-                    "circle-color": "green",
-                }}>
-                    <Feature coordinates={coords} />
-                </Layer>
+        if (coords.length === 2) {
+            const myLayer = {
+                id: value,
+                layer:
+                    <Layer type="circle" key={Math.random().toString()} paint={{
+                        "circle-radius": 10,
+                        "circle-color": "green",
+                    }}>
+                        <Feature coordinates={coords} />
+                    </Layer>
+            }
+
+            const updatedLayers = [...this.state.layers, myLayer];
+
+            this.setState({
+                coordinateInputValue: value,
+                isListening: false,
+                layers: updatedLayers,
+            });
+
+            this.map.flyTo({
+                center: coords,
+                zoom: [15]
+            });
         }
 
-        const updatedLayers = [...this.state.layers, myLayer];
-
-        this.setState({
-            coordinateInputValue: value,
-            isListening: false,
-            center: coords,
-            zoom: 15,
-            layers: updatedLayers,
-        });
     }
 
     coordinateSubmitHandler(value) {
-        const coords = value.split(' ');
-        const myLayer = {
-            id: value,
-            layer:
-                <Layer type="circle" key={Math.random().toString()} paint={{
-                    "circle-radius": 10,
-                    "circle-color": "green",
-                }}>
-                    <Feature coordinates={coords} />
-                </Layer>
-        }
 
-        const updatedLayers = [...this.state.layers, myLayer];
-        this.setState({
-            layers: updatedLayers,
-            center: coords,
-            zoom: 15,
-        });
+        const coords = value.split(' ');
+        if (coords.length === 2) {
+            const myLayer = {
+                id: value,
+                layer:
+                    <Layer type="circle" key={Math.random().toString()} paint={{
+                        "circle-radius": 10,
+                        "circle-color": "green",
+                    }}>
+                        <Feature coordinates={coords} />
+                    </Layer>
+            }
+
+            const updatedLayers = [...this.state.layers, myLayer];
+
+            this.setState({
+                layers: updatedLayers,
+            });
+
+            this.map.flyTo({
+                center: coords,
+                zoom: [15]
+            });
+        }
     }
 
     earClickHandler() {
