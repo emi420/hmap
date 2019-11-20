@@ -1,6 +1,6 @@
 import Goertzel from 'goertzeljs';
 
-class DTMF { 
+class DTMFDecoder { 
     constructor(options) {
       if (options == null) { options = {}; }
       this.options = {
@@ -15,29 +15,29 @@ class DTMF {
       }
       this.sampleRate = this.options.sampleRate / this.options.downsampleRate;
       this.frequencyTable = {
-        [697]: {
-          [1209]: '1',
-          [1336]: '2',
-          [1477]: '3',
-          [1633]: 'A'
+        697: {
+          1209: '1',
+          1336: '2',
+          1477: '3',
+          1633: 'A'
         },
-        [770]: {
-          [1209]: '4',
-          [1336]: '5',
-          [1477]: '6',
-          [1633]: 'B'
+        770: {
+          1209: '4',
+          1336: '5',
+          1477: '6',
+          1633: 'B'
         },
-        [852]: {
-          [1209]: '7',
-          [1336]: '8',
-          [1477]: '9',
-          [1633]: 'C'
+        852: {
+          1209: '7',
+          1336: '8',
+          1477: '9',
+          1633: 'C'
         },
-        [941]: {
-          [1209]: '*',
-          [1336]: '0',
-          [1477]: '#',
-          [1633]: 'D'
+        941: {
+          1209: '*',
+          1336: '0',
+          1477: '#',
+          1633: 'D'
         }
       };
       this.lowFrequencies = [];
@@ -104,6 +104,7 @@ class DTMF {
     on(eventName, handler) {
       switch (eventName) {
         case "decode": return this.decodeHandlers.push(handler);
+        default:
       }
     }
   
@@ -154,4 +155,4 @@ class DTMF {
     }
   }
   
-  export default DTMF;
+  export default DTMFDecoder;

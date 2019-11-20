@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import IconButtonSwitch from '../../components/IconButtonSwitch/IconButtonSwitch';
 import layers, { DEFAULT_HIDDEN_LAYERS } from '../../../config/layers';
-import { Layer, Feature } from 'react-mapbox-gl';
 import { connect } from "react-redux";
 import ReactMapboxGl from 'react-mapbox-gl';
 import MapLayers from '../../components/Map/MapLayers/MapLayers';
+import FIRMSLayer from '../../components/FIRMSLayer/FIRMSLayer';
+import CoordinatePointLayer from '../../components/CoordinatePointLayer/CoordinatePointLayer';
 import {
     MAP_DEFAULT_CENTER,
     MAPBOX_ACCESS_TOKEN,
@@ -12,7 +13,8 @@ import {
 } from '../../../config/config';
 import { FIRMSLatestModis24Action, FIRMSLatestViirs24Action } from '../../app/actions';
 import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../../app/selectors';
-import DTMFListener from '../../components/DTMFListener/DTMFListener';
+import DTMFListener from '../../components/DTMF/DTMFListener';
+import DTMFCoordinate from '../../components/DTMF/DTMFCoordinate';
 import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
 
 const MainMap = ReactMapboxGl({
@@ -30,6 +32,7 @@ class Cockpit extends PureComponent {
         hiddenLayers: DEFAULT_HIDDEN_LAYERS,
         layers: [],
         coordinateInputValue: "",
+        DTMFCoordinateString: "",
     }
 
     constructor(props) {
@@ -44,29 +47,8 @@ class Cockpit extends PureComponent {
 
     render() {
         const firmsIsLoading = this.state.firmsDataWasLoaded && (this.props.FIRMSLatestViirs24.features.length < 1 || this.props.FIRMSLatestModis24.features.length < 1);
-
-        const FIRMSModisLayer = this.props.FIRMSLatestModis24 ? [
-            {
-                id: 'firms-modis',
-                data: this.props.FIRMSLatestModis24,
-                circlePaint: {
-                    "circle-radius": 4,
-                    "circle-color": "red",
-                }
-            },
-        ] : []; 
-
-        const FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? [
-            {
-                id: 'firms-viirs',
-                data: this.props.FIRMSLatestViirs24,
-                circlePaint: {
-                    "circle-radius": 4,
-                    "circle-color": "yellow",
-                }
-            },
-        ] : [];
-
+        const FIRMSModisLayer = this.props.FIRMSLatestModis24 ? FIRMSLayer('firms-modis', this.props.FIRMSLatestModis24) : [];
+        const FIRMSViirsLayer = this.props.FIRMSLatestViirs24 ? FIRMSLayer('firms-viirs', this.props.FIRMSLatestViirs24) : [];
         const allLayers = [...layers, ...this.state.layers, ...FIRMSModisLayer, ...FIRMSViirsLayer];
 
         return (
@@ -97,35 +79,60 @@ class Cockpit extends PureComponent {
         );
     }
 
+    clockClickHandler() {
+        this.switchFireHistoryLayer()
+    }
+
+    fireClickHandler() {
+        this.switchFIRMSLayer();
+    }
+
+    earClickHandler() {
+        this.switchDTMFListening();
+    }
+
     DTMFDecodeHandler(value) {
-        const coords = value.split(' ');
 
-        if (coords.length === 2) {
-            const myLayer = {
-                id: value,
-                layer:
-                    <Layer type="circle" key={Math.random().toString()} paint={{
-                        "circle-radius": 10,
-                        "circle-color": "green",
-                    }}>
-                        <Feature coordinates={coords} />
-                    </Layer>
+        const coordinateDTMFDecoder = DTMFCoordinate(this.state.DTMFCoordinateString + value);
+
+        if (coordinateDTMFDecoder.decoded) {
+        
+            const coords = coordinateDTMFDecoder.coordinate;
+
+            if (coords.length === 2) {
+                try {
+                    const myLayer = CoordinatePointLayer(coords);
+
+                    const updatedLayers = [...this.state.layers, myLayer];
+
+                    this.setState({
+                        coordinateInputValue: coords.join(' '),
+                        isListening: false,
+                        layers: updatedLayers,
+                    });
+
+                    this.map.flyTo({
+                        center: coords,
+                        zoom: [15]
+                    });
+                } catch(e) {
+                    console.log("Coordinate error", e);
+                }
+
             }
-
-            const updatedLayers = [...this.state.layers, myLayer];
-
-            this.setState({
-                coordinateInputValue: value,
-                isListening: false,
-                layers: updatedLayers,
-            });
-
-            this.map.flyTo({
-                center: coords,
-                zoom: [15]
-            });
+        } else {
+            if (!coordinateDTMFDecoder.error) {
+                this.setState({
+                    DTMFCoordinateString: this.state.DTMFCoordinateString + value,
+                    coordinateInputValue: '',
+                });    
+            } else {
+                this.setState({
+                    DTMFCoordinateString: '',
+                    coordinateInputValue: '',
+                });
+            }
         }
-
     }
 
     coordinateChangeHandler(value) {
@@ -138,18 +145,9 @@ class Cockpit extends PureComponent {
 
         const value = this.state.coordinateInputValue;
         const coords = value.split(' ');
+        
         if (coords.length === 2) {
-            const myLayer = {
-                id: value,
-                layer:
-                    <Layer type="circle" key={Math.random().toString()} paint={{
-                        "circle-radius": 10,
-                        "circle-color": "green",
-                    }}>
-                        <Feature coordinates={coords} />
-                    </Layer>
-            }
-
+            const myLayer = CoordinatePointLayer(coords);
             const updatedLayers = [...this.state.layers, myLayer];
 
             this.setState({
@@ -163,20 +161,14 @@ class Cockpit extends PureComponent {
         }
     }
 
-    earClickHandler() {
-        if (this.state.isListening) {
-            this.setState({
-                isListening: false,
-            });
-        } else {
-            this.setState({
-                isListening: true,
-            });
-        }
-
+    switchDTMFListening () {
+        this.setState({
+            DTMFCoordinateString: this.state.isListening ? this.state.DTMFCoordinateString : '',
+            isListening: !this.state.isListening,
+        });
     }
 
-    clockClickHandler() {
+    switchFireHistoryLayer() {
         if (this.state.showFireHistory) {
             const hiddenLayers = [...this.state.hiddenLayers, 'big-fires'];
             this.setState({
@@ -191,10 +183,9 @@ class Cockpit extends PureComponent {
                 showFireHistory: true,
             });
         }
-
     }
 
-    fireClickHandler() {
+    switchFIRMSLayer() {
         if (this.state.showFIRMS) {
             const hiddenLayers = [...this.state.hiddenLayers, 'firms-modis', 'firms-viirs'];
             this.setState({

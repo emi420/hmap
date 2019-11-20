@@ -1,15 +1,11 @@
 import { PureComponent } from 'react';
 import Goertzel from 'goertzeljs';
-import DTMF from './DTMF/DTMF';
+import DTMFDecoder from './DTMFDecoder/DTMFDecoder';
 
 class DTMFListener extends PureComponent {
 
     state = {
-      audio: null
-    }
-
-    componentDidMount() {
-        this.toggleMicrophone();
+      audio: null,
     }
 
     async getMicrophone() {
@@ -26,7 +22,7 @@ class DTMFListener extends PureComponent {
         const bufferSize = 512
         const recorder = context.createScriptProcessor(bufferSize, 1, 1);
 
-        var dtmf = new DTMF({
+        var dtmf = new DTMFDecoder({
           sampleRate: context.sampleRate,
           repeatMin: 6,
           downsampleRate: 1,
@@ -36,49 +32,10 @@ class DTMFListener extends PureComponent {
           }
         })
 
-        var valuesString = "";
-        var nullCount = 0;
-
         dtmf.on("decode", (value) => {
-
-            if (this.props.listen) {
-                            
-              if (value === null) {
-                nullCount +=1 ;
-                if (nullCount > 10) {
-                  valuesString = "";
-                  nullCount = 0;
-                }
-              }
-          
-              if (value != null ) {
-                valuesString += value.replace("A", "");
-
-                console.log(valuesString);
-          
-                let firstChar = valuesString.indexOf("*");
-                let lastChar = valuesString.lastIndexOf("*");
-                let charCount = (valuesString.match(/\*/g)||[]).length;
-          
-                if (valuesString.length > 10 && charCount === 2) {
-          
-                  valuesString = valuesString.substring(firstChar + 1, lastChar - 1);
-                            
-                  let coords = valuesString.split("#");
-                    
-                  try {
-                    var lat = parseFloat(coords[0].substring(0, 3) + "." + coords[0].substring(3, coords[0].length)) - 180;
-                    var lon = parseFloat(coords[1].substring(0, 3) + "." + coords[1].substring(3, coords[1].length)) - 180 ; 
-
-                    this.props.onDecode([lat, lon].join(' '));
-      
-                  } catch(e) {
-                    console.log("Error decoding.");
-                  }
-          
-                }
-              }
-            }
+            if (value !== null) {
+              this.props.onDecode(value);
+            }            
         });
 
         recorder.onaudioprocess = function(e){
@@ -102,6 +59,12 @@ class DTMFListener extends PureComponent {
         } else {
             this.getMicrophone();
         }
+    }
+
+    componentDidUpdate(prevProps) {
+      if (this.props.listen !== prevProps.listen) {
+        this.toggleMicrophone();
+      }
     }
     
     render() {
