@@ -1,14 +1,11 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import Goertzel from 'goertzeljs';
 import DTMF from './DTMF/DTMF';
 
 class DTMFListener extends PureComponent {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          audio: null
-        };
+    state = {
+      audio: null
     }
 
     componentDidMount() {
@@ -39,29 +36,23 @@ class DTMFListener extends PureComponent {
           }
         })
 
-        var lastValue;
         var valuesString = "";
         var nullCount = 0;
 
         dtmf.on("decode", (value) => {
 
             if (this.props.listen) {
-                  
-              // var coords;
-              // console.log(value);
-          
+                            
               if (value === null) {
                 nullCount +=1 ;
                 if (nullCount > 10) {
                   valuesString = "";
-                  lastValue = "";
                   nullCount = 0;
                 }
               }
           
-              if (value != null && value !== lastValue  ) {
-                lastValue = value;
-                valuesString += value;
+              if (value != null ) {
+                valuesString += value.replace("A", "");
 
                 console.log(valuesString);
           
@@ -69,32 +60,21 @@ class DTMFListener extends PureComponent {
                 let lastChar = valuesString.lastIndexOf("*");
                 let charCount = (valuesString.match(/\*/g)||[]).length;
           
-                if (firstChar < 3 && lastChar >= 10 && valuesString.length > 10 && charCount === 2) {
+                if (valuesString.length > 10 && charCount === 2) {
           
-                  /*valuesString = valuesString.substring(firstChar + 1, lastChar - 1);
+                  valuesString = valuesString.substring(firstChar + 1, lastChar - 1);
                             
-                  coords = valuesString.split("#");
-                  coords[0] = coords[0].replace("*", "");
-                  coords[1] = coords[1].replace("*", "");
-          
-                  console.log("coords", coords);
-                  */
-                  
-                  valuesString = "";
-                  lastValue = "";
-
-                  this.props.onDecode('-64.3002159 -31.0649561');
-          
-                  /*try {
+                  let coords = valuesString.split("#");
+                    
+                  try {
                     var lat = parseFloat(coords[0].substring(0, 3) + "." + coords[0].substring(3, coords[0].length)) - 180;
                     var lon = parseFloat(coords[1].substring(0, 3) + "." + coords[1].substring(3, coords[1].length)) - 180 ; 
-                    console.log([lat, lon])
 
                     this.props.onDecode([lat, lon].join(' '));
       
                   } catch(e) {
                     console.log("Error decoding.");
-                  }*/
+                  }
           
                 }
               }

@@ -39,6 +39,7 @@ class Cockpit extends PureComponent {
         this.earClickHandler = this.earClickHandler.bind(this);
         this.coordinateSubmitHandler = this.coordinateSubmitHandler.bind(this);
         this.DTMFDecodeHandler = this.DTMFDecodeHandler.bind(this);
+        this.coordinateChangeHandler = this.coordinateChangeHandler.bind(this);
     }
 
     render() {
@@ -90,7 +91,7 @@ class Cockpit extends PureComponent {
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onClick={this.fireClickHandler} />
                 <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
-                <CoordinateInput value={this.state.coordinateInputValue} onSubmit={this.coordinateSubmitHandler} />
+                <CoordinateInput value={this.state.coordinateInputValue} onChange={this.coordinateChangeHandler} onSubmit={this.coordinateSubmitHandler} />
                 <DTMFListener listen={this.state.isListening} onDecode={this.DTMFDecodeHandler} />    
             </div>
         );
@@ -127,8 +128,15 @@ class Cockpit extends PureComponent {
 
     }
 
-    coordinateSubmitHandler(value) {
+    coordinateChangeHandler(value) {
+        this.setState({
+            coordinateInputValue: value
+        });
+    }
 
+    coordinateSubmitHandler() {
+
+        const value = this.state.coordinateInputValue;
         const coords = value.split(' ');
         if (coords.length === 2) {
             const myLayer = {

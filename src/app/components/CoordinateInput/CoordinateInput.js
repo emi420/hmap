@@ -1,30 +1,22 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './CoordinateInput.css';
 
-class CoordinateInput extends PureComponent {
-
-    state = {
-        textValue: ""
-    }
+const CoordinateInput = (props) => {
     
-    submitHandler = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.state.textValue);
+        props.onSubmit();
     }
 
-    textChangeHandler = (e) => {
-        this.setState({
-            textValue: e.target.value
-        });
+    const textChangeHandler = (e) => {
+        props.onChange(e.target.value);
     }
 
-    render() {
-        return (
-            <form onSubmit={this.submitHandler}>
-                <input placeholder="-64.10021 -31.0649" onChange={this.textChangeHandler} value={this.state.textValue || this.props.value} type="text" className="CoordinateInput" />
-            </form>
-        )
-    }
+    return (
+        <form onSubmit={submitHandler}>
+            <input placeholder="-64.10021 -31.0649" onChange={textChangeHandler} value={props.value} type="text" className="CoordinateInput" />
+        </form>
+    )
 }
 
 export default CoordinateInput;
