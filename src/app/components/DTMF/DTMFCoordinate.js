@@ -4,11 +4,11 @@
 
         *11572611489939*
 
-    Where '*' is the start of the transmission, 1157261 is (coordinate long + 180) * 10000, for example:
+    Where '*' characters are start and end of transmission
+    and 11572611489939 are two (coordinate + 180) * 10000 togheter:
     
-        (-64,2739 + 180) * 10000
-
-    The '#' character is 
+        (-64,2739 + 180) * 10000 => 1157261
+        (-31,0061 + 180) * 10000 => 1489939
 
 */
 
