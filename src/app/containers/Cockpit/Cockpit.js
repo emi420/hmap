@@ -16,6 +16,8 @@ import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../.
 import DTMFListener from '../../components/DTMF/DTMFListener';
 import DTMFCoordinate from '../../components/DTMF/DTMFCoordinate';
 import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
+import { withRouter } from 'react-router'
+import queryString from 'query-string';
 
 const MainMap = ReactMapboxGl({
     accessToken: MAPBOX_ACCESS_TOKEN
@@ -45,6 +47,10 @@ class Cockpit extends PureComponent {
         this.coordinateSubmitHandler = this.coordinateSubmitHandler.bind(this);
         this.DTMFDecodeHandler = this.DTMFDecodeHandler.bind(this);
         this.coordinateChangeHandler = this.coordinateChangeHandler.bind(this);
+        const query = queryString.parse(this.props.location.search);
+        if (query.coord) {
+            this.state.coordinateInputValue = query.coord;
+        }
     }
 
     render() {
@@ -57,7 +63,12 @@ class Cockpit extends PureComponent {
             <div>
                 <MainMap
                     // eslint-disable-next-line react/style-prop-object
-                    onStyleLoad={ el => this.map = el } 
+                    onStyleLoad={ el => {
+                        this.map = el;
+                        if (this.state.coordinateInputValue) {
+                            this.coordinateSubmitHandler();
+                        }
+                    }} 
                     style={MAPBOX_DEFAULT_STYLE}
                     center={this.state.center}
                     containerStyle={{
@@ -234,5 +245,5 @@ const mapDispatchToProps = dispatch => ({
     FIRMSLatestViirs24Action: () => dispatch(FIRMSLatestViirs24Action),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cockpit);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cockpit));
 
