@@ -23,8 +23,28 @@
 
     <script type="text/javascript">
 
-        // Code sample taken from https://codepen.io/edball/pen/EVMaVN
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log([position.coords.longitude, position.coords.latitude].join(' '));
+            var posArr = (Math.round((position.coords.longitude + 180) * 10000).toString() +
+                Math.round((position.coords.latitude + 180) * 10000).toString()).split('')
+            var posStr = "";
+            for (let i = 0; i < posArr.length; i++) {
+                posStr += posArr[i];
+                if (posArr[i + 1] === posArr[i]) {
+                    posStr += "#";
+                }
+            }
+            document.getElementById("dtmfValue").value = "*" + posStr + "*"
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
 
+        // Code sample taken from https://codepen.io/edball/pen/EVMaVN
         var start = function() {
         
             // polyfill
@@ -91,7 +111,6 @@
             var coordinateArr = coordinateStr.split('');
 
             let playTone = () => {
-                console.log(coordinateArr[0])
                 var frequencyPair = dtmfFrequencies[coordinateArr[0]];
                 dtmf.freq1 = frequencyPair.f1;
                 dtmf.freq2 = frequencyPair.f2;
@@ -106,7 +125,9 @@
                 }, 200);
             }
 
-            playTone();
+            window.setTimeout(() => {
+                playTone();
+            }, 200);
 
         }
     </script>
