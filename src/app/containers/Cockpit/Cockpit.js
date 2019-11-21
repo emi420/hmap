@@ -23,6 +23,8 @@ const MainMap = ReactMapboxGl({
 
 class Cockpit extends PureComponent {
 
+    DTMFListeningTimeout = null;
+
     state = {
         showFireHistory: false,
         showFIRMS: false,
@@ -89,34 +91,45 @@ class Cockpit extends PureComponent {
 
     earClickHandler() {
         this.switchDTMFListening();
-        setTimeout(() => {
-            this.switchDTMFListening();
-        }, 10000);
+        this.DTMFListeningTimeout = setTimeout(() => {
+            if (this.state.isListening) {
+                this.switchDTMFListening();
+            }
+        }, 20000);
     }
 
-    DTMFDecodeHandler(value) {
+    DTMFDecodeHandler(rawValue) {
 
-        const coordinateDTMFDecoder = DTMFCoordinate(this.state.DTMFCoordinateString + value);
+        const value = rawValue.replace('A', '').replace('#', '');
 
-        if (coordinateDTMFDecoder.decoded) {
-        
-            const coords = coordinateDTMFDecoder.coordinate;
-            this.setState({
-                coordinateInputValue: coords.join(' ')
-            });
-            this.coordinateSubmitHandler(coords);
+        if (
+            value !== '*' ||
+            (value === '*' && this.state.DTMFCoordinateString[this.state.DTMFCoordinateString.length - 1] !== "*")
+        ) {
+            const coordinateDTMFDecoder = DTMFCoordinate(this.state.DTMFCoordinateString + value);
 
-        } else {
-            if (!coordinateDTMFDecoder.error) {
+            if (coordinateDTMFDecoder.decoded) {
+            
+                const coords = coordinateDTMFDecoder.coordinate;
                 this.setState({
-                    DTMFCoordinateString: this.state.DTMFCoordinateString + value.replace('A', ''),
-                    coordinateInputValue: '',
-                });    
-            } else {
-                this.setState({
-                    DTMFCoordinateString: '',
-                    coordinateInputValue: '',
+                    coordinateInputValue: coords.join(' ')
                 });
+                this.coordinateSubmitHandler(coords);
+                this.switchDTMFListening();
+
+            } else {
+                if (!coordinateDTMFDecoder.error) {
+                    this.setState({
+                        DTMFCoordinateString: this.state.DTMFCoordinateString + value,
+                        coordinateInputValue: '',
+                    });    
+                } else {
+                    this.setState({
+                        DTMFCoordinateString: '',
+                        coordinateInputValue: '',
+                    });
+                    this.switchDTMFListening();
+                }
             }
         }
     }
@@ -140,21 +153,28 @@ class Cockpit extends PureComponent {
         }
         
         if (coords.length === 2) {
-            const myLayer = CoordinatePointLayer(coords);
-            const updatedLayers = [...this.state.layers, myLayer];
 
-            this.setState({
-                layers: updatedLayers,
-            });
-
-            this.map.flyTo({
-                center: coords,
-                zoom: [15]
-            });
+            try {
+                const myLayer = CoordinatePointLayer(coords);
+                const updatedLayers = [...this.state.layers, myLayer];
+    
+                this.setState({
+                    layers: updatedLayers,
+                });
+    
+                this.map.flyTo({
+                    center: coords,
+                    zoom: [15]
+                });
+            } catch(e) {
+                console.log("Coordinate error", e);
+                this.switchDTMFListening();
+            }
         }
     }
 
     switchDTMFListening () {
+        clearTimeout(this.DTMFListeningTimeout);
         this.setState({
             DTMFCoordinateString: this.state.isListening ? this.state.DTMFCoordinateString : '',
             isListening: !this.state.isListening,
