@@ -19,7 +19,7 @@ $ npm install
 * Rename `src/config/config.sample.js` to `config.js` and edit this file adding a `MAPBOX_ACCESS_TOKEN`.
 * Change map center `MAP_DEFAULT_CENTER`
 * Change `data/*.geojson` and/or `config/layers` with your own data and styles.
-* Also, you can change the map's style, changing `MAPBOX_DEFAULT_STYLE` , for example I'm using mya custom style `mapbox://styles/emi420/ck2divmvv1gip1cpjxumqy761`.
+* Also, you can change the map's style, changing `MAPBOX_DEFAULT_STYLE` , for example I'm using my own custom style `mapbox://styles/emi420/ck2divmvv1gip1cpjxumqy761`.
 * If you want to change the CSV sources for FIRMS data, change `MODIS_24_URL` and `VIIRS_24_URL` and use your own, for example you can load `https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_South_America_24h.csv` through a proxy.
 
 ### Run

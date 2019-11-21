@@ -5,7 +5,7 @@
         *11572611489939*
 
     Where '*' characters are start and end of transmission
-    and 11572611489939 are two (coordinate + 180) * 10000 togheter:
+    and 11572611489939 are two (coordinate + 180) * 10000 together:
     
         (-64,2739 + 180) * 10000 => 1157261
         (-31,0061 + 180) * 10000 => 1489939
