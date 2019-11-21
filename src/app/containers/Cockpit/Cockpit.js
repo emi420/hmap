@@ -89,6 +89,9 @@ class Cockpit extends PureComponent {
 
     earClickHandler() {
         this.switchDTMFListening();
+        setTimeout(() => {
+            this.switchDTMFListening();
+        }, 10000);
     }
 
     DTMFDecodeHandler(value) {
@@ -98,32 +101,15 @@ class Cockpit extends PureComponent {
         if (coordinateDTMFDecoder.decoded) {
         
             const coords = coordinateDTMFDecoder.coordinate;
+            this.setState({
+                coordinateInputValue: coords.join(' ')
+            });
+            this.coordinateSubmitHandler(coords);
 
-            if (coords.length === 2) {
-                try {
-                    const myLayer = CoordinatePointLayer(coords);
-
-                    const updatedLayers = [...this.state.layers, myLayer];
-
-                    this.setState({
-                        coordinateInputValue: coords.join(' '),
-                        isListening: false,
-                        layers: updatedLayers,
-                    });
-
-                    this.map.flyTo({
-                        center: coords,
-                        zoom: [15]
-                    });
-                } catch(e) {
-                    console.log("Coordinate error", e);
-                }
-
-            }
         } else {
             if (!coordinateDTMFDecoder.error) {
                 this.setState({
-                    DTMFCoordinateString: this.state.DTMFCoordinateString + value,
+                    DTMFCoordinateString: this.state.DTMFCoordinateString + value.replace('A', ''),
                     coordinateInputValue: '',
                 });    
             } else {
@@ -141,10 +127,17 @@ class Cockpit extends PureComponent {
         });
     }
 
-    coordinateSubmitHandler() {
+    coordinateSubmitHandler(coordinateValue) {
+        
+        let value;
+        let coords;
 
-        const value = this.state.coordinateInputValue;
-        const coords = value.split(' ');
+        if (!coordinateValue) {
+            value = this.state.coordinateInputValue;
+            coords = value.split(' ');
+        } else {
+            coords = coordinateValue;
+        }
         
         if (coords.length === 2) {
             const myLayer = CoordinatePointLayer(coords);
