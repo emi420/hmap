@@ -85,7 +85,7 @@ class Cockpit extends PureComponent {
                 </MainMap>
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onClick={this.fireClickHandler} />
-                <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
+                {/*<IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />*/}
                 <CoordinateInput value={this.state.coordinateInputValue} onChange={this.coordinateChangeHandler} onSubmit={this.coordinateSubmitHandler} />
                 <DTMFListener listen={this.state.isListening} onDecode={this.DTMFDecodeHandler} />    
             </div>
