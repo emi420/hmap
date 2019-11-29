@@ -41,12 +41,6 @@ class Cockpit extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.clockClickHandler = this.clockClickHandler.bind(this);
-        this.fireClickHandler = this.fireClickHandler.bind(this);
-        this.earClickHandler = this.earClickHandler.bind(this);
-        this.coordinateSubmitHandler = this.coordinateSubmitHandler.bind(this);
-        this.DTMFDecodeHandler = this.DTMFDecodeHandler.bind(this);
-        this.coordinateChangeHandler = this.coordinateChangeHandler.bind(this);
         const query = queryString.parse(this.props.location.search);
         if (query.coord) {
             this.state.coordinateInputValue = query.coord;
@@ -92,15 +86,15 @@ class Cockpit extends PureComponent {
         );
     }
 
-    clockClickHandler() {
+    clockClickHandler = () => {
         this.switchFireHistoryLayer()
     }
 
-    fireClickHandler() {
+    fireClickHandler = () => {
         this.switchFIRMSLayer();
     }
 
-    earClickHandler() {
+    earClickHandler = () => {
         this.switchDTMFListening();
         this.DTMFListeningTimeout = setTimeout(() => {
             if (this.state.isListening) {
@@ -109,7 +103,7 @@ class Cockpit extends PureComponent {
         }, 20000);
     }
 
-    DTMFDecodeHandler(rawValue) {
+    DTMFDecodeHandler = (rawValue) => {
 
         const value = rawValue.replace('A', '').replace('#', '');
 
@@ -145,13 +139,13 @@ class Cockpit extends PureComponent {
         }
     }
 
-    coordinateChangeHandler(value) {
+    coordinateChangeHandler = (value) => {
         this.setState({
             coordinateInputValue: value
         });
     }
 
-    coordinateSubmitHandler(coordinateValue) {
+    coordinateSubmitHandler= (coordinateValue) => {
         
         let value;
         let coords;
