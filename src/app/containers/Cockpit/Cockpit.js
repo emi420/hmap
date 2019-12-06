@@ -37,12 +37,14 @@ class Cockpit extends PureComponent {
         layers: [],
         coordinateInputValue: "",
         DTMFCoordinateString: "",
+        query: "",
     }
 
     constructor(props) {
         super(props);
         const query = queryString.parse(this.props.location.search);
         if (query.coord) {
+            this.state.query = query.coord;
             this.state.coordinateInputValue = query.coord;
         }
     }
@@ -60,8 +62,8 @@ class Cockpit extends PureComponent {
                     onClick={this.mapClickHandler}
                     onStyleLoad={ el => {
                         this.map = el;
-                        if (this.state.coordinateInputValue) {
-                            this.coordinateSubmitHandler();
+                        if (this.state.query) {
+                            this.coordinateSubmitHandler(false, true);
                         }
                     }} 
                     style={MAPBOX_DEFAULT_STYLE}
@@ -81,7 +83,7 @@ class Cockpit extends PureComponent {
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onClick={this.fireClickHandler} />
                 {/*<IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />*/}
-                <CoordinateInput value={this.state.coordinateInputValue} onChange={this.coordinateChangeHandler} onSubmit={this.coordinateSubmitHandler} />
+                <CoordinateInput value={this.state.coordinateInputValue} onChange={this.coordinateChangeHandler} onSubmit={(event) => this.coordinateSubmitHandler(event, true)} />
                 <DTMFListener listen={this.state.isListening} onDecode={this.DTMFDecodeHandler} />    
             </div>
         );
@@ -109,7 +111,8 @@ class Cockpit extends PureComponent {
         this.setState({
             coordinateInputValue: coordinateString
         });
-        this.props.history.push(`/?coord=${coordinateString}`)
+        this.props.history.push(`?coord=${coordinateString}`)
+        this.coordinateSubmitHandler()
     }
 
     DTMFDecodeHandler = (rawValue) => {
@@ -154,7 +157,7 @@ class Cockpit extends PureComponent {
         });
     }
 
-    coordinateSubmitHandler= (coordinateValue) => {
+    coordinateSubmitHandler= (coordinateValue, fly) => {
         
         let value;
         let coords;
@@ -170,16 +173,20 @@ class Cockpit extends PureComponent {
 
             try {
                 const myLayer = CoordinatePointLayer(coords);
-                const updatedLayers = [...this.state.layers, myLayer];
+                let updatedLayers;
+
+                // updatedLayers = [...this.state.layers, myLayer];
+                updatedLayers = [myLayer];
     
                 this.setState({
                     layers: updatedLayers,
                 });
-    
-                this.map.flyTo({
-                    center: coords,
-                    zoom: [15]
-                });
+                if (fly === true) {
+                    this.map.flyTo({
+                        center: coords,
+                        zoom: [15]
+                    });
+                }
             } catch(e) {
                 console.log("Coordinate error", e);
                 this.switchDTMFListening();
