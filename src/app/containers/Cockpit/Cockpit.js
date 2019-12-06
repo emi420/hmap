@@ -16,7 +16,7 @@ import { getFIRMSLatestModis24GeoJSON, getFIRMSLatestViirs24GeoJSON } from '../.
 import DTMFListener from '../../components/DTMF/DTMFListener';
 import DTMFCoordinate from '../../components/DTMF/DTMFCoordinate';
 import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import queryString from 'query-string';
 
 const MainMap = ReactMapboxGl({
@@ -57,6 +57,7 @@ class Cockpit extends PureComponent {
             <div>
                 <MainMap
                     // eslint-disable-next-line react/style-prop-object
+                    onClick={this.mapClickHandler}
                     onStyleLoad={ el => {
                         this.map = el;
                         if (this.state.coordinateInputValue) {
@@ -101,6 +102,14 @@ class Cockpit extends PureComponent {
                 this.switchDTMFListening();
             }
         }, 20000);
+    }
+
+    mapClickHandler = (clickEvent, mapEvent) => {
+        const coordinateString = `${mapEvent.lngLat.lng.toString().slice(0, 8)} ${mapEvent.lngLat.lat.toString().slice(0,8)}`;
+        this.setState({
+            coordinateInputValue: coordinateString
+        });
+        this.props.history.push(`/?coord=${coordinateString}`)
     }
 
     DTMFDecodeHandler = (rawValue) => {
