@@ -82,7 +82,7 @@ class Cockpit extends PureComponent {
                 </MainMap>
                 <IconButtonSwitch backgroundImage="clock-icon.png" value={this.state.showFireHistory} onClick={this.clockClickHandler} />
                 <IconButtonSwitch loading={firmsIsLoading} right={64} backgroundImage="fire-emoji.png" value={this.state.showFIRMS} onClick={this.fireClickHandler} />
-                {/*<IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />*/}
+                <IconButtonSwitch loading={this.state.isListening} right={105} backgroundImage="ear-icon.png" onClick={this.earClickHandler} />
                 <CoordinateInput value={this.state.coordinateInputValue} onChange={this.coordinateChangeHandler} onSubmit={(event) => this.coordinateSubmitHandler(event, true)} />
                 <DTMFListener listen={this.state.isListening} onDecode={this.DTMFDecodeHandler} />    
             </div>
@@ -103,7 +103,7 @@ class Cockpit extends PureComponent {
             if (this.state.isListening) {
                 this.switchDTMFListening();
             }
-        }, 20000);
+        }, 120000);
     }
 
     mapClickHandler = (clickEvent, mapEvent) => {
@@ -117,27 +117,42 @@ class Cockpit extends PureComponent {
 
     DTMFDecodeHandler = (rawValue) => {
 
-        const value = rawValue.replace('A', '').replace('#', '');
+        //console.log(rawValue)
 
-        if (
-            value !== '*' ||
-            (value === '*' && this.state.DTMFCoordinateString[this.state.DTMFCoordinateString.length - 1] !== "*")
-        ) {
-            const coordinateDTMFDecoder = DTMFCoordinate(this.state.DTMFCoordinateString + value);
+        const value = rawValue.replace('A', '');
+        let coordinateString = "";
+
+        if (this.state.DTMFCoordinateString.length === 0 || this.state.DTMFCoordinateString.slice(-1) !== value) {
+            coordinateString = this.state.DTMFCoordinateString + value;
+            this.setState({
+                DTMFCoordinateString: coordinateString
+            });
+        }
+
+        console.log('coordinateString:', coordinateString);
+
+        if (coordinateString.replace(/#/g, '').length === 12) {
+
+            coordinateString = coordinateString.replace(/#/g, '');
+
+            const coordinateDTMFDecoder = DTMFCoordinate(coordinateString);
 
             if (coordinateDTMFDecoder.decoded) {
             
                 const coords = coordinateDTMFDecoder.coordinate;
+                
+                console.log('coords:', coords);
+
                 this.setState({
                     coordinateInputValue: coords.join(' ')
                 });
-                this.coordinateSubmitHandler(coords);
+                this.coordinateSubmitHandler(coords, true);
                 this.switchDTMFListening();
 
             } else {
                 if (!coordinateDTMFDecoder.error) {
                     this.setState({
-                        DTMFCoordinateString: this.state.DTMFCoordinateString + value,
+                        DTMFCoordinateString: coordinateString,
                         coordinateInputValue: '',
                     });    
                 } else {
@@ -148,7 +163,7 @@ class Cockpit extends PureComponent {
                     this.switchDTMFListening();
                 }
             }
-        }
+        } 
     }
 
     coordinateChangeHandler = (value) => {

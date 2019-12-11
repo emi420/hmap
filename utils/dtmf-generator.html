@@ -18,7 +18,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <h1>DTMF Testing</h1>
-    <input class="input" type="text" id="dtmfValue" value="*1#157261#1489#939*" />
+    <input class="input" type="text" id="dtmfValue" value="1#15721#1489#93" />
     <button class="button" onClick="start()">Play</button>
 
     <script type="text/javascript">
@@ -26,16 +26,18 @@
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             console.log([position.coords.longitude, position.coords.latitude].join(' '));
-            var posArr = (Math.round((position.coords.longitude + 180) * 10000).toString() +
-                Math.round((position.coords.latitude + 180) * 10000).toString()).split('')
+            
+            var posArr = (Math.round((position.coords.longitude + 180) * 10000).toString().substring(0, 6) +
+                Math.round((position.coords.latitude + 180) * 10000).toString().substring(0,6)).split('')
             var posStr = "";
+
             for (let i = 0; i < posArr.length; i++) {
                 posStr += posArr[i];
                 if (posArr[i + 1] === posArr[i]) {
                     posStr += "#";
                 }
             }
-            document.getElementById("dtmfValue").value = "*" + posStr + "*"
+            document.getElementById("dtmfValue").value =  posStr
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
