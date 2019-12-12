@@ -105,7 +105,7 @@ class Cockpit extends PureComponent {
             if (this.state.isListening) {
                 this.switchDTMFListening();
             }
-        }, 120000);
+        }, 120000); 
     }
 
     mapClickHandler = (clickEvent, mapEvent) => {
@@ -120,13 +120,16 @@ class Cockpit extends PureComponent {
     DTMFDecodeHandler = (rawValue) => {
 
         let value = "";
+        let coordinateString = "";
+
         if (VALID_DTMF.indexOf(rawValue) > -1) {
             value = rawValue;
         }
 
-        let coordinateString = "";
-
-        if (this.state.DTMFCoordinateString.length === 0 || this.state.DTMFCoordinateString.slice(-1) !== value) {
+        if (
+            (this.state.DTMFCoordinateString.length === 0 && value === '#') ||
+            (this.state.DTMFCoordinateString.indexOf("#") > -1 && this.state.DTMFCoordinateString.slice(-1) !== value) 
+        ) {
             coordinateString = this.state.DTMFCoordinateString + value;
             this.setState({
                 DTMFCoordinateString: coordinateString
@@ -195,8 +198,6 @@ class Cockpit extends PureComponent {
             try {
                 const myLayer = CoordinatePointLayer(coords);
                 let updatedLayers;
-
-                // updatedLayers = [...this.state.layers, myLayer];
                 updatedLayers = [myLayer];
     
                 this.setState({
