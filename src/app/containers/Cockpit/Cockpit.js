@@ -19,6 +19,8 @@ import CoordinateInput from '../../components/CoordinateInput/CoordinateInput';
 import { withRouter } from 'react-router-dom'
 import queryString from 'query-string';
 
+const VALID_DTMF = ['1','2','3','4','5','6','7','8','9','0','#'];
+
 const MainMap = ReactMapboxGl({
     accessToken: MAPBOX_ACCESS_TOKEN
 });
@@ -117,9 +119,11 @@ class Cockpit extends PureComponent {
 
     DTMFDecodeHandler = (rawValue) => {
 
-        //console.log(rawValue)
+        let value = "";
+        if (VALID_DTMF.indexOf(rawValue) > -1) {
+            value = rawValue;
+        }
 
-        const value = rawValue.replace('A', '');
         let coordinateString = "";
 
         if (this.state.DTMFCoordinateString.length === 0 || this.state.DTMFCoordinateString.slice(-1) !== value) {
@@ -129,7 +133,9 @@ class Cockpit extends PureComponent {
             });
         }
 
-        console.log('coordinateString:', coordinateString);
+        if (coordinateString !== '') {
+            console.log(coordinateString);
+        }
 
         if (coordinateString.replace(/#/g, '').length === 12) {
 
