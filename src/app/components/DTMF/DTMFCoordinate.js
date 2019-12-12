@@ -2,18 +2,17 @@
 /*
     DTMFCoordinate will decode strings like this:
 
-        11572611489939
+        115726 148993
 
-    Where 11572611489939 are two (coordinate + 180) * 10000 together:
+    Where 115726148993 are two (coordinate + 180) * 10000 together:
     
-        (-64,2739 + 180) * 10000 => 1157261
-        (-31,0061 + 180) * 10000 => 1489939
+        (-64.273 + 180) * 10000 => 115727
+        (-31.006 + 180) * 10000 => 148994
 
 */
 
 const DTMFCoordinate = (valuesString) => {
 
-    // CHECK THIS: change to 14 characters
     const coords = [
         valuesString.substring(0, 6),
         valuesString.substring(6, 13),
