@@ -2,7 +2,7 @@
 /*
     DTMFCoordinate will decode strings like this:
 
-        115726 148993
+        "115726148993"
 
     Where 115726148993 are two (coordinate + 180) * 10000 together:
     
