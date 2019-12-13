@@ -29,7 +29,7 @@
             
             var posArr = (Math.round((position.coords.longitude + 180) * 10000).toString().substring(0, 6) +
                 Math.round((position.coords.latitude + 180) * 10000).toString().substring(0,6)).split('')
-            var posStr = "";
+            var posStr = "#";
 
             for (let i = 0; i < posArr.length; i++) {
                 posStr += posArr[i];

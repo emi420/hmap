@@ -1,14 +1,20 @@
-import { PureComponent } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Goertzel from 'goertzeljs';
 import DTMFDecoder from './DTMFDecoder/DTMFDecoder';
 
-class DTMFListener extends PureComponent {
+const DTMFListener = (props) => {
 
-    state = {
-      audio: null,
-    }
+    const [audio, setAudio] = useState(null);
+    const listen = useRef(false);
 
-    async getMicrophone() {
+    useEffect(() => {
+      if (props.listen !== listen.current) {
+        listen.current = props.listen;
+        toggleMicrophone();
+      }
+    });
+
+    const getMicrophone = async () => {
         const audio = await navigator.mediaDevices.getUserMedia({
             audio: true,
             video: false
@@ -34,7 +40,7 @@ class DTMFListener extends PureComponent {
 
         dtmf.on("decode", (value) => {
             if (value !== null) {
-              this.props.onDecode(value);
+              props.onDecode(value);
             }            
         });
 
@@ -45,31 +51,23 @@ class DTMFListener extends PureComponent {
         volume.connect (recorder)
         recorder.connect (context.destination) 
 
-        this.setState({ audio });
+        setAudio(audio);
     }
 
-    stopMicrophone() {
-        this.state.audio.getTracks().forEach(track => track.stop());
-        this.setState({ audio: null });
+    const stopMicrophone = () => {
+        audio.getTracks().forEach(track => track.stop());
+        setAudio(null);
     }
 
-    toggleMicrophone() {
-        if (this.state.audio) {
-            this.stopMicrophone();
+    const toggleMicrophone = () => {
+        if (audio) {
+            stopMicrophone();
         } else {
-            this.getMicrophone();
+            getMicrophone();
         }
     }
+    return ('');
 
-    componentDidUpdate(prevProps) {
-      if (this.props.listen !== prevProps.listen) {
-        this.toggleMicrophone();
-      }
-    }
-    
-    render() {
-        return ('');
-    }
 }
 
 export default DTMFListener;
