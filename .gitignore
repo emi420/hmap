@@ -32,4 +32,5 @@ src/config/config.js
 # deploy
 deploy.sh
 
-
+# misc
+tmp

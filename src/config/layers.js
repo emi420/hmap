@@ -1,4 +1,181 @@
 const layers = [
+    {   
+        id: 'big-fires',
+        type: 'OrderedGroup',
+        layers: [
+            {
+                name: "1976",
+                id: 'big-fires-1976',
+                data: './data/bigfires-1976.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1980",
+                id: 'big-fires-1980',
+                data: './data/bigfires-1980.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1981",
+                id: 'big-fires-1981',
+                data: './data/bigfires-1981.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1982",
+                id: 'big-fires-1982',
+                data: './data/bigfires-1982.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1983",
+                id: 'big-fires-1983',
+                data: './data/bigfires-1983.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1986",
+                id: 'big-fires-1986',
+                data: './data/bigfires-1986.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1988",
+                id: 'big-fires-1988',
+                data: './data/bigfires-1988.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1989",
+                id: 'big-fires-1989',
+                data: './data/bigfires-1989.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1990",
+                id: 'big-fires-1990',
+                data: './data/bigfires-1990.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1991",
+                id: 'big-fires-1991',
+                data: './data/bigfires-1991.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1992",
+                id: 'big-fires-1992',
+                data: './data/bigfires-1992.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "1993",
+                id: 'big-fires-1993',
+                data: './data/bigfires-1993.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2000",
+                id: 'big-fires-2000',
+                data: './data/bigfires-2000.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2002",
+                id: 'big-fires-2002',
+                data: './data/bigfires-2002.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2003",
+                id: 'big-fires-2003',
+                data: './data/bigfires-2003.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2008",
+                id: 'big-fires-2008',
+                data: './data/bigfires-2008.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2011",
+                id: 'big-fires-2011',
+                data: './data/bigfires-2011.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2013",
+                id: 'big-fires-2013',
+                data: './data/bigfires-2013.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+            {
+                name: "2017",
+                id: 'big-fires-2017',
+                data: './data/bigfires-2017.geojson',
+                fillPaint: {
+                    'fill-color': 'red',
+                    'fill-opacity': .2,
+                },
+            },
+        ]
+    },
     {
         id: 'area-line',
         data: './data/areas.geojson',
@@ -20,14 +197,6 @@ const layers = [
             "text-color": "white",
             "text-halo-color": "#a00010",
             "text-halo-width": 2,
-        },
-    },
-    {
-        id: 'big-fires',
-        data: './data/bigfires.geojson',
-        fillPaint: {
-            'fill-color': 'red',
-            'fill-opacity': .1,
         },
     },
     {
@@ -106,5 +275,6 @@ const layers = [
 ];
 
 export const DEFAULT_HIDDEN_LAYERS = ['big-fires', 'firms-modis', 'firms-viirs']
+// export const DEFAULT_HIDDEN_LAYERS = ['firms-modis', 'firms-viirs']
 
 export default layers;

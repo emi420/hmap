@@ -1,0 +1,9 @@
+.BigText {
+  position: absolute;
+  height: 58px;
+  width: 150px;
+  right: 50px;
+  /* margin-left: -50px; */
+  bottom: 50px;
+  /* margin-top: -50px; */
+}
