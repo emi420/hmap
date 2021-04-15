@@ -1,0 +1,1333 @@
+[{
+  "type": "node",
+  "id": 1483995922,
+  "lat": -32.1762440,
+  "lon": -64.4538483,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital municipal Dr. Luis Rivarola"
+  }
+},
+{
+  "type": "node",
+  "id": 1490089539,
+  "lat": -31.6512916,
+  "lon": -63.9139129,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal"
+  }
+},
+{
+  "type": "node",
+  "id": 1877668655,
+  "lat": -32.4142677,
+  "lon": -63.2461131,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Clínica de Especialidades"
+  }
+},
+{
+  "type": "node",
+  "id": 1903130642,
+  "lat": -30.9257345,
+  "lon": -64.5042474,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Sala De Salud"
+  }
+},
+{
+  "type": "node",
+  "id": 1903229929,
+  "lat": -31.3161929,
+  "lon": -64.4633169,
+  "tags": {
+    "amenity": "clinic",
+    "emergency": "no",
+    "healthcare": "clinic"
+  }
+},
+{
+  "type": "node",
+  "id": 2328653474,
+  "lat": -30.9800452,
+  "lon": -64.4923750,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal La Cumbre"
+  }
+},
+{
+  "type": "node",
+  "id": 2363141770,
+  "lat": -31.3410656,
+  "lon": -65.0801472,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Hogar de Ancianos"
+  }
+},
+{
+  "type": "node",
+  "id": 2395321276,
+  "lat": -31.7818687,
+  "lon": -63.7977796,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal"
+  }
+},
+{
+  "type": "node",
+  "id": 2453033698,
+  "lat": -32.9164066,
+  "lon": -62.4573230,
+  "tags": {
+    "addr:city": "Monte Buey",
+    "addr:housenumber": "578",
+    "addr:postcode": "2589",
+    "addr:street": "Mitre",
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "name": "Hospital Municipal Dr Lorenzo Colica",
+    "phone": "(3467) 470018",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2453034673,
+  "lat": -32.9167945,
+  "lon": -62.4509913,
+  "tags": {
+    "addr:city": "Monte Buey",
+    "addr:housenumber": "89",
+    "addr:postcode": "2589",
+    "addr:street": "Rivadavia",
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "name": "Hospital Italiano Moente Buey"
+  }
+},
+{
+  "type": "node",
+  "id": 2457588967,
+  "lat": -31.0084363,
+  "lon": -64.2691607,
+  "tags": {
+    "addr:city": "La Granja",
+    "addr:postcode": "X5115",
+    "addr:street": "Avenida Los Fresnos",
+    "amenity": "clinic",
+    "emergency": "no",
+    "healthcare": "clinic",
+    "name": "Dispensario Municipal de La Granja",
+    "operator": "Municipalidad de La Granja",
+    "operator:type": "public",
+    "phone": "03525 498121"
+  }
+},
+{
+  "type": "node",
+  "id": 2585241239,
+  "lat": -33.1224923,
+  "lon": -62.0981264,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal “Dr. Miguel Ángel Baeza”",
+    "phone": "03468401194"
+  }
+},
+{
+  "type": "node",
+  "id": 2721768763,
+  "lat": -31.3699765,
+  "lon": -64.5198211,
+  "tags": {
+    "addr:street": "Los Olmos",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Dispensario Villa Santa Cruz del Lago"
+  }
+},
+{
+  "type": "node",
+  "id": 3086931906,
+  "lat": -32.6994981,
+  "lon": -63.7060820,
+  "tags": {
+    "addr:city": "Las Perdices",
+    "addr:housenumber": "520",
+    "addr:postcode": "X5921",
+    "addr:street": "Sarmiento",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal \"Dr. Alfredo Garimaldi\"",
+    "name:en": "Town Hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 3211711134,
+  "lat": -31.0211153,
+  "lon": -64.0621478,
+  "tags": {
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "ref": "Servicio de Urgencias Médicas"
+  }
+},
+{
+  "type": "node",
+  "id": 3221993305,
+  "lat": -33.6029947,
+  "lon": -62.6270961,
+  "tags": {
+    "addr:city": "Alejo Ledesma",
+    "addr:housenumber": "575",
+    "addr:postcode": "2662",
+    "addr:street": "Roque Sáenz Peña",
+    "amenity": "hospital",
+    "contact:phone": "+54 (3468) 49-0197",
+    "description": "Hospital de autogestión de Alejo Ledesma",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal",
+    "operator": "Flores Miriam"
+  }
+},
+{
+  "type": "node",
+  "id": 3277919351,
+  "lat": -33.0929355,
+  "lon": -64.2899208,
+  "tags": {
+    "addr:full": "Pje. Bulnes 157",
+    "addr:postcode": "5805",
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "name": "Centro De Salud Juan Cortona",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "(0358) 497-0006",
+    "ref:sisa_codigo": "50140982231664",
+    "ref:sisa_tipologia": "ESSIDT"
+  }
+},
+{
+  "type": "node",
+  "id": 3312727527,
+  "lat": -33.9298462,
+  "lon": -64.4101355,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3312727535,
+  "lat": -33.9303357,
+  "lon": -64.5315703,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3314248780,
+  "lat": -34.0372424,
+  "lon": -63.9164860,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3314248781,
+  "lat": -34.1533647,
+  "lon": -63.3081725,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 3446772954,
+  "lat": -32.0627076,
+  "lon": -64.5304128,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Regional Eva Perón"
+  }
+},
+{
+  "type": "node",
+  "id": 3484563744,
+  "lat": -31.3549456,
+  "lon": -64.1675277,
+  "tags": {
+    "addr:city": "Córdoba",
+    "addr:housenumber": "4588",
+    "addr:street": "Calixto Oyuela",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Dispensario Parque Liceo",
+    "operator": "Municipalidad de Córdoba"
+  }
+},
+{
+  "type": "node",
+  "id": 3556517366,
+  "lat": -31.6568497,
+  "lon": -64.4316457,
+  "tags": {
+    "addr:city": "Alta Gracia",
+    "addr:full": "Carignani 180",
+    "addr:housenumber": "180",
+    "addr:postcode": "5186",
+    "addr:street": "Dr. Dino Carignani",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general",
+    "name": "Sanatorio Alta Gracia",
+    "operator": "Sanatorio Alta Gracia S.R.L.",
+    "operator:type": "private",
+    "phone": "+54 3547 421209",
+    "ref:sisa_codigo": "10141472331307",
+    "ref:sisa_tipologia": "ESCIG"
+  }
+},
+{
+  "type": "node",
+  "id": 3577741604,
+  "lat": -32.4259645,
+  "lon": -63.7331732,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pillar"
+  }
+},
+{
+  "type": "node",
+  "id": 3680186063,
+  "lat": -32.6922013,
+  "lon": -63.7081706,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "C.I.C"
+  }
+},
+{
+  "type": "node",
+  "id": 3725336064,
+  "lat": -30.7079928,
+  "lon": -62.0189486,
+  "tags": {
+    "addr:city": "Morteros",
+    "addr:housenumber": "1270",
+    "addr:street": "Boulevard 25 de Mayo",
+    "alt_name": "Hospital Municipal Dr. Jose Sauret Morteros",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal José Sauret",
+    "phone": "+54 3562 425335",
+    "ref:sisa_codigo": "10141402231193",
+    "ref:sisa_tipologia": "ESCIG"
+  }
+},
+{
+  "type": "node",
+  "id": 3738375019,
+  "lat": -31.2155874,
+  "lon": -64.3171821,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Dispensario Municipal"
+  }
+},
+{
+  "type": "node",
+  "id": 3744177802,
+  "lat": -33.2835128,
+  "lon": -62.1939889,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Regional Pedro Vella"
+  }
+},
+{
+  "type": "node",
+  "id": 3817126153,
+  "lat": -31.5790954,
+  "lon": -65.5381487,
+  "tags": {
+    "abandoned:amenity": "doctors",
+    "addr:city": "Los Medanitos",
+    "addr:postcode": "5871",
+    "addr:street": "camino rural - público",
+    "emergency": "no",
+    "name": "Sala de Primeros Auxilios",
+    "note": "En la actualidad edificio abandonado, no hay atención medica"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258109,
+  "lat": -33.8938983,
+  "lon": -65.0765134,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258111,
+  "lat": -33.9023459,
+  "lon": -64.7969325,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258112,
+  "lat": -33.9037503,
+  "lon": -64.8958953,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258113,
+  "lat": -33.9062213,
+  "lon": -64.7447811,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258114,
+  "lat": -33.9062715,
+  "lon": -64.9390301,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258115,
+  "lat": -33.9071218,
+  "lon": -65.0226795,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258117,
+  "lat": -33.9090768,
+  "lon": -64.9811464,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258118,
+  "lat": -33.9227273,
+  "lon": -64.6373608,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4022258119,
+  "lat": -33.9299680,
+  "lon": -64.5421282,
+  "tags": {
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 4075940893,
+  "lat": -31.4280380,
+  "lon": -62.0680881,
+  "tags": {
+    "addr:city": "San Francisco",
+    "addr:postcode": "2400",
+    "addr:street": "Dominga Cullen",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Regional J.B. Iturraspe"
+  }
+},
+{
+  "type": "node",
+  "id": 4093386121,
+  "lat": -32.8888539,
+  "lon": -62.6800876,
+  "tags": {
+    "addr:city": "Justiniano Posse",
+    "addr:housenumber": "767",
+    "addr:postcode": "2553",
+    "addr:street": "Avenida de Mayo",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital San Roque",
+    "operator": "431382"
+  }
+},
+{
+  "type": "node",
+  "id": 4093437520,
+  "lat": -31.5518466,
+  "lon": -63.5269951,
+  "tags": {
+    "addr:city": "Villa del Rosario",
+    "addr:housenumber": "1290",
+    "addr:postcode": "5963",
+    "addr:street": "Santa Fe",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "level": "Dispensario_Municipal",
+    "name": "Alma Atta"
+  }
+},
+{
+  "type": "node",
+  "id": 4093465793,
+  "lat": -31.5569344,
+  "lon": -63.5358982,
+  "tags": {
+    "addr:city": "Villa del Rosario",
+    "addr:housenumber": "635",
+    "addr:postcode": "5963",
+    "addr:street": "Hipólito Yrigoyen",
+    "amenity": "hospital",
+    "emergency": "si",
+    "healthcare": "hospital",
+    "name": "Clínica",
+    "operator": "Privada Regional"
+  }
+},
+{
+  "type": "node",
+  "id": 4093471782,
+  "lat": -31.5540202,
+  "lon": -63.5377784,
+  "tags": {
+    "addr:city": "Villa del Rosario",
+    "addr:housenumber": "870",
+    "addr:postcode": "5963",
+    "addr:street": "Avenida San Martín",
+    "amenity": "hospital",
+    "emergency": "si",
+    "healthcare": "hospital",
+    "name": "Clínica",
+    "operator": "San Martín"
+  }
+},
+{
+  "type": "node",
+  "id": 4099875090,
+  "lat": -31.6627432,
+  "lon": -63.0457555,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Asistencia Pública Municipal"
+  }
+},
+{
+  "type": "node",
+  "id": 4099875280,
+  "lat": -31.6674041,
+  "lon": -63.0457815,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Sala de Primeros Auxilios"
+  }
+},
+{
+  "type": "node",
+  "id": 4100752252,
+  "lat": -33.9142996,
+  "lon": -64.3959694,
+  "tags": {
+    "addr:city": "Vicuña Mackenna",
+    "addr:full": "Alberto Novillo 549",
+    "addr:housenumber": "549",
+    "addr:postcode": "6140",
+    "addr:street": "Alberto Novillo",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Doctor Enrique Carrozzi",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "+54 3583 429614",
+    "ref:sisa_codigo": "10140982231265",
+    "ref:sisa_tipologia": "ESCIG"
+  }
+},
+{
+  "type": "node",
+  "id": 4102607240,
+  "lat": -33.2805084,
+  "lon": -63.9745138,
+  "tags": {
+    "addr:city": "Las Acequias",
+    "addr:housenumber": "276",
+    "addr:postcode": "5848",
+    "addr:street": "San Martín",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Dr. Rafael Acevedo Cámara"
+  }
+},
+{
+  "type": "node",
+  "id": 4109705933,
+  "lat": -31.2340047,
+  "lon": -64.3154268,
+  "tags": {
+    "addr:city": "Unquillo",
+    "addr:housenumber": "Paseo del Dante",
+    "addr:postcode": "5109",
+    "addr:street": "Avenida San Martín",
+    "emergency": "assembly_point",
+    "name": "CEC"
+  }
+},
+{
+  "type": "node",
+  "id": 4110515977,
+  "lat": -31.3419921,
+  "lon": -64.3378302,
+  "tags": {
+    "addr:city": "La Calera",
+    "addr:postcode": "5151",
+    "addr:street": "República de Bolivia",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "name": "Hospital Doctor Umberto Illia",
+    "operator": "Francisca Méndez"
+  }
+},
+{
+  "type": "node",
+  "id": 4114172271,
+  "lat": -31.2464761,
+  "lon": -62.9262220,
+  "tags": {
+    "addr:city": "Colonia Las Pichanas",
+    "addr:postcode": "2433",
+    "addr:street": "PUBLICA",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "name": "Dispensario comunal"
+  }
+},
+{
+  "type": "node",
+  "id": 4115261487,
+  "lat": -31.4394438,
+  "lon": -64.5055070,
+  "tags": {
+    "addr:city": "Villa Carlos Paz",
+    "addr:postcode": "5152",
+    "addr:street": "Avenida Presidente Juan D. Perón",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal Gumersindo Sayago",
+    "phone": "03541 - 436416"
+  }
+},
+{
+  "type": "node",
+  "id": 4210936488,
+  "lat": -31.2154436,
+  "lon": -64.3503517,
+  "tags": {
+    "addr:street": "Avenida 5 de octubre",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital"
+  }
+},
+{
+  "type": "node",
+  "id": 4217726335,
+  "lat": -33.4986765,
+  "lon": -64.3127572,
+  "tags": {
+    "addr:city": "San Basilio",
+    "addr:full": "Remigio Coego 144",
+    "addr:housenumber": "144",
+    "addr:postcode": "5841",
+    "addr:street": "Remigio Coego",
+    "amenity": "clinic",
+    "description": "Centro de salud para atención de urgencias, vacunatorio, medicina clínica, radiología, ecografía, internación, servicio de ambulancia y traslado a hospitales cercanos para casos de mayor complejidad.",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "healthcare:speciality": "general;radiology;emergency",
+    "name": "Dispensario Municipal",
+    "official_name": "Dispensario Municipal San Basilio",
+    "opening_hours": "24/7",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "+54 3585 491010",
+    "ref:sisa_codigo": "50140982231957",
+    "ref:sisa_tipologia": "ESSIDT",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 4218414646,
+  "lat": -32.7558335,
+  "lon": -63.7882218,
+  "tags": {
+    "addr:city": "General Deheza",
+    "addr:housenumber": "251",
+    "addr:postcode": "5923",
+    "addr:street": "Bv. San Martín",
+    "description": "Salón de Usos Múltiples, ubicado frente a la Plaza Central, perteneciente al CE. Gral. San Martín",
+    "emergency": "no",
+    "name": "SUM",
+    "office": "educational_institution"
+  }
+},
+{
+  "type": "node",
+  "id": 4224610489,
+  "lat": -31.6402858,
+  "lon": -64.4287285,
+  "tags": {
+    "addr:housenumber": "484",
+    "addr:postcode": "5186",
+    "addr:street": "Los Comechingones",
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "healthcare:speciality": "paediatrics;general",
+    "name": "Dispensario n° 12"
+  }
+},
+{
+  "type": "node",
+  "id": 4231094502,
+  "lat": -31.1368203,
+  "lon": -64.2918204,
+  "tags": {
+    "addr:city": "Salsipuedes",
+    "addr:postcode": "X5113",
+    "addr:street": "Córdoba",
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "name": "Dispensario Municipal Dr. Julian Ostrovsky",
+    "operator": "Municipalidad de Salsipuedes",
+    "operator:type": "public",
+    "phone": "03543 492087"
+  }
+},
+{
+  "type": "node",
+  "id": 4374952794,
+  "lat": -30.7835986,
+  "lon": -63.4076671,
+  "tags": {
+    "addr:city": "Obispo Trejo",
+    "addr:postcode": "5000",
+    "addr:street": "General Paz",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal",
+    "operator": "Marissa Gisell"
+  }
+},
+{
+  "type": "node",
+  "id": 4379967292,
+  "lat": -31.3819325,
+  "lon": -64.1425277,
+  "tags": {
+    "addr:city": "Córdoba",
+    "addr:full": "José De Quevedo S/N Esq. Dos Barrios",
+    "addr:postcode": "5000",
+    "addr:street": "José Quevedo",
+    "amenity": "clinic",
+    "emergency": "no",
+    "healthcare": "clinic",
+    "name": "Centro de Salud 4 - Barrio Nueva Italia",
+    "opening_hours": "07:00-17:00",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "+54 0351 4335123",
+    "ref:sisa_codigo": "50140142133187",
+    "ref:sisa_tipologia": "ESSIDT"
+  }
+},
+{
+  "type": "node",
+  "id": 4382191955,
+  "lat": -31.7285791,
+  "lon": -64.4296257,
+  "tags": {
+    "addr:city": "Villa La Bolsa",
+    "addr:street": "Champagnat",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "operator": "Anabel"
+  }
+},
+{
+  "type": "node",
+  "id": 4401241561,
+  "lat": -31.0942666,
+  "lon": -64.4840513,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Consultorios Externos"
+  }
+},
+{
+  "type": "node",
+  "id": 4401245419,
+  "lat": -31.0942021,
+  "lon": -64.4836916,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Chalet Consultorios"
+  }
+},
+{
+  "type": "node",
+  "id": 4477795074,
+  "lat": -31.3219526,
+  "lon": -64.2423637,
+  "tags": {
+    "addr:full": "Barrio Ciudad Sol Naciente - Manzana 11",
+    "addr:postcode": "5000",
+    "amenity": "clinic",
+    "emergency": "yes",
+    "healthcare": "clinic",
+    "name": "CAPS Sol Naciente",
+    "operator": "Provincial",
+    "operator:type": "public",
+    "ref:sisa_codigo": "50140142131414",
+    "ref:sisa_tipologia": "ESSIDT",
+    "source": "http://prensa.cba.gov.ar/salud/de-la-sota-inauguro-el-caps-24-horas-de-barrio-sol-naciente/"
+  }
+},
+{
+  "type": "node",
+  "id": 4871337153,
+  "lat": -32.3978821,
+  "lon": -63.2561732,
+  "tags": {
+    "emergency": "ambulance_station",
+    "name": "Emergencia"
+  }
+},
+{
+  "type": "node",
+  "id": 4911964070,
+  "lat": -32.3930875,
+  "lon": -63.1993191,
+  "tags": {
+    "emergency": "phone",
+    "name": "SOS Marque *788"
+  }
+},
+{
+  "type": "node",
+  "id": 5080607069,
+  "lat": -30.8567135,
+  "lon": -64.5253231,
+  "tags": {
+    "amenity": "hospital",
+    "emergency": "no",
+    "healthcare": "hospital",
+    "name": "Gistas"
+  }
+},
+{
+  "type": "node",
+  "id": 5184059616,
+  "lat": -31.6828541,
+  "lon": -63.8808169,
+  "tags": {
+    "addr:city": "Pilar",
+    "addr:housenumber": "837",
+    "addr:postcode": "5972",
+    "addr:street": "Tomas Garzon",
+    "amenity": "hospital",
+    "description": "Centro de salud para la población de Pilar.\n\nCategoría de tipología: Con atención médica diaria y con especialidades y/o otras profesiones",
+    "email": "centrodesaludpilar@hotmail.com",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general",
+    "name": "Centro de Salud \"Madre Teresa de Calcuta\"",
+    "phone": "+54 3572 471429",
+    "ref:sisa_codigo": "50141192231404",
+    "ref:sisa_tipologia": "ESSIDT"
+  }
+},
+{
+  "type": "node",
+  "id": 5189484422,
+  "lat": -32.1791811,
+  "lon": -64.1068203,
+  "tags": {
+    "addr:city": "Río Tercero",
+    "addr:housenumber": "500",
+    "addr:postcode": "5850",
+    "addr:street": "12 de Octubre",
+    "amenity": "hospital",
+    "description": "pertenece al ámbito de la medicina pública provincial - Servicios: medicina general, atención ambulatoria, internación, diagnóstico, cuenta con 47 camas",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Provincial Río Tercero"
+  }
+},
+{
+  "type": "node",
+  "id": 6001907256,
+  "lat": -31.4172902,
+  "lon": -63.0503339,
+  "tags": {
+    "addr:city": "Arroyito",
+    "addr:housenumber": "943",
+    "addr:postcode": "2434",
+    "addr:street": "Avenida Mariano Moreno",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general",
+    "name": "SEREM privado"
+  }
+},
+{
+  "type": "node",
+  "id": 6883997281,
+  "lat": -30.9434000,
+  "lon": -64.2857000,
+  "tags": {
+    "emergency": "water_tank"
+  }
+},
+{
+  "type": "node",
+  "id": 7067914171,
+  "lat": -31.4157580,
+  "lon": -64.1769673,
+  "tags": {
+    "emergency": "fire_extinguisher"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210256,
+  "lat": -31.3476040,
+  "lon": -64.2391605,
+  "tags": {
+    "emergency": "fire_alarm_box",
+    "indoor": "no"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210257,
+  "lat": -31.3476579,
+  "lon": -64.2385746,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210258,
+  "lat": -31.3470003,
+  "lon": -64.2384995,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210259,
+  "lat": -31.3470149,
+  "lon": -64.2365912,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210260,
+  "lat": -31.3465808,
+  "lon": -64.2366004,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210261,
+  "lat": -31.3498626,
+  "lon": -64.2367911,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210262,
+  "lat": -31.3502099,
+  "lon": -64.2398907,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210263,
+  "lat": -31.3509677,
+  "lon": -64.2383933,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210264,
+  "lat": -31.3512729,
+  "lon": -64.2379003,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210265,
+  "lat": -31.3522306,
+  "lon": -64.2393854,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210266,
+  "lat": -31.3508835,
+  "lon": -64.2357867,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210267,
+  "lat": -31.3516022,
+  "lon": -64.2361623,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210268,
+  "lat": -31.3420843,
+  "lon": -64.2399092,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210269,
+  "lat": -31.3392175,
+  "lon": -64.2400399,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210270,
+  "lat": -31.3416212,
+  "lon": -64.2364088,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210271,
+  "lat": -31.3465510,
+  "lon": -64.2220905,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7133210272,
+  "lat": -31.3482828,
+  "lon": -64.2214038,
+  "tags": {
+    "emergency": "fire_alarm_box"
+  }
+},
+{
+  "type": "node",
+  "id": 7447333235,
+  "lat": -34.1488292,
+  "lon": -63.3545440,
+  "tags": {
+    "description": "SOS",
+    "emergency": "phone"
+  }
+},
+{
+  "type": "node",
+  "id": 7508650348,
+  "lat": -32.4461777,
+  "lon": -64.3948906,
+  "tags": {
+    "addr:city": "Berrotarán",
+    "addr:full": "Catamarca 389",
+    "addr:housenumber": "389",
+    "addr:postcode": "5817",
+    "addr:street": "Catamarca",
+    "alt_name": "Hospital Municipal Berrotarán",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "healthcare:speciality": "general;pediatrics;gynaecology;radiology;dentist;ophthalmology;dermatology;cardiology",
+    "name": "Hospital Municipal Dr. René Favaloro",
+    "official_name": "Hospital Dr. René Favaloro",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "+54 358 4941509",
+    "ref:sisa_codigo": "10140982231174",
+    "ref:sisa_tipologia": "ESCIG"
+  }
+},
+{
+  "type": "node",
+  "id": 7511709779,
+  "lat": -31.4035607,
+  "lon": -62.6405501,
+  "tags": {
+    "addr:city": "La Francia",
+    "addr:full": "Ruta Provincial N 19 S/n",
+    "addr:postcode": "2426",
+    "addr:street": "Ruta Nacional 19",
+    "amenity": "hospital",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Hospital Municipal Doctor Amancio Rodriguez Alvarez",
+    "operator": "Municipal",
+    "operator:type": "public",
+    "phone": "+54 03564 471005",
+    "ref:sisa_codigo": "10141402231187",
+    "ref:sisa_tipologia": "ESCIG"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846488,
+  "lat": -33.6378804,
+  "lon": -64.0270497,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "110",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846489,
+  "lat": -33.6339904,
+  "lon": -64.0305663,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846490,
+  "lat": -33.6288550,
+  "lon": -64.0299417,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846491,
+  "lat": -33.6310157,
+  "lon": -64.0239612,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846492,
+  "lat": -33.6295331,
+  "lon": -64.0210496,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846493,
+  "lat": -33.6323315,
+  "lon": -64.0123333,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "110",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846494,
+  "lat": -33.6344368,
+  "lon": -64.0156129,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7578846495,
+  "lat": -33.6366145,
+  "lon": -64.0163730,
+  "tags": {
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "pipe",
+    "ref": "90",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7606847105,
+  "lat": -33.6387364,
+  "lon": -64.0087616,
+  "tags": {
+    "colour": "rojo",
+    "emergency": "fire_hydrant",
+    "fire_hydrant:type": "underground",
+    "ref": "110",
+    "water_source": "main"
+  }
+},
+{
+  "type": "node",
+  "id": 7702887452,
+  "lat": -31.0113563,
+  "lon": -64.1211373,
+  "tags": {
+    "emergency": "water_tank",
+    "name": "Canal de riego"
+  }
+},
+{
+  "type": "node",
+  "id": 7876252601,
+  "lat": -31.9091261,
+  "lon": -63.6843294,
+  "tags": {
+    "addr:city": "Oncativo",
+    "addr:housenumber": "311",
+    "addr:postcode": "5986",
+    "addr:street": "Belgrano",
+    "amenity": "hospital",
+    "description": "Categoría de tipología: Con atención médica diaria y con especialidades y/o otras profesiones",
+    "emergency": "yes",
+    "healthcare": "hospital",
+    "name": "Centro Medico Privado",
+    "phone": "+54 3572 457148",
+    "ref:sisa_codigo": "50141192333156",
+    "ref:sisa_tipologia": "ESSIDT"
+  }
+}
+
+  ]

@@ -58,7 +58,7 @@ class Cockpit extends PureComponent {
   }
 
   componentDidMount() {
-    this.fireClickHandler();
+    // this.fireClickHandler();
   }
 
   render() {
