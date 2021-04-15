@@ -31,8 +31,7 @@ function* getLatestViirs24() {
 
 function* actionWatcher() {
     yield takeEvery('GET_LATEST_MODIS_24_EVENT', getLatestModis24)
-    yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)
-}
+    yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)}
 
 export default function* rootSaga() {
     yield all([

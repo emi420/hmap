@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import ReactMapboxGl from "react-mapbox-gl";
 import MapLayers from "../../components/Map/MapLayers/MapLayers";
 import FIRMSLayer from "../../components/FIRMSLayer/FIRMSLayer";
-import BigText from "../../components/BigText/BigText";
 import CoordinatePointLayer from "../../components/CoordinatePointLayer/CoordinatePointLayer";
 import {
   MAP_DEFAULT_CENTER,
@@ -20,13 +19,10 @@ import {
   getFIRMSLatestModis24GeoJSON,
   getFIRMSLatestViirs24GeoJSON,
 } from "../../app/selectors";
-import DTMFListener from "../../components/DTMF/DTMFListener";
-import DTMFCoordinate from "../../components/DTMF/DTMFCoordinate";
 import CoordinateInput from "../../components/CoordinateInput/CoordinateInput";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 
-const VALID_DTMF = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "#"];
 const currentYear = new Date().getFullYear();
 
 const MainMap = ReactMapboxGl({
@@ -49,7 +45,6 @@ class Cockpit extends PureComponent {
     query: "",
     showFireHistoryAnimation: false,
     fireHistoryIndex: 0,
-    bigText: null,
   };
 
   constructor(props) {
@@ -121,17 +116,11 @@ class Cockpit extends PureComponent {
           antialias={true}
         >
           <MapLayers
-            onDTMFDecode={this.DTMFDecodeHandler}
             layers={allLayers}
             hiddenLayers={this.state.hiddenLayers}
           />
         </MainMap>
 
-        <IconButtonSwitch
-          backgroundImage="clock-icon.png"
-          value={this.state.showFireHistory}
-          onClick={this.clockClickHandler}
-        />
         <IconButtonSwitch
           loading={firmsIsLoading}
           right={64}
@@ -139,52 +128,19 @@ class Cockpit extends PureComponent {
           value={this.state.showFIRMS}
           onClick={this.fireClickHandler}
         />
-        {/* <IconButtonSwitch
-          loading={this.state.isListening}
-          right={105}
-          backgroundImage="ear-icon.png"
-          onClick={this.earClickHandler}
-        /> */}
+       
         <CoordinateInput
           value={this.state.coordinateInputValue}
           onChange={this.coordinateChangeHandler}
           onSubmit={(event) => this.coordinateSubmitHandler(event, true)}
         />
-
-        <DTMFListener
-          listen={this.state.isListening}
-          onDecode={this.DTMFDecodeHandler}
-        />
-
-        { this.state.bigText ? 
-          <BigText>{this.state.bigText}</BigText>
-        : null}
         
       </div>
     );
   }
 
-  clockClickHandler = () => {
-    this.switchFireHistoryLayer()
-    console.log(this.state.hiddenLayers);
-    // if (this.state.showFireHistoryAnimation === false) {
-    //   this.setState({showFireHistoryAnimation: true});
-    // } else {
-    //   this.setState({showFireHistoryAnimation: false});
-    // }
-  };
-
   fireClickHandler = () => {
     this.switchFIRMSLayer();
-  };
-
-  earClickHandler = () => {
-    this.switchDTMFListening();
-    this.DTMFListeningTimeout = setTimeout(() => {
-      if (this.state.isListening) {
-        this.switchDTMFListening();
-      }
-    }, 120000);
   };
 
   mapClickHandler = (clickEvent, mapEvent) => {
@@ -196,61 +152,6 @@ class Cockpit extends PureComponent {
     });
     this.props.history.push(`?coord=${coordinateString}`);
     this.coordinateSubmitHandler();
-  };
-
-  DTMFDecodeHandler = (rawValue) => {
-    let value = "";
-    let coordinateString = "";
-
-    if (VALID_DTMF.indexOf(rawValue) > -1) {
-      value = rawValue;
-    }
-
-    if (
-      (this.state.DTMFCoordinateString.length === 0 && value === "#") ||
-      (this.state.DTMFCoordinateString.indexOf("#") > -1 &&
-        this.state.DTMFCoordinateString.slice(-1) !== value)
-    ) {
-      coordinateString = this.state.DTMFCoordinateString + value;
-      this.setState({
-        DTMFCoordinateString: coordinateString,
-      });
-    }
-
-    if (coordinateString !== "") {
-      console.log(coordinateString);
-    }
-
-    if (coordinateString.replace(/#/g, "").length === 12) {
-      coordinateString = coordinateString.replace(/#/g, "");
-
-      const coordinateDTMFDecoder = DTMFCoordinate(coordinateString);
-
-      if (coordinateDTMFDecoder.decoded) {
-        const coords = coordinateDTMFDecoder.coordinate;
-
-        console.log("coords:", coords);
-
-        this.setState({
-          coordinateInputValue: coords.join(" "),
-        });
-        this.coordinateSubmitHandler(coords, true);
-        this.switchDTMFListening();
-      } else {
-        if (!coordinateDTMFDecoder.error) {
-          this.setState({
-            DTMFCoordinateString: coordinateString,
-            coordinateInputValue: "",
-          });
-        } else {
-          this.setState({
-            DTMFCoordinateString: "",
-            coordinateInputValue: "",
-          });
-          this.switchDTMFListening();
-        }
-      }
-    }
   };
 
   coordinateChangeHandler = (value) => {
@@ -287,37 +188,9 @@ class Cockpit extends PureComponent {
         }
       } catch (e) {
         console.log("Coordinate error", e);
-        this.switchDTMFListening();
       }
     }
   };
-
-  switchDTMFListening() {
-    clearTimeout(this.DTMFListeningTimeout);
-    this.setState({
-      DTMFCoordinateString: this.state.isListening
-        ? this.state.DTMFCoordinateString
-        : "",
-      isListening: !this.state.isListening,
-    });
-  }
-
-  switchFireHistoryLayer() {
-    if (this.state.showFireHistory) {
-      const hiddenLayers = [...this.state.hiddenLayers, "big-fires"];
-      this.setState({
-        hiddenLayers: hiddenLayers,
-        showFireHistory: false,
-      });
-    } else {
-      const hiddenLayers = [...this.state.hiddenLayers];
-      hiddenLayers.splice(hiddenLayers.indexOf("big-fires"), 1);
-      this.setState({
-        hiddenLayers: hiddenLayers,
-        showFireHistory: true,
-      });
-    }
-  }
 
   switchFIRMSLayer() {
     if (this.state.showFIRMS) {

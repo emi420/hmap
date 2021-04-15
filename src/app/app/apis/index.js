@@ -15,7 +15,7 @@ const API = {
         return axios({
             url: VIIRS_24_URL
         })
-    },
+    }
 };
 
 export default API;

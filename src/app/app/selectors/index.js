@@ -13,3 +13,4 @@ export const getFIRMSLatestViirs24GeoJSON = createSelector(
     [getFIRMSLatestViirs24],
     (CSVString) => ( CSVToGeoJSON(CSVString) )
 )
+
