@@ -2,7 +2,7 @@ import requests
 import boto3
 from botocore import UNSIGNED
 from botocore.config import Config
-from datetime import datetime
+import datetime
 from netCDF4 import Dataset # https://github.com/Unidata/netcdf4-python
 import json
 import numpy as np
@@ -17,11 +17,11 @@ def get_day_of_year(date):
   return date.timetuple().tm_yday
 
 def get_s3_folder_prefix(date, hour):
-  return product + "/" + str(date.year) + "/" + str(get_day_of_year(date)) + "/" + str(date.hour)
+  return product + "/" + str(date.year) + "/" + str(get_day_of_year(date)) + "/" + str(hour)
 
 def get_s3_link(date_str, hour, bucket):
-  date = datetime.strptime(date_str, "%m/%d/%Y")
-  for key in s3.list_objects(Bucket=bucket, Prefix=get_s3_folder_prefix(date, hour),)['Contents']:
+  date = datetime.datetime.strptime(date_str, "%m/%d/%Y")
+  for key in s3.list_objects(Bucket=bucket, Prefix=get_s3_folder_prefix(date, hour))['Contents']:
       return key['Key']
 
 def get_data(lat, lon, mask, channels):
@@ -62,7 +62,7 @@ def getFireFromGoesByBucket(bucket, date, hour):
     return data
 
 def getFireFromGoes():
-  now = datetime.now()
+  now = datetime.datetime.now(datetime.timezone.utc)
   date = now.strftime("%m/%d/%Y")
   hour = now.strftime("%H")
   goes16 = getFireFromGoesByBucket("noaa-goes16", date, hour)
