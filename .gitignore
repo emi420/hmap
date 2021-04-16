@@ -34,4 +34,4 @@ deploy.sh
 
 # misc
 tmp
-GOES
+*.pyc
