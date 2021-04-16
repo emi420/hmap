@@ -3,6 +3,7 @@ import axios from 'axios';
 import { 
     MODIS_24_URL, 
     VIIRS_24_URL,
+    GOES_URL,
 } from '../../../config/config';
 
 const API = {
@@ -14,6 +15,11 @@ const API = {
     getLatestViirs24: function () {
         return axios({
             url: VIIRS_24_URL
+        })
+    },
+    getLatestGoes: function () {
+        return axios({
+            url: GOES_URL
         })
     }
 };

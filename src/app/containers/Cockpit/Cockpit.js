@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import ReactMapboxGl from "react-mapbox-gl";
 import MapLayers from "../../components/Map/MapLayers/MapLayers";
 import FIRMSLayer from "../../components/FIRMSLayer/FIRMSLayer";
+import GOESLayer from "../../components/GOESLayer/GOESLayer";
 import CoordinatePointLayer from "../../components/CoordinatePointLayer/CoordinatePointLayer";
 import {
   MAP_DEFAULT_CENTER,
@@ -14,23 +15,22 @@ import {
 import {
   FIRMSLatestModis24Action,
   FIRMSLatestViirs24Action,
+  GoesLatestAction,
 } from "../../app/actions";
 import {
   getFIRMSLatestModis24GeoJSON,
   getFIRMSLatestViirs24GeoJSON,
+  getLatestGoesGeoJSON
 } from "../../app/selectors";
 import CoordinateInput from "../../components/CoordinateInput/CoordinateInput";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
-
-const currentYear = new Date().getFullYear();
 
 const MainMap = ReactMapboxGl({
   accessToken: MAPBOX_ACCESS_TOKEN,
 });
 
 class Cockpit extends PureComponent {
-  DTMFListeningTimeout = null;
 
   state = {
     showFireHistory: false,
@@ -41,7 +41,6 @@ class Cockpit extends PureComponent {
     hiddenLayers: DEFAULT_HIDDEN_LAYERS,
     layers: [],
     coordinateInputValue: "",
-    DTMFCoordinateString: "",
     query: "",
     showFireHistoryAnimation: false,
     fireHistoryIndex: 0,
@@ -58,46 +57,33 @@ class Cockpit extends PureComponent {
   }
 
   componentDidMount() {
-    // this.fireClickHandler();
+    this.fireClickHandler();
   }
 
   render() {
     const firmsIsLoading =
       this.state.firmsDataWasLoaded &&
-      (this.props.FIRMSLatestViirs24.features.length < 1 ||
-        this.props.FIRMSLatestModis24.features.length < 1);
+      (this.props .FIRMSLatestViirs24.features.length < 1 ||
+        this.props.FIRMSLatestModis24.features.length < 1 ||
+        this.props.GoesLatest.length < 1);
     const FIRMSModisLayer = this.props.FIRMSLatestModis24
       ? FIRMSLayer("firms-modis", this.props.FIRMSLatestModis24)
       : [];
     const FIRMSViirsLayer = this.props.FIRMSLatestViirs24
       ? FIRMSLayer("firms-viirs", this.props.FIRMSLatestViirs24)
       : [];
+    const GoesLayer = this.props.GoesLatest
+      ? GOESLayer("goes", this.props.GoesLatest)
+      : [];
     const allLayers = [
       ...layers,
       ...this.state.layers,
       ...FIRMSModisLayer,
       ...FIRMSViirsLayer,
+      ...GoesLayer,
     ];
-
-    if (this.state.showFireHistoryAnimation) {
-
-      if (this.state.fireHistoryFeaturesTo < currentYear) {
-        setTimeout(
-          () => {
-            this.setState({
-              fireHistoryIndex: this.state.fireHistoryIndex + 1,
-            });
-          },
-          500
-        );
-      } else {
-        this.setState({ showFireHistoryAnimation: false });
-      }
-    }
-
     return (
       <div>
-
         <MainMap
           onClick={this.mapClickHandler}
           onStyleLoad={(el) => {
@@ -119,6 +105,7 @@ class Cockpit extends PureComponent {
             layers={allLayers}
             hiddenLayers={this.state.hiddenLayers}
           />
+
         </MainMap>
 
         <IconButtonSwitch
@@ -198,6 +185,7 @@ class Cockpit extends PureComponent {
         ...this.state.hiddenLayers,
         "firms-modis",
         "firms-viirs",
+        "goes",
       ];
       this.setState({
         hiddenLayers: hiddenLayers,
@@ -207,6 +195,7 @@ class Cockpit extends PureComponent {
       if (!this.state.firmsDataWasLoaded) {
         this.props.FIRMSLatestModis24Action();
         this.props.FIRMSLatestViirs24Action();
+        this.props.GoesLatestAction();
         this.setState({
           firmsDataWasLoaded: true,
         });
@@ -214,6 +203,7 @@ class Cockpit extends PureComponent {
       const hiddenLayers = [...this.state.hiddenLayers];
       hiddenLayers.splice(hiddenLayers.indexOf("firms-modis"), 1);
       hiddenLayers.splice(hiddenLayers.indexOf("firms-viirs"), 1);
+      hiddenLayers.splice(hiddenLayers.indexOf("goes"), 1);
       this.setState({
         hiddenLayers: hiddenLayers,
         showFIRMS: true,
@@ -224,11 +214,13 @@ class Cockpit extends PureComponent {
 const mapStateToProps = (state) => ({
   FIRMSLatestModis24: getFIRMSLatestModis24GeoJSON(state),
   FIRMSLatestViirs24: getFIRMSLatestViirs24GeoJSON(state),
+  GoesLatest: getLatestGoesGeoJSON(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   FIRMSLatestModis24Action: () => dispatch(FIRMSLatestModis24Action),
   FIRMSLatestViirs24Action: () => dispatch(FIRMSLatestViirs24Action),
+  GoesLatestAction: () => dispatch(GoesLatestAction),
 });
 
 export default connect(

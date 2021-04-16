@@ -8,3 +8,8 @@ export const FIRMSLatestViirs24Action = {
   type: "GET_LATEST_VIIRS_24_EVENT",
   payload: {}
 };
+
+export const GoesLatestAction = {
+  type: "GET_LATEST_GOES_EVENT",
+  payload: {}
+};

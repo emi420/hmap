@@ -5,21 +5,7 @@ const MapLayers = (props) => {
     let layers = [];
     props.layers.map(layer => {
         if (props.hiddenLayers.indexOf(layer.id) === -1) {
-            if (layer.type === 'OrderedGroup') {
-                layers = layer.layers.map(orderedLayer => (
-                    <GeoJSONLayer
-                        id={orderedLayer.id}
-                        name={orderedLayer.id}
-                        key={orderedLayer.id}
-                        data={orderedLayer.data || null}
-                        symbolLayout={orderedLayer.symbolLayout}
-                        symbolPaint={orderedLayer.symbolPaint}
-                        linePaint={orderedLayer.linePaint}
-                        circlePaint={orderedLayer.circlePaint}
-                        fillPaint={orderedLayer.fillPaint}
-                    />
-                )) 
-            } else if (layer.data) {
+            if (layer.data) {
                 layers.push(<GeoJSONLayer
                     id={layer.id}
                     name={layer.id}

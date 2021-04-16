@@ -19,8 +19,8 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('now/', views.now),
     path('firms/modis/', views.getFirmsModis),
     path('firms/viirs/', views.getFirmsViirs),
+    path('goes/', views.getGoes),
     path('api-auth/', include('rest_framework.urls'))
 ]

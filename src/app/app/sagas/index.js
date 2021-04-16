@@ -29,9 +29,24 @@ function* getLatestViirs24() {
     }
 }
 
+function* getLatestGoes() {
+    try {
+        const latestPoints = (yield call(API.getLatestGoes));
+        return yield put(
+            {
+                type: 'GET_LATEST_GOES_SUCCESS',
+                payload: latestPoints,
+            },
+        );
+    } catch(e) {
+        console.error('[SAGA ERROR]', e);
+    }
+}
+
 function* actionWatcher() {
     yield takeEvery('GET_LATEST_MODIS_24_EVENT', getLatestModis24)
-    yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)}
+    yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)
+    yield takeEvery('GET_LATEST_GOES_EVENT', getLatestGoes)}
 
 export default function* rootSaga() {
     yield all([

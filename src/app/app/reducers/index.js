@@ -11,7 +11,12 @@ export default (state, action) => {
         ...state,
         FIRMSLatestViirs24Data: action.payload.data
       };
-    default:
+      case "GET_LATEST_GOES_SUCCESS":
+        return {
+          ...state,
+          GoesLatestData: action.payload.data
+        };
+      default:
       return state;
   }
 };

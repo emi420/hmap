@@ -2,14 +2,10 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import datetime
 import requests
-
-def now(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+from app.goes.goes import getFireFromGoes
 
 def getFirmsModis(request):
     modis_url = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_South_America_24h.csv"
@@ -21,3 +17,7 @@ def getFirmsViirs(request):
     r = requests.get(viirs_url)
     return HttpResponse(r.text)
 
+def getGoes(request):
+    r = getFireFromGoes()
+    return JsonResponse(r)
+    
