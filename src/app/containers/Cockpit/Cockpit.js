@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import IconButtonSwitch from "../../components/IconButtonSwitch/IconButtonSwitch";
 import layers, { DEFAULT_HIDDEN_LAYERS } from "../../../config/layers";
 import { connect } from "react-redux";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Popup } from "react-mapbox-gl";
 import MapLayers from "../../components/Map/MapLayers/MapLayers";
 import FIRMSLayer from "../../components/FIRMSLayer/FIRMSLayer";
 import GOESLayer from "../../components/GOESLayer/GOESLayer";
@@ -44,10 +44,12 @@ class Cockpit extends PureComponent {
     query: "",
     showFireHistoryAnimation: false,
     fireHistoryIndex: 0,
+    popup: null,
   };
 
   constructor(props) {
     super(props);
+    this.escFunction = this.escFunction.bind(this);
     const query = queryString.parse(this.props.location.search);
     this.mapRef = React.createRef();
     if (query.coord) {
@@ -58,14 +60,20 @@ class Cockpit extends PureComponent {
 
   componentDidMount() {
     this.fireClickHandler();
+    document.addEventListener("keydown", this.escFunction, false);
+  }
+  escFunction(event){
+    if(event.keyCode === 27) {
+      this.setState({
+        popup: null
+      })
+    }
+  }
+  componentWillUnmount(){
+    document.removeEventListener("keydown", this.escFunction, false);
   }
 
   render() {
-    const firmsIsLoading =
-      this.state.firmsDataWasLoaded &&
-      (this.props .FIRMSLatestViirs24.features.length < 1 ||
-        this.props.FIRMSLatestModis24.features.length < 1 ||
-        this.props.GoesLatest.length < 1);
     const FIRMSModisLayer = this.props.FIRMSLatestModis24
       ? FIRMSLayer("firms-modis", this.props.FIRMSLatestModis24)
       : [];
@@ -106,10 +114,22 @@ class Cockpit extends PureComponent {
             hiddenLayers={this.state.hiddenLayers}
           />
 
+          { this.state.popup ? 
+            <Popup
+              coordinates={[this.state.popup.lng, this.state.popup.lat]}
+              offset={{
+                'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+              }}>
+              {this.state.popup.title ? <h1>{this.state.popup.title}</h1> : null }
+              <em>{this.state.popup.lng}, {this.state.popup.lat}</em>
+            </Popup>
+          : null}        
+
+
         </MainMap>
 
         <IconButtonSwitch
-          loading={firmsIsLoading}
+          loading={!this.state.firmsDataWasLoaded}
           right={64}
           backgroundImage="fire-emoji.png"
           value={this.state.showFIRMS}
@@ -121,7 +141,7 @@ class Cockpit extends PureComponent {
           onChange={this.coordinateChangeHandler}
           onSubmit={(event) => this.coordinateSubmitHandler(event, true)}
         />
-        
+
       </div>
     );
   }
@@ -131,14 +151,12 @@ class Cockpit extends PureComponent {
   };
 
   mapClickHandler = (clickEvent, mapEvent) => {
-    const coordinateString = `${mapEvent.lngLat.lng
-      .toString()
-      .slice(0, 8)} ${mapEvent.lngLat.lat.toString().slice(0, 8)}`;
     this.setState({
-      coordinateInputValue: coordinateString,
-    });
-    this.props.history.push(`?coord=${coordinateString}`);
-    this.coordinateSubmitHandler();
+      popup: { 
+        lat: mapEvent.lngLat.lat,
+        lng: mapEvent.lngLat.lng,
+      }
+    })
   };
 
   coordinateChangeHandler = (value) => {
@@ -181,6 +199,7 @@ class Cockpit extends PureComponent {
 
   switchFIRMSLayer() {
     if (this.state.showFIRMS) {
+      console.log("HERE 1")
       const hiddenLayers = [
         ...this.state.hiddenLayers,
         "firms-modis",
@@ -192,10 +211,13 @@ class Cockpit extends PureComponent {
         showFIRMS: false,
       });
     } else {
+      console.log("HERE 2")
       if (!this.state.firmsDataWasLoaded) {
+        console.log("HERE 3")
         this.props.FIRMSLatestModis24Action();
         this.props.FIRMSLatestViirs24Action();
         this.props.GoesLatestAction();
+        console.log("HERE 4")
         this.setState({
           firmsDataWasLoaded: true,
         });

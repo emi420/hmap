@@ -16,6 +16,9 @@ const MapLayers = (props) => {
                     linePaint={layer.linePaint}
                     circlePaint={layer.circlePaint}
                     fillPaint={layer.fillPaint}
+                    circleOnClick={(e) => {
+                        console.log(e.lngLat)
+                    }}
                 />)
             } else {
                 layers.push(layer.layer);

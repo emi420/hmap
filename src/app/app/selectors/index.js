@@ -18,6 +18,6 @@ export const getFIRMSLatestViirs24GeoJSON = createSelector(
 
 export const getLatestGoesGeoJSON = createSelector(
     [getLatestGoes],
-    result => result || []
+    result => result || {features: []}
 )
 
