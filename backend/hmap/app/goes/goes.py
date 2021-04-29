@@ -8,7 +8,7 @@ import json
 import numpy as np
 from geojson import Point, FeatureCollection, Feature, dumps
 import os.path
-from app.goes.goes2latlon import goes_to_latlon
+from goes2latlon import goes_to_latlon
 
 product = "ABI-L2-FDCF"
 s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
@@ -21,11 +21,8 @@ def get_s3_folder_prefix(date, hour):
 
 def get_s3_link(date_str, hour, bucket):
   date = datetime.datetime.strptime(date_str, "%m/%d/%Y")
-  for key in s3.list_objects(Bucket=bucket, Prefix=get_s3_folder_prefix(date, hour)):
-    if 'Contents' in key:
-      return key['Contents']['Key']
-    else:
-      return None
+  for key in s3.list_objects(Bucket=bucket, Prefix=get_s3_folder_prefix(date, hour))['Contents']:
+    return key['Key']
 
 def get_data(lat, lon, mask, channels):
   res = []
@@ -48,6 +45,9 @@ def getFireFromGoesByBucket(bucket, date, hour):
     channels = [10,11,12,13,14,15,30,31,32,33,34,35]
     filename = "tmp/" + bucket + date.replace("/","-") + hour
     s3_link = None
+    data = {
+      'features': []
+    }
     while s3_link == None and int(hour) > 0:
       s3_link = get_s3_link(date, hour, bucket)
       hour = int(hour) - 1
@@ -64,17 +64,12 @@ def getFireFromGoesByBucket(bucket, date, hour):
           os.remove(filename + ".nc")
           with open(filename + ".geojson", 'w') as outfile:
             json.dump(data, outfile)
-        else:
-          data = {
-            'features': []
-          }
       else:
         f = open(filename + ".geojson", "r")
         data = json.loads(f.read())
     return data
 
-def getFireFromGoes():
-  now = datetime.datetime.now(datetime.timezone.utc)
+def getFireFromGoes(now):
   date = now.strftime("%m/%d/%Y")
   hour = now.strftime("%H")
   goes16 = getFireFromGoesByBucket("noaa-goes16", date, hour)
