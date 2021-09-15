@@ -16,10 +16,14 @@ INTERNAL_IPS = env.list("HMAP_BACKEND_INTERNAL_IPS", default=[])
 
 ALLOWED_HOSTS = env.list("HMAP_BACKEND_ALLOWED_HOSTS", default=[])
 
+# Related Task #8 – login: CORS configuration
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+
 # Corsheaders
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"] + env.list(
+    "HMAP_BACKEND_CORS_ALLOWED_ORIGINS", default=[]
+)
 
 SECRET_KEY = env.str("HMAP_BACKEND_SECRET_KEY")
 

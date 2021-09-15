@@ -1,10 +1,10 @@
 const styles = {
     circle: {
         background: 'rgba(255,255,255,.75)',
-        position: 'fixed',
+        // position: 'fixed',
         width: '28px',
         height: '28px', 
-        top: '25px',
+        // top: '25px',
         borderRadius: '100%',
         cursor: 'pointer',
         lineHeight: '22px',

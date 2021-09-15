@@ -25,6 +25,7 @@ yarn-error.log*
 # python
 ENV
 utils/ENV
+backend/hmap/venv/
 
 # config
 src/config/config.js

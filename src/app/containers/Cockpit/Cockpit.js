@@ -1,12 +1,15 @@
-import React, { PureComponent } from "react";
+import React, { useState, useEffect } from "react";
 import IconButtonSwitch from "../../components/IconButtonSwitch/IconButtonSwitch";
-import layers, { DEFAULT_HIDDEN_LAYERS } from "../../../config/layers";
+import TextButton from "../../components/TextButton";
+import baseLayers, { DEFAULT_HIDDEN_LAYERS } from "../../../config/layers";
 import { connect } from "react-redux";
 import ReactMapboxGl, { Popup } from "react-mapbox-gl";
 import MapLayers from "../../components/Map/MapLayers/MapLayers";
 import FIRMSLayer from "../../components/FIRMSLayer/FIRMSLayer";
 import GOESLayer from "../../components/GOESLayer/GOESLayer";
 import CoordinatePointLayer from "../../components/CoordinatePointLayer/CoordinatePointLayer";
+import LoginForm from "../../components/LoginForm";
+import LoadingIndicator from "../../components/LoadingIndicator";
 import {
   MAP_DEFAULT_CENTER,
   MAPBOX_ACCESS_TOKEN,
@@ -16,161 +19,102 @@ import {
   FIRMSLatestModis24Action,
   FIRMSLatestViirs24Action,
   GoesLatestAction,
+  SubmitUserAuthAction,
+  GetMeAction,
+  LogOutAction
 } from "../../app/actions";
 import {
   getFIRMSLatestModis24GeoJSON,
   getFIRMSLatestViirs24GeoJSON,
-  getLatestGoesGeoJSON
+  getLatestGoesGeoJSON,
+  getUserAuthData,
+  getMeData
 } from "../../app/selectors";
 import CoordinateInput from "../../components/CoordinateInput/CoordinateInput";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
+import './Cockpit.css';
+import showErrorMessage from "../../lib/showErrorMessage";
+
 
 const MainMap = ReactMapboxGl({
   accessToken: MAPBOX_ACCESS_TOKEN,
 });
 
-class Cockpit extends PureComponent {
+const Cockpit = (props) => {
+  // const [showFireHistory, setShowFireHistory] = useState(false);
+  const [showFIRMS, setShowFIRMS] = useState(false);
+  const [firmsDataWasLoaded, setFirmsDataWasLoaded] = useState(false);
+  const [center] = useState(MAP_DEFAULT_CENTER);
+  // const [isListening, setIsListening] = useState(false);
+  const [hiddenLayers, setHiddenLayers] = useState(DEFAULT_HIDDEN_LAYERS);
+  const [layers, setLayers] = useState([]);
+  const [coordinateInputValue, setCoordinateInputValue] = useState("");
+  const [query, setQuery] = useState(queryString.parse(props.location.search));
+  // const [showFireHistoryAnimation, setShowFireHistoryAnimation] = useState(false);
+  // const [fireHistoryIndex, setFireHistoryIndex] = useState(0);
+  const [popup, setPopup] = useState(null);
+  const [loginPopup, setLoginPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [map, setMap] = useState(null);
+  const mapRef = React.createRef();
 
-  state = {
-    showFireHistory: false,
-    showFIRMS: false,
-    firmsDataWasLoaded: false,
-    center: MAP_DEFAULT_CENTER,
-    isListening: false,
-    hiddenLayers: DEFAULT_HIDDEN_LAYERS,
-    layers: [],
-    coordinateInputValue: "",
-    query: "",
-    showFireHistoryAnimation: false,
-    fireHistoryIndex: 0,
-    popup: null,
-  };
-
-  constructor(props) {
-    super(props);
-    this.escFunction = this.escFunction.bind(this);
-    const query = queryString.parse(this.props.location.search);
-    this.mapRef = React.createRef();
-    if (query.coord) {
-      this.state.query = query.coord;
-      this.state.coordinateInputValue = query.coord;
+  const switchFIRMSLayer = () => {
+    if (showFIRMS) {
+      console.log("HERE 1")
+      setHiddenLayers(oldLayers => [
+        ...oldLayers,
+        "firms-modis",
+        "firms-viirs",
+        "goes",
+      ]);
+      setShowFIRMS(false);
+    } else {
+      console.log("HERE 2")
+      if (!firmsDataWasLoaded) {
+        console.log("HERE 3")
+        props.FIRMSLatestModis24Action();
+        props.FIRMSLatestViirs24Action();
+        props.GoesLatestAction();
+        console.log("HERE 4")
+        setFirmsDataWasLoaded(true);
+      }
+      const allHiddenLayers = [...hiddenLayers];
+      allHiddenLayers.splice(hiddenLayers.indexOf("firms-modis"), 1);
+      allHiddenLayers.splice(hiddenLayers.indexOf("firms-viirs"), 1);
+      allHiddenLayers.splice(hiddenLayers.indexOf("goes"), 1);
+      setShowFIRMS(true);
+      setHiddenLayers(allHiddenLayers);
     }
   }
 
-  componentDidMount() {
-    this.fireClickHandler();
-    document.addEventListener("keydown", this.escFunction, false);
-  }
-  escFunction(event){
+  const escFunction = (event) => {
     if(event.keyCode === 27) {
-      this.setState({
-        popup: null
-      })
+      setPopup(null);
     }
   }
-  componentWillUnmount(){
-    document.removeEventListener("keydown", this.escFunction, false);
-  }
 
-  render() {
-    const FIRMSModisLayer = this.props.FIRMSLatestModis24
-      ? FIRMSLayer("firms-modis", this.props.FIRMSLatestModis24)
-      : [];
-    const FIRMSViirsLayer = this.props.FIRMSLatestViirs24
-      ? FIRMSLayer("firms-viirs", this.props.FIRMSLatestViirs24)
-      : [];
-    const GoesLayer = this.props.GoesLatest
-      ? GOESLayer("goes", this.props.GoesLatest)
-      : [];
-    const allLayers = [
-      ...layers,
-      ...this.state.layers,
-      ...FIRMSModisLayer,
-      ...FIRMSViirsLayer,
-      ...GoesLayer,
-    ];
-    return (
-      <div>
-        <MainMap
-          onClick={this.mapClickHandler}
-          onStyleLoad={(el) => {
-            this.map = el;
-            if (this.state.query) {
-              this.coordinateSubmitHandler(false, true);
-            }
-          }}
-          ref={this.mapRef}
-          style={MAPBOX_DEFAULT_STYLE}
-          center={this.state.center}
-          containerStyle={{
-            height: "100vh",
-            width: "100vw",
-          }}
-          antialias={true}
-        >
-          <MapLayers
-            layers={allLayers}
-            hiddenLayers={this.state.hiddenLayers}
-          />
-
-          { this.state.popup ? 
-            <Popup
-              coordinates={[this.state.popup.lng, this.state.popup.lat]}
-              offset={{
-                'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-              }}>
-              {this.state.popup.title ? <h1>{this.state.popup.title}</h1> : null }
-              <em>{this.state.popup.lng}, {this.state.popup.lat}</em>
-            </Popup>
-          : null}        
-
-
-        </MainMap>
-
-        <IconButtonSwitch
-          loading={!this.state.firmsDataWasLoaded}
-          right={64}
-          backgroundImage="fire-emoji.png"
-          value={this.state.showFIRMS}
-          onClick={this.fireClickHandler}
-        />
-       
-        <CoordinateInput
-          value={this.state.coordinateInputValue}
-          onChange={this.coordinateChangeHandler}
-          onSubmit={(event) => this.coordinateSubmitHandler(event, true)}
-        />
-
-      </div>
-    );
-  }
-
-  fireClickHandler = () => {
-    this.switchFIRMSLayer();
+  const fireClickHandler = () => {
+    switchFIRMSLayer();
   };
 
-  mapClickHandler = (clickEvent, mapEvent) => {
-    this.setState({
-      popup: { 
+  const mapClickHandler = (clickEvent, mapEvent) => {
+    setPopup({ 
         lat: mapEvent.lngLat.lat,
         lng: mapEvent.lngLat.lng,
-      }
-    })
+      });
   };
 
-  coordinateChangeHandler = (value) => {
-    this.setState({
-      coordinateInputValue: value,
-    });
+  const coordinateChangeHandler = (value) => {
+    setCoordinateInputValue(value);
   };
 
-  coordinateSubmitHandler = (coordinateValue, fly) => {
+  const coordinateSubmitHandler = (coordinateValue, fly) => {
     let value;
     let coords;
 
     if (!coordinateValue) {
-      value = this.state.coordinateInputValue;
+      value = coordinateInputValue;
       coords = value.split(" ");
     } else {
       coords = coordinateValue;
@@ -181,12 +125,9 @@ class Cockpit extends PureComponent {
         const myLayer = CoordinatePointLayer(coords);
         let updatedLayers;
         updatedLayers = [myLayer];
-
-        this.setState({
-          layers: updatedLayers,
-        });
+        setLayers(updatedLayers);
         if (fly === true) {
-          this.map.flyTo({
+          map.flyTo({
             center: coords,
             zoom: [15],
           });
@@ -197,52 +138,134 @@ class Cockpit extends PureComponent {
     }
   };
 
-  switchFIRMSLayer() {
-    if (this.state.showFIRMS) {
-      console.log("HERE 1")
-      const hiddenLayers = [
-        ...this.state.hiddenLayers,
-        "firms-modis",
-        "firms-viirs",
-        "goes",
-      ];
-      this.setState({
-        hiddenLayers: hiddenLayers,
-        showFIRMS: false,
-      });
-    } else {
-      console.log("HERE 2")
-      if (!this.state.firmsDataWasLoaded) {
-        console.log("HERE 3")
-        this.props.FIRMSLatestModis24Action();
-        this.props.FIRMSLatestViirs24Action();
-        this.props.GoesLatestAction();
-        console.log("HERE 4")
-        this.setState({
-          firmsDataWasLoaded: true,
-        });
-      }
-      const hiddenLayers = [...this.state.hiddenLayers];
-      hiddenLayers.splice(hiddenLayers.indexOf("firms-modis"), 1);
-      hiddenLayers.splice(hiddenLayers.indexOf("firms-viirs"), 1);
-      hiddenLayers.splice(hiddenLayers.indexOf("goes"), 1);
-      this.setState({
-        hiddenLayers: hiddenLayers,
-        showFIRMS: true,
-      });
+  useEffect(() => {
+    fireClickHandler();
+    document.addEventListener("keydown", escFunction, false);
+    props.GetMeAction();
+
+    return () => document.removeEventListener("keydown", escFunction, false);
+  }, []);
+
+  useEffect(() => {
+    if (query.coord) {
+      setQuery(query.coord);
+      coordinateInputValue = query.coord;
     }
-  }
+  }, [query]);
+
+  useEffect(() => {
+    if (props.UserAuthData.error) {
+      showErrorMessage(props.UserAuthData.error);
+      setLoading(false);
+    } else {
+      props.GetMeAction();
+    }
+  }, [props.UserAuthData]);
+
+  useEffect(() => {
+    if (props.GetMeData.email) {
+      setLoginPopup(false);
+      setLoading(false);
+    } 
+  }, [props.GetMeData.email]);
+
+  const FIRMSModisLayer = props.FIRMSLatestModis24
+  ? FIRMSLayer("firms-modis", props.FIRMSLatestModis24)
+  : [];
+  const FIRMSViirsLayer = props.FIRMSLatestViirs24
+    ? FIRMSLayer("firms-viirs", props.FIRMSLatestViirs24)
+    : [];
+  const GoesLayer = props.GoesLatest
+    ? GOESLayer("goes", props.GoesLatest)
+    : [];
+  const allLayers = [
+    ...baseLayers,
+    ...layers,
+    ...FIRMSModisLayer,
+    ...FIRMSViirsLayer,
+    ...GoesLayer,
+  ];
+  
+  return (
+      <div>
+        <MainMap
+          onClick={mapClickHandler}
+          onStyleLoad={(el) => {
+            setMap(el);
+            if (query) {
+              coordinateSubmitHandler(false, true);
+            }
+          }}
+          ref={mapRef}
+          style={MAPBOX_DEFAULT_STYLE}
+          center={center}
+          containerStyle={{
+            height: "100vh",
+            width: "100vw",
+          }}
+          antialias={true}
+        >
+          <MapLayers
+            layers={allLayers}
+            hiddenLayers={hiddenLayers}
+          />
+
+          { popup ? 
+            <Popup
+              coordinates={[popup.lng, popup.lat]}
+              offset={{
+                'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+              }}>
+              {popup.title ? <h1>{popup.title}</h1> : null }
+              <em>{popup.lng}, {popup.lat}</em>
+            </Popup>
+          : null}        
+
+
+        </MainMap>
+        <div className="top-bar">
+          {!props.GetMeData.email ? <TextButton onClick={() => setLoginPopup(!loginPopup)} text="Login"/> : <TextButton onClick={props.LogOutAction} text="Logout"/>}
+          <IconButtonSwitch
+            loading={!firmsDataWasLoaded}
+            right={64}
+            backgroundImage="fire-emoji.png"
+            value={showFIRMS}
+            onClick={fireClickHandler}
+          />
+        
+          <CoordinateInput
+            value={coordinateInputValue}
+            onChange={coordinateChangeHandler}
+            onSubmit={(event) => coordinateSubmitHandler(event, true)}
+          />
+          
+        </div>
+        {loginPopup && !props.UserAuthData.isLoggedIn && <LoginForm onSubmit={(email, password) => {
+          setLoading(true);
+          props.SubmitUserAuthAction(email, password);
+        }}/>}
+        {loading && <LoadingIndicator/>}
+      </div>
+
+    );
 }
+
+
 const mapStateToProps = (state) => ({
   FIRMSLatestModis24: getFIRMSLatestModis24GeoJSON(state),
   FIRMSLatestViirs24: getFIRMSLatestViirs24GeoJSON(state),
   GoesLatest: getLatestGoesGeoJSON(state),
+  UserAuthData: getUserAuthData(state),
+  GetMeData: getMeData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   FIRMSLatestModis24Action: () => dispatch(FIRMSLatestModis24Action),
   FIRMSLatestViirs24Action: () => dispatch(FIRMSLatestViirs24Action),
   GoesLatestAction: () => dispatch(GoesLatestAction),
+  SubmitUserAuthAction: (email, password) => dispatch(SubmitUserAuthAction(email, password)),
+  GetMeAction: () => dispatch(GetMeAction),
+  LogOutAction: () => dispatch(LogOutAction),
 });
 
 export default connect(

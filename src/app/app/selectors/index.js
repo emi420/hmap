@@ -4,6 +4,8 @@ import { CSVToGeoJSON } from '../utils';
 export const getFIRMSLatestModis24 = state => state ? state.FIRMSLatestModis24Data : {};
 export const getFIRMSLatestViirs24 = state => state ? state.FIRMSLatestViirs24Data : {};
 export const getLatestGoes = state => state ? state.GoesLatestData : {};
+export const getUserAuthDataFromState = state => state ? state.UserAuthData : {};
+export const getGetMeDataFromState = state => state ? state.GetMeData : {};
 
 export const getFIRMSLatestModis24GeoJSON = createSelector(
     [getFIRMSLatestModis24],
@@ -15,9 +17,18 @@ export const getFIRMSLatestViirs24GeoJSON = createSelector(
     (CSVString) => ( CSVToGeoJSON(CSVString) )
 )
 
-
 export const getLatestGoesGeoJSON = createSelector(
     [getLatestGoes],
     result => result || {features: []}
+)
+
+export const getUserAuthData = createSelector(
+    [getUserAuthDataFromState],
+    result => result || {}
+)
+
+export const getMeData = createSelector(
+    [getGetMeDataFromState],
+    result => result || {}
 )
 

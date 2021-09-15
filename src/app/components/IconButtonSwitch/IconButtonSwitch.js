@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './IconButtonSwitch.styles';
 import './IconButtonSwitch.css';
 
-const DEFAULT_RIGHT_POSITION = 22;
 
 const IconButtonSwitch = (props) => {
     const stylesCircle = {...styles.circle};
@@ -10,7 +9,6 @@ const IconButtonSwitch = (props) => {
     const classes = [];
     
     stylesIcon.backgroundImage = `url(${props.backgroundImage})`;    
-    stylesCircle.right = `${props.right || DEFAULT_RIGHT_POSITION}px`;  
 
     if (props.value === true) {
         stylesCircle.background = 'white';
