@@ -65,6 +65,6 @@ repos:
       - id: migrations-check
         language: system
         name: Check for uncreated migrations.
-        entry: sh -c "./api/manage.py makemigrations --check --dry-run"
+        entry: sh -c "./hmap_backend/api/manage.py makemigrations --check --dry-run"
         files: models/*.*\.py$
         stages: [commit]

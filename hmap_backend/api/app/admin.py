@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from app.models import Layer
+
+
+class LayerAdmin(admin.ModelAdmin):
+    exclude = ["geojson_data"]
+
+
+admin.site.register(Layer, LayerAdmin)
