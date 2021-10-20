@@ -1,10 +1,13 @@
 import React from 'react'
-import { Spin } from 'antd'
-import { LoadingOutlined } from '@ant-design/icons';
-const antIcon = <LoadingOutlined style={{ fontSize: 48 }} spin />;
-
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 function index() {
-    return <div style={{position:"absolute", top:"50%", left:"50%"}}><Spin indicator={antIcon} size="large"/></div>
+    return (<Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => 9999 }}
+        open={true}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>);
 }
 
 export default index

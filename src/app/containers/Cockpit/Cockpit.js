@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import IconButtonSwitch from "../../components/IconButtonSwitch/IconButtonSwitch";
-import TextButton from "../../components/TextButton";
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import baseLayers, { DEFAULT_HIDDEN_LAYERS } from "../../../config/layers";
 import { connect } from "react-redux";
 import ReactMapboxGl, { Popup } from "react-mapbox-gl";
@@ -34,7 +36,7 @@ import CoordinateInput from "../../components/CoordinateInput/CoordinateInput";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import './Cockpit.css';
-import showErrorMessage from "../../lib/showErrorMessage";
+import getServerErrorMessage from "../../lib/getServerErrorMessage";
 
 
 const MainMap = ReactMapboxGl({
@@ -57,6 +59,7 @@ const Cockpit = (props) => {
   const [loginPopup, setLoginPopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [map, setMap] = useState(null);
+  const [error, setError] = useState(null);
   const mapRef = React.createRef();
 
   const switchFIRMSLayer = () => {
@@ -155,7 +158,7 @@ const Cockpit = (props) => {
 
   useEffect(() => {
     if (props.UserAuthData.error) {
-      showErrorMessage(props.UserAuthData.error);
+      setError(getServerErrorMessage(props.UserAuthData.error));
       setLoading(false);
     } else {
       props.GetMeAction();
@@ -224,7 +227,7 @@ const Cockpit = (props) => {
 
         </MainMap>
         <div className="top-bar">
-          {!props.GetMeData.email ? <TextButton onClick={() => setLoginPopup(!loginPopup)} text="Login"/> : <TextButton onClick={props.LogOutAction} text="Logout"/>}
+          {!props.GetMeData.email ? <Button onClick={() => setLoginPopup(!loginPopup)} variant="contained">Login</Button> : <Button onClick={props.LogOutAction} variant="contained">Logout</Button>}
           <IconButtonSwitch
             loading={!firmsDataWasLoaded}
             right={64}
@@ -240,7 +243,12 @@ const Cockpit = (props) => {
           />
           
         </div>
-        {loginPopup && !props.UserAuthData.isLoggedIn && <LoginForm onSubmit={(email, password) => {
+        {error && <Snackbar open={error} autoHideDuration={6000} onClose={() => setError(null)}>
+          <Alert onClose={() => setError(null)} severity="error" sx={{ width: '100%' }}>
+          {error}
+          </Alert>
+        </Snackbar>}
+        {loginPopup && !props.UserAuthData.isLoggedIn && <LoginForm open={loginPopup} setOpen={setLoginPopup} onSubmit={(email, password) => {
           setLoading(true);
           props.SubmitUserAuthAction(email, password);
         }}/>}

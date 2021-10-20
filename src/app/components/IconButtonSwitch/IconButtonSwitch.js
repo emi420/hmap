@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './IconButtonSwitch.styles';
 import './IconButtonSwitch.css';
+import IconButton from '@mui/material/IconButton';
 
 
 const IconButtonSwitch = (props) => {
@@ -19,11 +20,7 @@ const IconButtonSwitch = (props) => {
         classes.push('Pulsate');
     }
 
-    return (
-        <div className={classes.join(' ')} onClick={() => { props.onClick() }} style={stylesCircle}>
-            <span aria-label="fire" style={stylesIcon} role="img"></span>
-        </div>
-    );
+    return <IconButton  onClick={() => { props.onClick() }} style={stylesCircle} className={classes.join(' ')} color="primary" aria-label="fire" component="span"><span aria-label="fire" style={stylesIcon} role="img"></span></IconButton>;
 };
 
 export default IconButtonSwitch;
