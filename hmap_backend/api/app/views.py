@@ -28,7 +28,6 @@ def getGoes(request):
 
 
 class LayerViewSet(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
     serializer_class = LayerSerializer
     pagination_class = None
 

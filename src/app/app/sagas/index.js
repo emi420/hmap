@@ -1,4 +1,4 @@
-import { takeEvery, takeLeading, put, call, all } from 'redux-saga/effects';
+import { takeEvery, put, call, all } from 'redux-saga/effects';
 import API from '../apis';
 
 function* getLatestModis24() {
@@ -55,7 +55,7 @@ function* submitUserAuth(action) {
 
     return yield put(
         {
-            type: 'SUBMIT_USER_AUTH_EVENT',
+            type: 'SUBMIT_USER_AUTH_SUCCESS',
             payload
         },
     );
@@ -71,7 +71,7 @@ function* submitLogout() {
 
     return yield put(
         {
-            type: 'SUBMIT_LOGOUT_EVENT',
+            type: 'SUBMIT_LOGOUT_SUCCESS',
             payload
         },
     );
@@ -87,7 +87,23 @@ function* submitGetMe() {
 
     return yield put(
         {
-            type: 'SUBMIT_GET_ME_EVENT',
+            type: 'SUBMIT_GET_ME_SUCCESS',
+            payload
+        },
+    );
+}
+
+function* submitGetUserLayers() {
+    let payload = {}
+    try {
+        payload = (yield call(API.getUserLayers)).data;
+    } catch(error) {
+        payload = { error };
+    }
+
+    return yield put(
+        {
+            type: 'SUBMIT_GET_USER_LAYERS_SUCCESS',
             payload
         },
     );
@@ -97,9 +113,10 @@ function* actionWatcher() {
     yield takeEvery('GET_LATEST_MODIS_24_EVENT', getLatestModis24)
     yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)
     yield takeEvery('GET_LATEST_GOES_EVENT', getLatestGoes)
-    yield takeLeading('SUBMIT_USER_AUTH_EVENT', submitUserAuth)
-    yield takeLeading('SUBMIT_GET_ME_EVENT', submitGetMe)
-    yield takeLeading('SUBMIT_LOGOUT_EVENT', submitLogout)
+    yield takeEvery('SUBMIT_USER_AUTH_EVENT', submitUserAuth)
+    yield takeEvery('SUBMIT_GET_ME_EVENT', submitGetMe)
+    yield takeEvery('SUBMIT_LOGOUT_EVENT', submitLogout)
+    yield takeEvery('GET_USER_LAYERS_EVENT', submitGetUserLayers)
 }
 
 export default function* rootSaga() {

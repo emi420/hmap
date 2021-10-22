@@ -18,4 +18,4 @@ class LayerSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Layer
-        fields = ["id", "name", "description", "is_public", "geojson_data", "style_file"]
+        fields = ["id", "name", "description", "is_public", "geojson_data", "styles"]

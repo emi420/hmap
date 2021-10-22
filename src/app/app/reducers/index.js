@@ -16,17 +16,17 @@ export default (state, action) => {
         ...state,
         GoesLatestData: action.payload.data
       };
-    case "SUBMIT_USER_AUTH_EVENT":
+    case "SUBMIT_USER_AUTH_SUCCESS":
       return {
         ...state,
         UserAuthData: action.payload
       };
-    case "SUBMIT_GET_ME_EVENT":
+    case "SUBMIT_GET_ME_SUCCESS":
         return {
           ...state,
           GetMeData: action.payload
         };
-    case "SUBMIT_LOGOUT_EVENT":
+    case "SUBMIT_LOGOUT_SUCCESS":
         if(action.payload.isLoggedIn === false) {
           return {
             ...state,
@@ -34,6 +34,11 @@ export default (state, action) => {
             UserAuthData: null,
           };
         }
+    case "SUBMIT_GET_USER_LAYERS_SUCCESS":
+      return {
+        ...state,
+        UserLayersData: action.payload
+      };
     default:
     return state;
   }
