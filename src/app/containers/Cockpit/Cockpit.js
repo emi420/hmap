@@ -23,14 +23,16 @@ import {
   GoesLatestAction,
   SubmitUserAuthAction,
   GetMeAction,
-  LogOutAction
+  LogOutAction,
+  GetUserLayersAction,
 } from "../../app/actions";
 import {
   getFIRMSLatestModis24GeoJSON,
   getFIRMSLatestViirs24GeoJSON,
   getLatestGoesGeoJSON,
   getUserAuthData,
-  getMeData
+  getMeData,
+  getUserLayersData
 } from "../../app/selectors";
 import CoordinateInput from "../../components/CoordinateInput/CoordinateInput";
 import { withRouter } from "react-router-dom";
@@ -51,6 +53,7 @@ const Cockpit = (props) => {
   // const [isListening, setIsListening] = useState(false);
   const [hiddenLayers, setHiddenLayers] = useState(DEFAULT_HIDDEN_LAYERS);
   const [layers, setLayers] = useState([]);
+  const [userLayers, setUserLayers] = useState([]);
   const [coordinateInputValue, setCoordinateInputValue] = useState("");
   const [query, setQuery] = useState(queryString.parse(props.location.search));
   // const [showFireHistoryAnimation, setShowFireHistoryAnimation] = useState(false);
@@ -145,6 +148,7 @@ const Cockpit = (props) => {
     fireClickHandler();
     document.addEventListener("keydown", escFunction, false);
     props.GetMeAction();
+    props.GetUserLayersAction();
 
     return () => document.removeEventListener("keydown", escFunction, false);
   }, []);
@@ -169,8 +173,18 @@ const Cockpit = (props) => {
     if (props.GetMeData.email) {
       setLoginPopup(false);
       setLoading(false);
-    } 
+      props.GetUserLayersAction();
+    } else {
+      setUserLayers([]);
+    }
   }, [props.GetMeData.email]);
+
+  useEffect(() => {
+    if(props.UserLayersData.error) {
+      return;
+    }
+    setUserLayers(props.UserLayersData.map(layerData => ({...layerData, ...layerData.styles, id: JSON.stringify(layerData.id), data: layerData.geojson_data,   })));
+  }, [props.UserLayersData]);
 
   const FIRMSModisLayer = props.FIRMSLatestModis24
   ? FIRMSLayer("firms-modis", props.FIRMSLatestModis24)
@@ -187,6 +201,7 @@ const Cockpit = (props) => {
     ...FIRMSModisLayer,
     ...FIRMSViirsLayer,
     ...GoesLayer,
+    ...userLayers,
   ];
   
   return (
@@ -265,6 +280,7 @@ const mapStateToProps = (state) => ({
   GoesLatest: getLatestGoesGeoJSON(state),
   UserAuthData: getUserAuthData(state),
   GetMeData: getMeData(state),
+  UserLayersData: getUserLayersData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -274,6 +290,7 @@ const mapDispatchToProps = (dispatch) => ({
   SubmitUserAuthAction: (email, password) => dispatch(SubmitUserAuthAction(email, password)),
   GetMeAction: () => dispatch(GetMeAction),
   LogOutAction: () => dispatch(LogOutAction),
+  GetUserLayersAction: () => dispatch(GetUserLayersAction),
 });
 
 export default connect(

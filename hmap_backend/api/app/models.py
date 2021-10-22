@@ -14,7 +14,7 @@ class Layer(models.Model):
     source_file = models.FileField(
         upload_to="layer_source_files", validators=[FileExtensionValidator(["csv", "geojson", "kml"])]
     )
-    style_file = models.FileField(null=True, blank=True)
+    styles = models.JSONField(null=True, blank=True)
     is_public = models.BooleanField(default=False)
     # created_by = models.ForeignKey(UserAccount, null=True, on_delete=models.DO_NOTHING)
 

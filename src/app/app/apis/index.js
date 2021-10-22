@@ -38,6 +38,9 @@ const API = {
     },
     getMe: function () {
         return api.get(`v1/accounts/me/`);
+    },
+    getUserLayers: function () {
+        return api.get(`v1/layers/`);
     }
 };
 

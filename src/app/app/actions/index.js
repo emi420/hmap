@@ -28,3 +28,8 @@ export const LogOutAction = {
   type: "SUBMIT_LOGOUT_EVENT",
   payload: {}
 };
+
+export const GetUserLayersAction = {
+  type: "GET_USER_LAYERS_EVENT",
+  payload: {}
+};

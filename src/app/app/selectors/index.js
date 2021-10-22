@@ -6,6 +6,7 @@ export const getFIRMSLatestViirs24 = state => state ? state.FIRMSLatestViirs24Da
 export const getLatestGoes = state => state ? state.GoesLatestData : {};
 export const getUserAuthDataFromState = state => state ? state.UserAuthData : {};
 export const getGetMeDataFromState = state => state ? state.GetMeData : {};
+export const getUserLayers = state => state ? state.UserLayersData : [];
 
 export const getFIRMSLatestModis24GeoJSON = createSelector(
     [getFIRMSLatestModis24],
@@ -30,5 +31,10 @@ export const getUserAuthData = createSelector(
 export const getMeData = createSelector(
     [getGetMeDataFromState],
     result => result || {}
+)
+
+export const getUserLayersData = createSelector(
+    [getUserLayers],
+    result => result || []
 )
 
