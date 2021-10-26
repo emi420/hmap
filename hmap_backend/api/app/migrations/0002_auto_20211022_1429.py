@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0001_initial'),
+        ("app", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='layer',
-            name='style_file',
+            model_name="layer",
+            name="style_file",
         ),
         migrations.AddField(
-            model_name='layer',
-            name='styles',
+            model_name="layer",
+            name="styles",
             field=models.JSONField(blank=True, null=True),
         ),
     ]

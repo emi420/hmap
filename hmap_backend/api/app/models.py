@@ -18,14 +18,24 @@ class Layer(models.Model):
     is_public = models.BooleanField(default=False)
     # created_by = models.ForeignKey(UserAccount, null=True, on_delete=models.DO_NOTHING)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._source_file_name = "" if not self.source_file else self.source_file.name
+
     def __str__(self):
         return self.name
 
     def save_geojson_data_from_source_file(self):
-        _, extension = os.path.splitext(self.source_file.name)
+        if self._source_file_name == self.source_file.name:
+            return
+        name, extension = os.path.splitext(self.source_file.name)
+        name = name.split("/")[-1]
         extension = extension.lower()
         if extension == ".geojson":
-            self.geojson_data.save(self.source_file.name, self.source_file, save=False)
+            file = self.source_file.file
+        if self.geojson_data:
+            self.geojson_data.delete(save=False)
+        self.geojson_data.save(f"{name}.geojson", file, save=False)
 
     def save(self, *args, **kwargs):
         self.save_geojson_data_from_source_file()
