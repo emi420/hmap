@@ -16,6 +16,7 @@ class Layer(models.Model):
     )
     styles = models.JSONField(null=True, blank=True)
     is_public = models.BooleanField(default=False)
+    is_default_public_layer = models.BooleanField(null=True, blank=True, default=False)
     # created_by = models.ForeignKey(UserAccount, null=True, on_delete=models.DO_NOTHING)
 
     def __init__(self, *args, **kwargs):
