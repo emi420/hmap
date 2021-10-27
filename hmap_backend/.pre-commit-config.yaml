@@ -16,7 +16,7 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: pretty-format-json
-        args: ['--autofix', '--indent 2', ]
+        args: ['--autofix',]
   - repo: https://github.com/ambv/black
     rev: 21.6b0
     hooks:

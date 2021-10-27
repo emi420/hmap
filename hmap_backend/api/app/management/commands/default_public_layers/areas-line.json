@@ -1,0 +1,10 @@
+{
+  "linePaint": {
+    "line-color": "red",
+    "line-dasharray": [
+      7,
+      4
+    ],
+    "line-width": 2
+  }
+}
