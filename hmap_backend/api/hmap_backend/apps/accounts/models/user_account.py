@@ -77,3 +77,7 @@ class UserAccount(PermissionsMixin, CoreModel, AbstractBaseUser):
         else:
             salutation = gettext_lazy("Dear client")
         return salutation
+
+    @property
+    def id(self):
+        return self.uuid
