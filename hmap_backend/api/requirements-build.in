@@ -16,3 +16,5 @@ netcdf4==1.5.7
 geojson==2.5.0
 drf-flex-fields==0.9.5
 django-guardian==2.4.0
+# Feature 24: Celery: Config celery and create periodic task to update firms data
+django-celery-beat==2.2.1

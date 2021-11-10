@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_filters",
     "drf_yasg",
     "corsheaders",
+    "django_celery_beat",
     # our apps
     "hmap_backend.apps.common",
     "hmap_backend.apps.accounts",
@@ -135,3 +136,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",  # this is default
     "guardian.backends.ObjectPermissionBackend",
 )
+
+# External data sources
+DEFAULT_UPDATE_INTERVAL = env.int("DEFAULT_UPDATE_INTERVAL", default=12)
+UPDATE_INTERVALS = env.dict("UPDATE_INTERVALS", default={})
