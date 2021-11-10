@@ -1,7 +1,10 @@
 import os
 
+from django.core.files import File
 from django.core.validators import FileExtensionValidator
 from django.db import models
+
+from app.utils.csv_to_geojson import create_geojson
 
 
 class Layer(models.Model):
@@ -34,6 +37,11 @@ class Layer(models.Model):
         extension = extension.lower()
         if extension == ".geojson":
             file = self.source_file.file
+        elif extension == ".csv":
+            self.source_file.save(self.source_file.name, self.source_file.file, save=False)
+            file = File(create_geojson(self.source_file), name=name)
+        else:
+            return
         if self.geojson_data:
             self.geojson_data.delete(save=False)
         self.geojson_data.save(f"{name}.geojson", file, save=False)
