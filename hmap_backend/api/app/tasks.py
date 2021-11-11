@@ -12,6 +12,12 @@ FIRMS_MODIS_URL = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/
 FIRMS_VIIRS_URL = (
     "https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs/csv/VNP14IMGTDL_NRT_South_America_24h.csv"
 )
+default_stiles = {
+    "circlePaint": {
+        "circle-radius": 4,
+        "circle-color": "red",
+    }
+}
 
 
 def pull_layer_from_csv_service(url: str, layer_name: str) -> Layer:
@@ -19,6 +25,7 @@ def pull_layer_from_csv_service(url: str, layer_name: str) -> Layer:
     csv_file = ContentFile(response.text, name="untitled.csv")
     layer = Layer.objects.get_or_create(name=layer_name, is_public=True)[0]
     layer.source_file = csv_file
+    layer.styles = default_stiles
     layer.save()
     return layer
 
