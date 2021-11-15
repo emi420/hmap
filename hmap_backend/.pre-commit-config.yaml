@@ -16,7 +16,7 @@ repos:
       - id: check-yaml
       - id: debug-statements
       - id: pretty-format-json
-        args: ['--autofix', '--indent 2', ]
+        args: ['--autofix',]
   - repo: https://github.com/ambv/black
     rev: 21.6b0
     hooks:
@@ -65,6 +65,6 @@ repos:
       - id: migrations-check
         language: system
         name: Check for uncreated migrations.
-        entry: sh -c "./api/manage.py makemigrations --check --dry-run"
+        entry: sh -c "./hmap_backend/api/manage.py makemigrations --check --dry-run"
         files: models/*.*\.py$
         stages: [commit]

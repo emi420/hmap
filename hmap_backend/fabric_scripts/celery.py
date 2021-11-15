@@ -19,7 +19,11 @@ def celery_worker(ctx):
 @task()
 def celery_beat(ctx):
     with ctx.cd(project_path("api")):
-        ctx.run("celery -A hmap_backend beat -l DEBUG", pty=True, replace_env=False)
+        ctx.run(
+            "celery -A hmap_backend beat -l DEBUG --scheduler django_celery_beat.schedulers:DatabaseScheduler",
+            pty=True,
+            replace_env=False,
+        )
 
 
 @task()

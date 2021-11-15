@@ -41,6 +41,12 @@ $ npm run build
 $ sh ./deploy.sh
 ```
 
+### Backend 
+
+to continue with the backend configuration: [Readme backend](hmap_backend/READMe.md)
+
+
+
 ### License
 
 You may use this project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.

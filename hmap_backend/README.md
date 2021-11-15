@@ -38,6 +38,7 @@ pip install -U fabric invoke pip pip-tools setuptools
 Install Python requirements:
 
 ```bash
+cd hmap_backend
 fab pip.sync
 ```
 

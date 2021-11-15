@@ -1,0 +1,20 @@
+{
+  "circlePaint": {
+    "circle-color": "white",
+    "circle-radius": 2
+  },
+  "symbolLayout": {
+    "text-anchor": "top",
+    "text-field": "{name}",
+    "text-offset": [
+      0,
+      0.6
+    ],
+    "text-size": 10
+  },
+  "symbolPaint": {
+    "text-color": "white",
+    "text-halo-color": "rgba(0,0,0,.75)",
+    "text-halo-width": 1
+  }
+}

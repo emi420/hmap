@@ -1,0 +1,12 @@
+{
+  "symbolLayout": {
+    "symbol-placement": "line",
+    "text-field": "Pirca",
+    "text-size": 7
+  },
+  "symbolPaint": {
+    "text-color": "white",
+    "text-halo-color": "#333333",
+    "text-halo-width": 2
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "symbolLayout": {
+    "symbol-placement": "line",
+    "text-field": "{Nombre}",
+    "text-size": 10
+  },
+  "symbolPaint": {
+    "text-color": "white",
+    "text-halo-color": "#b301ff",
+    "text-halo-width": 2
+  }
+}
