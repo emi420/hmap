@@ -7,6 +7,14 @@ from django.db import models
 from app.utils.csv_to_geojson import create_geojson
 
 
+class LayerQuerySet(models.QuerySet):
+    def delete(self, *args, **kwargs):
+        for layer in self:
+            layer.geojson_data.delete(save=False)
+            layer.source_file.delete(save=False)
+        super().delete(*args, **kwargs)
+
+
 class Layer(models.Model):
 
     name = models.TextField(null=False, blank=False)
@@ -21,6 +29,7 @@ class Layer(models.Model):
     is_public = models.BooleanField(default=False)
     is_default_public_layer = models.BooleanField(null=True, blank=True, default=False)
     # created_by = models.ForeignKey(UserAccount, null=True, on_delete=models.DO_NOTHING)
+    objects = LayerQuerySet.as_manager()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,3 +58,8 @@ class Layer(models.Model):
     def save(self, *args, **kwargs):
         self.save_geojson_data_from_source_file()
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.geojson_data.delete(save=False)
+        self.source_file.delete(save=False)
+        super().delete(*args, **kwargs)
