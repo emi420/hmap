@@ -4,6 +4,7 @@ from django.urls import include, path, re_path
 
 from app.urls import app_router
 from app.views import getFirmsModis, getFirmsViirs, getGoes
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 
 PLATFORM_PREFIX = "_platform"
@@ -15,6 +16,9 @@ admin_urlpatterns = [
 ]
 
 api_v1_urlpatterns = [
+    path(f"{API_PREFIX}/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path(f"{API_PREFIX}/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path(f"{API_PREFIX}/v1/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path(
         f"{API_PREFIX}/v1/accounts/",
         include(("hmap_backend.apps.accounts.api.v1.urls", "accounts"), namespace="api-v1-accounts"),

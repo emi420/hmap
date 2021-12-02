@@ -1,5 +1,7 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
 import API from '../apis';
+import LocalStorageService from "../../lib/localStorageService";
+const localStorageService = LocalStorageService.getService();
 
 function* getLatestModis24() {
     try {
@@ -10,7 +12,7 @@ function* getLatestModis24() {
                 payload: latestPoints,
             },
         );
-    } catch(e) {
+    } catch (e) {
         console.error('[SAGA ERROR]', e);
     }
 }
@@ -24,7 +26,7 @@ function* getLatestViirs24() {
                 payload: latestPoints,
             },
         );
-    } catch(e) {
+    } catch (e) {
         console.error('[SAGA ERROR]', e);
     }
 }
@@ -38,7 +40,7 @@ function* getLatestGoes() {
                 payload: latestPoints,
             },
         );
-    } catch(e) {
+    } catch (e) {
         console.error('[SAGA ERROR]', e);
     }
 }
@@ -47,9 +49,10 @@ function* submitUserAuth(action) {
     const { email, password } = action.payload;
     let payload = {}
     try {
-        (yield call(API.postAccountToken, email, password));
+        payload = yield call(API.postAccountToken, email, password);
+        localStorageService.setToken(payload.data);
         payload.isLoggedIn = true;
-    } catch(error) {
+    } catch (error) {
         payload = { error };
     }
 
@@ -62,10 +65,10 @@ function* submitUserAuth(action) {
 }
 
 function* submitLogout() {
-    let payload = {isLoggedIn:false}
+    let payload = { isLoggedIn: false }
     try {
         (yield call(API.logout));
-    } catch(error) {
+    } catch (error) {
         payload = { error };
     }
 
@@ -81,7 +84,7 @@ function* submitGetMe() {
     let payload = {}
     try {
         payload = (yield call(API.getMe)).data;
-    } catch(error) {
+    } catch (error) {
         payload = { error };
     }
 
@@ -97,7 +100,7 @@ function* submitGetUserLayers() {
     let payload = {}
     try {
         payload = (yield call(API.getUserLayers)).data;
-    } catch(error) {
+    } catch (error) {
         payload = { error };
     }
 
@@ -123,4 +126,4 @@ export default function* rootSaga() {
     yield all([
         actionWatcher(),
     ]);
- }
+}

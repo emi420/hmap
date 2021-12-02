@@ -311,6 +311,7 @@ django==3.2.7 \
     #   django-guardian
     #   django-timezone-field
     #   djangorestframework
+    #   djangorestframework-simplejwt
     #   drf-yasg
     #   model-bakery
 django-celery-beat==2.2.1 \
@@ -350,7 +351,12 @@ djangorestframework==3.12.4 \
     --hash=sha256:f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2
     # via
     #   -r ./requirements-build.in
+    #   djangorestframework-simplejwt
     #   drf-yasg
+djangorestframework-simplejwt==4.8.0 \
+    --hash=sha256:153c973c5c154baf566be431de8527c2bd62557fde7373ebcb0f02b73b28e07a \
+    --hash=sha256:6f09f97cb015265e85d1d02dc6bfc299c72c231eecbe261c5bee5c6b2867f2b4
+    # via -r ./requirements-build.in
 docker[ssh]==5.0.3 \
     --hash=sha256:7a79bb439e3df59d0a72621775d600bc8bc8b422d285824cb37103eab91d1ce0 \
     --hash=sha256:d916a26b62970e7c2f554110ed6af04c7ccff8e9f81ad17d0d40c75637e227fb
@@ -824,6 +830,10 @@ pygments==2.10.0 \
     # via
     #   -r ./requirements-dev.in
     #   ipython
+pyjwt==2.3.0 \
+    --hash=sha256:b888b4d56f06f6dcd777210c334e69c737be74755d3e5e9ee3fe67dc18a0ee41 \
+    --hash=sha256:e0c4bb8d9f0af0c7f5b1ec4c5036309617d03d56932877f2f7a0beeb5318322f
+    # via djangorestframework-simplejwt
 pylama==7.7.1 \
     --hash=sha256:9bae53ef9c1a431371d6a8dca406816a60d547147b60a4934721898f553b7d8f \
     --hash=sha256:fd61c11872d6256b019ef1235be37b77c922ef37ac9797df6bd489996dddeb15
