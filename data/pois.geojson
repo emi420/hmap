@@ -1,0 +1,139 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"name":"Paso Blanco","category":null},"geometry":{"type":"Point","coordinates":[-64.34594443440504,-31.064380915186028]}}
+,
+{"type":"Feature","properties":{"name":"Rodeo Verde","category":null},"geometry":{"type":"Point","coordinates":[-64.3936206467348,-30.893605518446485]}}
+,
+{"type":"Feature","properties":{"name":"Ongamira","category":null},"geometry":{"type":"Point","coordinates":[-64.40596215051677,-30.77456838326202]}}
+,
+{"type":"Feature","properties":{"name":"Estancia El Carapé","category":null},"geometry":{"type":"Point","coordinates":[-64.36360088091656,-30.970421932016837]}}
+,
+{"type":"Feature","properties":{"name":"Dique Los Alazanes","category":null},"geometry":{"type":"Point","coordinates":[-64.45963853220358,-30.8864177789174]}}
+,
+{"type":"Feature","properties":{"name":"Cuartel de Bomberos La Cumbre","category":null},"geometry":{"type":"Point","coordinates":[-64.4862013782917,-30.980022660172917]}}
+,
+{"type":"Feature","properties":{"name":"Estancia El Totorayo","category":null},"geometry":{"type":"Point","coordinates":[-64.34781304270165,-30.93653727901574]}}
+,
+{"type":"Feature","properties":{"name":"Antigua Casita de Piedra","category":null},"geometry":{"type":"Point","coordinates":[-64.37608427309658,-31.012640960420406]}}
+,
+{"type":"Feature","properties":{"name":"Puesto de Loza","category":null},"geometry":{"type":"Point","coordinates":[-64.43030427695999,-31.01454190887052]}}
+,
+{"type":"Feature","properties":{"name":"Chacra de Las Papas","category":null},"geometry":{"type":"Point","coordinates":[-64.43091685104744,-31.00256164739962]}}
+,
+{"type":"Feature","properties":{"name":"Peñón Blanco","category":null},"geometry":{"type":"Point","coordinates":[-64.47424650393009,-31.003244638989145]}}
+,
+{"type":"Feature","properties":{"name":"Atalaya","category":null},"geometry":{"type":"Point","coordinates":[-64.50240729289789,-31.007226220228276]}}
+,
+{"type":"Feature","properties":{"name":"Agua del Durazno","category":null},"geometry":{"type":"Point","coordinates":[-64.5084609830219,-31.01438917950448]}}
+,
+{"type":"Feature","properties":{"name":"Aeroclub","category":null},"geometry":{"type":"Point","coordinates":[-64.52615420380597,-31.009334458375097]}}
+,
+{"type":"Feature","properties":{"name":"Casco de Estancia Cantera Centenario","category":null},"geometry":{"type":"Point","coordinates":[-64.56050663012624,-31.03058371049446]}}
+,
+{"type":"Feature","properties":{"name":"Puente del Vallecito","category":null},"geometry":{"type":"Point","coordinates":[-64.64046421430825,-31.02711806164117]}}
+,
+{"type":"Feature","properties":{"name":"Tres Cerros","category":null},"geometry":{"type":"Point","coordinates":[-64.64085057446309,-30.912146451370223]}}
+,
+{"type":"Feature","properties":{"name":"Puente Rio Cruz Grande","category":null},"geometry":{"type":"Point","coordinates":[-64.51899567156458,-30.942017763960628]}}
+,
+{"type":"Feature","properties":{"name":"Obrador Dique Los Laureles","category":null},"geometry":{"type":"Point","coordinates":[-64.46421915885905,-30.94109523433099]}}
+,
+{"type":"Feature","properties":{"name":"Colonia Hogar","category":null},"geometry":{"type":"Point","coordinates":[-64.27520773761916,-30.84953202753281]}}
+,
+{"type":"Feature","properties":{"name":"Estancia Pavón","category":null},"geometry":{"type":"Point","coordinates":[-64.45345148079959,-30.834977721723913]}}
+,
+{"type":"Feature","properties":{"name":"Estancia Mi Sueño","category":null},"geometry":{"type":"Point","coordinates":[-64.42393768136044,-31.030625121776982]}}
+,
+{"type":"Feature","properties":{"name":"Estancia El Silencio","category":null},"geometry":{"type":"Point","coordinates":[-64.42494994982273,-31.10549142952542]}}
+,
+{"type":"Feature","properties":{"name":"Cantera El Sauce","category":null},"geometry":{"type":"Point","coordinates":[-64.31899557092923,-31.089587435725402]}}
+,
+{"type":"Feature","properties":{"name":"Cerro Predicador","category":null},"geometry":{"type":"Point","coordinates":[-64.36394892166533,-31.02507635690281]}}
+,
+{"type":"Feature","properties":{"name":"Tranquera (con llave)","category":null},"geometry":{"type":"Point","coordinates":[-64.3613469268823,-31.044640266029077]}}
+,
+{"type":"Feature","properties":{"name":"Entrada al campo Prado Argentino","category":null},"geometry":{"type":"Point","coordinates":[-64.35174644306515,-31.054140726894104]}}
+,
+{"type":"Feature","properties":{"name":"Cerro Agua Salada","category":null},"geometry":{"type":"Point","coordinates":[-64.3663620075616,-31.018576199382483]}}
+,
+{"type":"Feature","properties":{"name":"Estancia La Sediciosa","category":null},"geometry":{"type":"Point","coordinates":[-64.35262232009322,-31.025346763177122]}}
+,
+{"type":"Feature","properties":{"name":"Tranquera","category":null},"geometry":{"type":"Point","coordinates":[-64.36616889157354,-31.029366834504717]}}
+,
+{"type":"Feature","properties":{"name":"Casa","category":null},"geometry":{"type":"Point","coordinates":[-64.36166166711833,-31.032097128823356]}}
+,
+{"type":"Feature","properties":{"name":"Arbol Coco","category":null},"geometry":{"type":"Point","coordinates":[-64.33555084570403,-30.984676597078046]}}
+,
+{"type":"Feature","properties":{"name":"","category":"Inicio ataque al indian"},"geometry":{"type":"Point","coordinates":[-64.37072516834039,-31.014367434486054]}}
+,
+{"type":"Feature","properties":{"name":"Puesto campo del Tala","category":null},"geometry":{"type":"Point","coordinates":[-64.30358711739862,-30.982160540744648]}}
+,
+{"type":"Feature","properties":{"name":"Cerro Mogote El Toldo","category":null},"geometry":{"type":"Point","coordinates":[-64.33532232410407,-30.976757525157623]}}
+,
+{"type":"Feature","properties":{"name":"Monolito","category":null},"geometry":{"type":"Point","coordinates":[-64.36933414342543,-30.949700370274215]}}
+,
+{"type":"Feature","properties":{"name":"Cerro De La Cruz","category":null},"geometry":null}
+,
+{"type":"Feature","properties":{"name":"Dos Cocos","category":null},"geometry":{"type":"Point","coordinates":[-64.34224350010889,-30.988250985506426]}}
+,
+{"type":"Feature","properties":{"name":"Antena Juan Fernandez","category":null},"geometry":{"type":"Point","coordinates":[-64.4324954369974,-30.877927269265438]}}
+,
+{"type":"Feature","properties":{"name":"Planta Pollos","category":null},"geometry":{"type":"Point","coordinates":[-64.23479937727551,-31.039728908728463]}}
+,
+{"type":"Feature","properties":{"name":"Cerro Ascochinga","category":null},"geometry":null}
+,
+{"type":"Feature","properties":{"name":"Estancia Wyhead","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.27776919022804,-30.953730853845858]}}
+,
+{"type":"Feature","properties":{"name":"Policía La Pampa","category":null},"geometry":{"type":"Point","coordinates":[-64.27690923365883,-30.94238886554046]}}
+,
+{"type":"Feature","properties":{"name":"Cruce de San Jorge","category":null},"geometry":{"type":"Point","coordinates":[-64.27701053681784,-30.943992832224975]}}
+,
+{"type":"Feature","properties":{"name":"Las Acequias (Makongo)","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.28163774358596,-30.934517820638966]}}
+,
+{"type":"Feature","properties":{"name":"Estancia Las Lajas","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.29573277575341,-30.926141929805308]}}
+,
+{"type":"Feature","properties":{"name":"Entrada a Estanica","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.30443313201171,-30.923626520683005]}}
+,
+{"type":"Feature","properties":{"name":"Bosque de Acacias","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.30373105315174,-30.920538124266994]}}
+,
+{"type":"Feature","properties":{"name":"La Estafeta de San Jorge","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.30575542973762,-30.917381469251747]}}
+,
+{"type":"Feature","properties":{"name":"Cañada del Rosario","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.32489083650292,-30.898836499108302]}}
+,
+{"type":"Feature","properties":{"name":"Vado","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.32588811183334,-30.89612298251158]}}
+,
+{"type":"Feature","properties":{"name":"Acceso a casa JFO","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.33143110727451,-30.89301519427258]}}
+,
+{"type":"Feature","properties":{"name":"La Puerta de Flores","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.33882949867932,-30.88976825133632]}}
+,
+{"type":"Feature","properties":{"name":"Escuela","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.33996592870702,-30.88596468961098]}}
+,
+{"type":"Feature","properties":{"name":"Vado","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.3453001921023,-30.88932759479497]}}
+,
+{"type":"Feature","properties":{"name":"Cruce al Mal Paso","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.34423333942324,-30.889629096639062]}}
+,
+{"type":"Feature","properties":{"name":"Casa JFO","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.3318717638159,-30.880584041316634]}}
+,
+{"type":"Feature","properties":{"name":"El Retiro (puesto norte de San Miguel)","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.35801151506975,-30.893807770296632]}}
+,
+{"type":"Feature","properties":{"name":"Tranquera","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.40425420204969,-30.890148251264648]}}
+,
+{"type":"Feature","properties":{"name":"Puerta del Susto","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.42511196805616,-30.8925969617392]}}
+,
+{"type":"Feature","properties":{"name":"Antena INA","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.42493464051994,-30.89320329753751]}}
+,
+{"type":"Feature","properties":{"name":"Tranquera","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.44092958428672,-30.889905005363858]}}
+,
+{"type":"Feature","properties":{"name":"Puesto Oscuro Vera","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.41989853849135,-30.88486890333529]}}
+,
+{"type":"Feature","properties":{"name":"Tranquera a Las Barrancas","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.4005166387828,-30.891323625653605]}}
+,
+{"type":"Feature","properties":{"name":"Campo de Mosero","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.37556665443702,-30.891997470291212]}}
+,
+{"type":"Feature","properties":{"name":"Campo de Botaro","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.37180731066921,-30.89717543434877]}}
+,
+{"type":"Feature","properties":{"name":"Rodeo Del Molle","category":"San Jorge"},"geometry":{"type":"Point","coordinates":[-64.35957171067021,-30.891217229131858]}}
+,
+{"type":"Feature","properties":{"name":"San Vicente","category":null},"geometry":{"type":"Point","coordinates":[-64.33279141281461,-31.068308105840238]}}
+,
+{"type":"Feature","properties":{"name":"Camino a El Carmelo","category":null},"geometry":{"type":"Point","coordinates":[-64.3083043832241,-31.061338377194268]}}
+,
+{"type":"Feature","properties":{"name":"Santa Julia","category":null},"geometry":{"type":"Point","coordinates":[-64.38278545198159,-31.044247390822466]}}]}
