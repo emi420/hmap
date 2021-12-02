@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-database-hmap-prod
+  namespace: hmap-prod
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pg-database-hmap-prod
+  template:
+    metadata:
+      labels:
+        app: pg-database-hmap-prod
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:12.4
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 5432
+        envFrom:
+          - configMapRef:
+              name: hmap-database-prod-config
+        volumeMounts:
+          - mountPath: /var/lib/postgresql
+            name: pg-database-hmap-prod
+      volumes:
+        - name: pg-database-hmap-prod
+          persistentVolumeClaim:
+            claimName:  pg-database-hmap-prod-pvc

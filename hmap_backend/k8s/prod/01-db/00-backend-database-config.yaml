@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hmap-database-prod-config
+  labels:
+    app: postgres
+  namespace: hmap-prod
+data:
+  POSTGRES_SERVER: "hamp-database-prod"
+  POSTGRES_USER: "hamp_prod_user"
+  POSTGRES_PASSWORD: "VQcTW3R6aqpCVN9K785cNTPaN4s7KN5K"
+  POSTGRES_DB: "hamp_prod_db"
