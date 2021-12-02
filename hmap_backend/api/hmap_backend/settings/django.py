@@ -1,5 +1,7 @@
 import os
 
+from datetime import timedelta
+
 from .environment import env
 
 
@@ -140,3 +142,13 @@ AUTHENTICATION_BACKENDS = (
 # External data sources
 DEFAULT_UPDATE_INTERVAL = 12
 UPDATE_INTERVALS = env.dict("UPDATE_INTERVALS", default={})
+
+# Related to task #37: setup JWT login instead of cookie based login.
+# It better fits the api login vs server side rending (django templates)
+# We need CORS access from the client app and the cookie policy was giving us hard times
+# To enable reading the cross site cookies (nevertheless it was properly written with useCredentials=true headers)
+SIMPLE_JWT = {
+    # 'SIGNING_KEY': settings.SECRET_KEY,
+    "USER_ID_FIELD": "uuid",
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=env.int("HMAP_BACKEND_ACCESS_TOKEN_LIFETIME", default=60 * 24)),
+}

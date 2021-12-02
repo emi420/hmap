@@ -18,5 +18,7 @@ drf-flex-fields==0.9.5
 django-guardian==2.4.0
 # Feature 24: Celery: Config celery and create periodic task to update firms data
 django-celery-beat==2.2.1
-pandas==1.3.4
+pandas==1.3.5
 numpy==1.21.3
+# Related to feature #37 add JWT support
+djangorestframework-simplejwt==4.8.0
