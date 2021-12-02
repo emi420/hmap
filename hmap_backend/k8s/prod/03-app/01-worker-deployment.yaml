@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hmap-prod-backend-worker-prod
+  labels:
+    app: hmap-prod-backend-worker-prod
+  namespace: hmap-prod
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hmap-prod-backend-worker-prod
+  template:
+    metadata:
+      labels:
+        app: hmap-prod-backend-worker-prod
+    spec:
+      containers:
+        - name: hmap-prod-backend-worker
+          image: devnano/hmap-api:8
+          imagePullPolicy: Always
+          workingDir: /code/api
+          command: ["celery"]
+          args: ["-A", "hmap_backend", "worker", "-l", "INFO", "--uid", "nobody", "--gid", "nogroup"]
+          envFrom:
+            - configMapRef:
+                name: hmap-prod-config
+          livenessProbe:
+            exec:
+              # bash is needed to replace the environment variable
+              command: ["bash", "-c", "celery inspect ping -b $HMAP_BACKEND_CELERY_BROKER -d celery@$HOSTNAME"]
+            initialDelaySeconds: 45 # startup takes some time
+            periodSeconds: 90 # default is quite often and celery uses a lot cpu/ram then.
+            timeoutSeconds: 25 # default is too low
+      dnsPolicy: ClusterFirst

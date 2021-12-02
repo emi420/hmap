@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hmap-prod-backend-api
+  labels:
+    app: hmap-prod-backend-api
+  namespace: hmap-prod
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.backend-api: regexp:^[vx][0-9]+\.[0-9]+\.[0-9]+$
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hmap-prod-backend-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: hmap-prod-backend-api
+    spec:
+      containers:
+        - name: backend-api
+          image: devnano/hmap-api:8
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: hmap-prod-config
+          ports:
+            - name: liveness-port
+              protocol: TCP
+              containerPort: 8000
+          # livenessProbe:
+          #   httpGet:
+          #     path: /liveness
+          #     port: liveness-port
+          #     httpHeaders:
+          #       - name: 'Check'
+          #         value: '1'
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 60
+          # readinessProbe:
+          #   httpGet:
+          #     path: /readiness
+          #     port: liveness-port
+          #     httpHeaders:
+          #       - name: 'Check'
+          #         value: '1'
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 60
+          # startupProbe:
+          #   httpGet:
+          #     path: /readiness
+          #     port: liveness-port
+          #     httpHeaders:
+          #       - name: 'Check'
+          #         value: '1'
+          #   failureThreshold: 30
+          #   periodSeconds: 60
+      dnsPolicy: ClusterFirst

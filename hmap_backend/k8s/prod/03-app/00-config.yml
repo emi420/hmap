@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hmap-prod-config
+  labels:
+    app: hamp-prod
+  namespace: hmap-prod
+data:
+  # TODO: implement a proper static backend and turn DEBUG setting off
+  # See https://github.com/emi420/hmap/issues/42
+  HMAP_BACKEND_DEBUG: "on"
+  HMAP_BACKEND_EMAIL_HOST: "127.0.0.1"
+  HMAP_BACKEND_EMAIL_PORT: "1025"
+  HMAP_BACKEND_EMAIL_HOST_USER: "user"
+  HMAP_BACKEND_EMAIL_HOST_PASSWORD: "password"
+  HMAP_BACKEND_EMAIL_USE_TLS: "off"
+  HMAP_BACKEND_ALLOWED_HOSTS: "127.0.0.1,localhost,hmap.commite.ar,api.hmap.commite.ar,app.hmap.commite.ar"
+  HMAP_BACKEND_SECRET_KEY: "rz1a7jf=uyw5vb04$4-h5=y@1nne_6kdlc%+_ly_4td6)oyroo"
+  HMAP_BACKEND_DATABASE_URL: "psql://hamp_prod_user:VQcTW3R6aqpCVN9K785cNTPaN4s7KN5K@pg-database-hmap-prod:5432/hamp_prod_db"
+  HMAP_BACKEND_CELERY_BROKER: "redis://redis-hmap-prod:6379/1"
+  HMAP_BACKEND_REDIS_URL: "redis://redis-hmap-prod:6379/2"
+  HMAP_BACKEND_USE_SENTRY: "off"
+  HMAP_BACKEND_CORS_ALLOWED_ORIGINS: "https://app.hmap.commite.ar,"
+  HMAP_BACKEND_CSRF_TRUSTED_ORIGINS: "app.hmap.commite.ar"
+  UPDATE_INTERVALS: "goes=1,firms_viirs=1,firms_modis=1"

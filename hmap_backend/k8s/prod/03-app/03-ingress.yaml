@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hmap-prod-backend-api
+  namespace: hmap-prod
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    external-dns.alpha.kubernetes.io/hostname: api.hmap.commite.ar
+    kubernetes.io/tls-acme: "true"
+    acme.cert-manager.io/http01-edit-in-place: "true"
+
+spec:
+  rules:
+    - host: api.hmap.commite.ar
+      http:
+        paths:
+          - backend:
+              serviceName: hmap-prod-backend-api
+              servicePort: 80
+            path: /
+
+  tls:
+    - hosts:
+        - api.hmap.commite.ar
+      secretName: api-hmap-tls
