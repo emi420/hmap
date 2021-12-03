@@ -102,6 +102,8 @@ X_FRAME_OPTIONS = env.str("HMAP_BACKEND_X_FRAME_OPTIONS", default="SAMEORIGIN")
 SECURE_HSTS_SECONDS = env.int("HMAP_BACKEND_SECURE_HSTS_SECONDS", default=31536000)  # 1 year
 SESSION_COOKIE_NAME = "s"
 CSRF_COOKIE_NAME = "c"
+# CSRF For a secure unsafe request. See https://docs.djangoproject.com/en/3.2/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = env.list("HMAP_BACKEND_CSRF_TRUSTED_ORIGINS", default=[])
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
