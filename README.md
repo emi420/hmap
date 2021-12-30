@@ -1,6 +1,12 @@
 # Humanitarian Map
 
 Easy-to-use humanitarian map for work before, during and after events.
+### Backend 
+
+to start with the backend configuration, see: [Readme backend](hmap_backend/README.md)
+Below are the instructions to run, build and deploy the front-end web-app.
+
+
 
 ### Install
 
@@ -40,12 +46,6 @@ $ npm run build
 ```
 $ sh ./deploy.sh
 ```
-
-### Backend 
-
-to continue with the backend configuration: [Readme backend](hmap_backend/READMe.md)
-
-
 
 ### License
 

@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from django_celery_beat.models import IntervalSchedule, PeriodicTask, PeriodicTasks
 
@@ -13,11 +16,12 @@ class Command(BaseCommand):
         for service_name in CONFIGURED_SERVICES:
             task_name = f"{APP_NAME}.tasks.update_{service_name}"
             hours_count = int(settings.UPDATE_INTERVALS.get(service_name, settings.DEFAULT_UPDATE_INTERVAL))
-            schedule, _ = IntervalSchedule.objects.get_or_create(every=hours_count, period=IntervalSchedule.MINUTES)
+            schedule, _ = IntervalSchedule.objects.get_or_create(every=hours_count, period=IntervalSchedule.HOURS)
             PeriodicTask.objects.update_or_create(
                 defaults={
                     "interval": schedule,
                     "name": f"update_{service_name}",
+                    "last_run_at": timezone.now() - timedelta(hours=hours_count),
                 },
                 task=task_name,
             )
