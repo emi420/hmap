@@ -19,12 +19,16 @@ class Layer(models.Model):
 
     name = models.TextField(null=False, blank=False)
     description = models.TextField(null=True, blank=True)
+    
+    # TODO: use PostGIS data instead of files
+    # https://docs.djangoproject.com/en/3.2/ref/contrib/gis/install/postgis/
     geojson_data = models.FileField(
         upload_to="layers_geojson/", null=True, validators=[FileExtensionValidator(["geojson"])]
     )
     source_file = models.FileField(
         upload_to="layer_source_files", validators=[FileExtensionValidator(["csv", "geojson", "kml"])]
     )
+    
     styles = models.JSONField(null=True, blank=True)
     is_public = models.BooleanField(default=False)
     is_default_public_layer = models.BooleanField(null=True, blank=True, default=False)

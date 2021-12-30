@@ -1,9 +1,0 @@
-.Pulsate {
-  animation: Pulsate .75s linear infinite;
-}
-
-@keyframes Pulsate {
-  from { opacity: .5; }
-  50% { opacity: .3; }
-  to { opacity: .5; }
-}

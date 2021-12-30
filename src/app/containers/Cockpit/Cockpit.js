@@ -37,20 +37,16 @@ import getServerErrorMessage from "../../lib/getServerErrorMessage";
 import filterLayers from "../../lib/filterLayers";
 import MenuIcon from '@mui/icons-material/Layers';
 
-
 const MainMap = ReactMapboxGl({
   accessToken: MAPBOX_ACCESS_TOKEN,
 });
 
 const Cockpit = (props) => {
   const [center] = useState(MAP_DEFAULT_CENTER);
-  const [hiddenLayers, setHiddenLayers] = useState([]);
   const [layers, setLayers] = useState([]);
   const [userLayers, setUserLayers] = useState([]);
   const [coordinateInputValue, setCoordinateInputValue] = useState("");
   const [query, setQuery] = useState(queryString.parse(props.location.search));
-  // const [showFireHistoryAnimation, setShowFireHistoryAnimation] = useState(false);
-  // const [fireHistoryIndex, setFireHistoryIndex] = useState(0);
   const [popup, setPopup] = useState(null);
   const [loginPopup, setLoginPopup] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -172,7 +168,7 @@ const Cockpit = (props) => {
         >
           <MapLayers
             layers={allLayers}
-            hiddenLayers={hiddenLayers}
+            hiddenLayers={[]}
           />
 
           { popup ? 
@@ -210,13 +206,6 @@ const Cockpit = (props) => {
             </Grid>
 
           </Grid>
-
-          {/* <Grid item xs={4}>
-            xs=4
-          </Grid>
-          <Grid item xs={8}>
-            xs=8
-          </Grid> */}
         </Grid>
 
         <Box display={{ xs: isMenuVisible ? "block" : "none", sm:"block" }}>
