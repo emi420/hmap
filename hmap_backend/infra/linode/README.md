@@ -17,6 +17,7 @@ Set the issue token on the variable.tf file
 
 Deploy linode k8s engine cluster with terraform:
 
+terraform init
 terraform plan
 terraform apply
 
