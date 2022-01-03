@@ -4,8 +4,13 @@
 See also https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/
 
 
+Create the nginx-ingress namespaces
+
 `kubectl apply -f load-balancer/00-namespace`
-`kubectl ns nginx-ingress `
+
+Set current namespace to `nginx-ingress`
+
+`kubectl ns nginx-ingress` or `kubectl config set-context --current --namespace=nginx-ingress`
 `helm repo add nginx-stable https://helm.nginx.com/stable`
 `helm repo update`
 `helm install nginx-ingress nginx-stable/nginx-ingress`
