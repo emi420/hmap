@@ -355,4 +355,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Custom
+
+infra
+
 # End of https://www.gitignore.io/api/vim,osx,emacs,linux,macos,django,python,windows,pycharm,virtualenv,sublimetext,visualstudiocode
