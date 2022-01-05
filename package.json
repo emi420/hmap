@@ -2,7 +2,7 @@
   "name": "eworkmap",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://app.hmap.commite.ar",
+  "homepage": "https://emi420.github.io/hmap/",
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",

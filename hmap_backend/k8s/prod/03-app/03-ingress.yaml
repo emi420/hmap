@@ -6,13 +6,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    external-dns.alpha.kubernetes.io/hostname: api.hmap.commite.ar
+    external-dns.alpha.kubernetes.io/hostname: api.hmap.forodeincendiosforestales.org
     kubernetes.io/tls-acme: "true"
     acme.cert-manager.io/http01-edit-in-place: "true"
 
 spec:
   rules:
-    - host: api.hmap.commite.ar
+    - host: api.hmap.forodeincendiosforestales.org
       http:
         paths:
           - backend:
@@ -22,5 +22,5 @@ spec:
 
   tls:
     - hosts:
-        - api.hmap.commite.ar
+        - api.hmap.forodeincendiosforestales.org
       secretName: api-hmap-tls
