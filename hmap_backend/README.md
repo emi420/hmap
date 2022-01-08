@@ -1,25 +1,6 @@
 # hmap-backend
 
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
-### List of services: ###
-
-* Dev server: [https://example.com/](https://example.com/)
-
-### Documentation: ###
-
-* [Architecture overview](docs/architecture_overview.md)
-* [Backend: Routine tasks](docs/commands.md)
-* [Backend: Pre-commit hook](docs/pre_commit_hook.md)
-
-### API documentation: ###
-
-* ReDoc web UI: [https://example.com/_platform/docs/v1/redoc/](https://example.com/_platform/docs/v1/redoc/)
-* Swagger web UI: [https://example.com/_platform/docs/v1/swagger/](https://example.com/_platform/docs/v1/swagger/)
-* Swagger JSON: [https://example.com/_platform/docs/v1/swagger.json](https://example.com/_platform/docs/v1/swagger.json)
-* Swagger YAML: [https://example.com/_platform/docs/v1/swagger.yaml](https://example.com/_platform/docs/v1/swagger.yaml)
-
-### First run: ###
+### First run:
 
 Install Python 3.8.2 & setup virtual environment. We recommend to use [pyenv](https://github.com/pyenv/pyenv) & [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv):
 
@@ -78,7 +59,8 @@ Run Django server:
 fab run
 ```
 
-Load all default layers.
+### Load all default layers.
+
 The default layers files – geojson and style json – are placed in hmap_backend/api/app/management/commands/default_public_layers/
 
 TODO: A simple logging output when loading is going on
@@ -87,7 +69,7 @@ TODO: A simple logging output when loading is going on
 ./api/manage.py loaddefaultpubliclayer
 ```
 
-Create or update the periodic tasks
+### Create or update the periodic tasks
 
 TODO: A simple logging output while refreshing periodic tasks configuration
 
@@ -95,7 +77,7 @@ TODO: A simple logging output while refreshing periodic tasks configuration
 ./api/manage.py configexternaldatasources
 ```
 
-RUn the celery worker
+### Run the celery worker
 
 In a new terminal run:
 
@@ -103,14 +85,14 @@ In a new terminal run:
 fab celery.worker
 ```
 
-Run the celery beat process.
+### Run the celery beat process.
 
 In a new terminal run:
 ```bash
 fab celery.beat
 ```
 
-### Environment variables ###
+### Environment variables
 
 + 'UPDATE_INTERVALS': set each external source refresh frequency. It
   is a comma separated <service_key>=<number_of_hours> string. Current
