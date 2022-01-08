@@ -3,48 +3,6 @@ import API from '../apis';
 import LocalStorageService from "../../lib/localStorageService";
 const localStorageService = LocalStorageService.getService();
 
-function* getLatestModis24() {
-    try {
-        const latestPoints = (yield call(API.getLatestModis24));
-        return yield put(
-            {
-                type: 'GET_LATEST_MODIS_24_SUCCESS',
-                payload: latestPoints,
-            },
-        );
-    } catch (e) {
-        console.error('[SAGA ERROR]', e);
-    }
-}
-
-function* getLatestViirs24() {
-    try {
-        const latestPoints = (yield call(API.getLatestViirs24));
-        return yield put(
-            {
-                type: 'GET_LATEST_VIIRS_24_SUCCESS',
-                payload: latestPoints,
-            },
-        );
-    } catch (e) {
-        console.error('[SAGA ERROR]', e);
-    }
-}
-
-function* getLatestGoes() {
-    try {
-        const latestPoints = (yield call(API.getLatestGoes));
-        return yield put(
-            {
-                type: 'GET_LATEST_GOES_SUCCESS',
-                payload: latestPoints,
-            },
-        );
-    } catch (e) {
-        console.error('[SAGA ERROR]', e);
-    }
-}
-
 function* submitUserAuth(action) {
     const { email, password } = action.payload;
     let payload = {}
@@ -113,9 +71,6 @@ function* submitGetUserLayers() {
 }
 
 function* actionWatcher() {
-    yield takeEvery('GET_LATEST_MODIS_24_EVENT', getLatestModis24)
-    yield takeEvery('GET_LATEST_VIIRS_24_EVENT', getLatestViirs24)
-    yield takeEvery('GET_LATEST_GOES_EVENT', getLatestGoes)
     yield takeEvery('SUBMIT_USER_AUTH_EVENT', submitUserAuth)
     yield takeEvery('SUBMIT_GET_ME_EVENT', submitGetMe)
     yield takeEvery('SUBMIT_LOGOUT_EVENT', submitLogout)
