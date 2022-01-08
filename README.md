@@ -36,6 +36,12 @@ Then load http://localhost:3000 in your browser.
 $ npm run build
 ```
 
+### Deploy
+
+```
+$ npm run deploy
+```
+
 ### License
 
 You may use this project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
