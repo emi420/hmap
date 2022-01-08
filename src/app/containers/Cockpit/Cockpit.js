@@ -40,9 +40,6 @@ const Cockpit = (props) => {
   const [loginPopup, setLoginPopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-
-  const allLayers = [...userLayers];
 
   useEffect(() => {
     props.GetMeAction();
@@ -88,27 +85,30 @@ const Cockpit = (props) => {
           antialias={true}
         >
           <MapLayers
-            layers={allLayers}
+            layers={userLayers}
             hiddenLayers={[]}
           />
-
         </MainMap>
+
         <div style={{ position: "absolute", top: "15px", right: "15px" }}>
             {!props.GetMeData.email ? <Button onClick={() => setLoginPopup(!loginPopup)} variant="contained">Login</Button> : <Button onClick={props.LogOutAction} variant="contained">Logout</Button>}
         </div>
 
-        <Box display={{ xs: isMenuVisible ? "block" : "none", sm:"block" }}>
-          <LayersMenu isMenuVisible={isMenuVisible} setIsMenuVisible={setIsMenuVisible}/>
+        <Box>
+          <LayersMenu />
         </Box>
+
         {error && <Snackbar open={error} autoHideDuration={6000} onClose={() => setError(null)}>
           <Alert onClose={() => setError(null)} severity="error" sx={{ width: '100%' }}>
           {error}
           </Alert>
         </Snackbar>}
+
         {loginPopup && !props.UserAuthData.isLoggedIn && <LoginForm open={loginPopup} setOpen={setLoginPopup} onSubmit={(email, password) => {
           setLoading(true);
           props.SubmitUserAuthAction(email, password);
         }}/>}
+        
         {loading && <LoadingIndicator/>}
       </div>
 
