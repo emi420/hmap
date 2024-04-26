@@ -11,13 +11,13 @@ from guardian.shortcuts import get_objects_for_user
 
 
 def getFirmsModis(request):
-    modis_url = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/c6/csv/MODIS_C6_South_America_24h.csv"
+    modis_url = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/csv/MODIS_C6_1_South_America_24h.csv"
     r = requests.get(modis_url)
     return HttpResponse(r.text)
 
 
 def getFirmsViirs(request):
-    viirs_url = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/viirs/csv/VNP14IMGTDL_NRT_South_America_24h.csv"
+    viirs_url = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_South_America_24h.csv"
     r = requests.get(viirs_url)
     return HttpResponse(r.text)
 

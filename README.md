@@ -1,6 +1,6 @@
-# Humanitarian Map
+# Humanitarian Disaster Map
 
-Easy-to-use humanitarian map for work before, during and after events.
+The goal of this project is to create an easy-to-use humanitarian map for work before, during and disaster events.
 
 ### Backend 
 
@@ -44,6 +44,6 @@ $ npm run deploy
 
 ### License
 
-You may use this project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
+You may use this project under the terms of the GNU General Public License (GPL) Version 3.
 
 (c) 2019 Emilio Mariscal

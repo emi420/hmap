@@ -2,13 +2,7 @@
 
 ### First run:
 
-Install Python 3.8.2 & setup virtual environment. We recommend to use [pyenv](https://github.com/pyenv/pyenv) & [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv):
-
-```bash
-pyenv install 3.8.2
-pyenv virtualenv 3.8.2 hmap_backend
-pyenv activate hmap_backend
-```
+Install Python 3.8.2 & setup virtual environment:
 
 Update `pip` & `setuptools`, install `fabric`, `invoke` & `pip-tools`:
 
@@ -20,6 +14,12 @@ Install Python requirements:
 
 ```bash
 cd hmap_backend
+pip install -r requirements.txt
+```
+
+Alternatively, you can use fab:
+
+```bash
 fab pip.sync
 ```
 
@@ -98,3 +98,9 @@ fab celery.beat
   is a comma separated <service_key>=<number_of_hours> string. Current
   valid keys:  'firms_modis', 'firms_viirs' and 'goes'.
   See .env.example file.
+
+### License
+
+You may use this project under the terms of the GNU General Public License (GPL) Version 3.
+
+(c) 2021 Emilio Mariscal
